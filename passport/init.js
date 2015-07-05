@@ -7,7 +7,7 @@ var connection = mysql.createConnection({
   user     : 'root',
   password : '#havoc4110',
   database : 'havoc',
-  port     : '4110'
+  port     : '3306'
 });
 
 connection.connect();
