@@ -58,7 +58,8 @@ var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : '#havoc4110',
-  database : 'havoc'
+  database : 'havoc',
+  port     : '3306'
 });
 
 connection.connect();
