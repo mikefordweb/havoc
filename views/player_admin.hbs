@@ -1,0 +1,546 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="/css/normalize.css">
+        <link rel="stylesheet" href="/css/main.css">
+        <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/css/font-awesome-4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/dot-luv/jquery-ui.css">
+        <link rel="stylesheet" href="/css/jquery.timepicker.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min.js"></script>
+        <script id="boxscore-template" type="text/x-handlebars-template">
+            <table class="boxscore-table">
+                <tr>
+                    <th>Jersey</th>
+                    <th>Player</th>
+                    <th>PTS</th>
+                    <th>2FGM</th>
+                    <th>2FGA</th>
+                    <th>3FGM</th>
+                    <th>3FGA</th>
+                    <th>FTM</th>
+                    <th>FTA</th>
+                    <th>A</th>
+                    <th>OR</th>
+                    <th>DR</th>
+                    <th>R</th>
+                    <th>B</th>
+                    <th>S</th>
+                    <th>TO</th>
+                    <th>Ch</th>
+                    <th>PF</th>
+                </tr>
+                \{{#each box_score}}
+                <tr>
+                    <td>\{{Jersey}}</td>
+                    <td>\{{first_name}} \{{last_name}}</td>
+                     <td>\{{Points}}</td>
+                     <td>\{{TwoPointsMade}}</td>
+                     <td>\{{TwoPointAttempts}}</td>
+                     <td>\{{ThreePointsMade}}</td>
+                     <td>\{{ThreePointAttempts}}</td>
+                     <td>\{{FreeThrowsMade}}</td>
+                     <td>\{{FreeThrowAttempts}}</td>
+                     <td>\{{Assists}}</td>
+                     <td>\{{OffensiveRebounds}}</td>
+                     <td>\{{DefensiveRebounds}}</td>
+                     <td>\{{Rebounds}}</td>
+                     <td>\{{BlockedShots}}</td>
+                     <td>\{{Steals}}</td>
+                     <td>\{{Turnovers}}</td>
+                     <td>\{{Charges}}</td>
+                     <td>\{{PersonalFouls}}</td>
+                </tr>
+                \{{/each}}
+            </table>
+        </script>
+        <script id="media-row-template" type="text/x-handlebars-template">
+            <tr data-media-id="\{{media_id}}" class="media-item-row">
+                <td>\{{media_url}}</td><td>\{{media_type}}</td>
+                <td><a href="#" class="delete-media-item admin-btn" data-media-id="\{{media_id}}">Delete</a></td>
+            </tr>
+        </script>
+        <script id="game-template" type="text/x-handlebars-template">
+            <form class="game-data-form" enctype="multipart/form-data" action= "/upload_game" method="post">
+                <label for="datepicker">Game Date:</label><input type="text" name="game_date" id="datepicker">
+                <label for="timepicker">Game Time:</label><input type="text" name="game_time" id="timepicker"><br>
+                <label for="opponent">Team:</label>
+                <select name="team">
+                    <option value="Sophomore">Sophomore</option>
+                    <option value="Freshman">Freshman</option>
+                    <option value="7th Grade">7th Grade</option>
+                </select><br>
+                <label for="opponent">Opponent: </label><input type="text" name="opponent"><br>
+                <label for="venue">Venue: </label><input type="text" name="venue"><br>
+                <label for="address">Address: </label><input type="text" name="address"><br>
+                <label for="city">City: </label><input type="text" name="city"><br>
+                <label for="state">State: </label>
+                <select name="state">
+                    <option value="">Select</option>
+                    <option value="AL">Alabama</option>
+                    <option value="AK">Alaska</option>
+                    <option value="AZ">Arizona</option>
+                    <option value="AR">Arkansas</option>
+                    <option value="CA">California</option>
+                    <option value="CO">Colorado</option>
+                    <option value="CT">Connecticut</option>
+                    <option value="DE">Delaware</option>
+                    <option value="DC">District Of Columbia</option>
+                    <option value="FL">Florida</option>
+                    <option value="GA">Georgia</option>
+                    <option value="HI">Hawaii</option>
+                    <option value="ID">Idaho</option>
+                    <option value="IL">Illinois</option>
+                    <option value="IN">Indiana</option>
+                    <option value="IA">Iowa</option>
+                    <option value="KS">Kansas</option>
+                    <option value="KY">Kentucky</option>
+                    <option value="LA">Louisiana</option>
+                    <option value="ME">Maine</option>
+                    <option value="MD">Maryland</option>
+                    <option value="MA">Massachusetts</option>
+                    <option value="MI">Michigan</option>
+                    <option value="MN">Minnesota</option>
+                    <option value="MS">Mississippi</option>
+                    <option value="MO">Missouri</option>
+                    <option value="MT">Montana</option>
+                    <option value="NE">Nebraska</option>
+                    <option value="NV">Nevada</option>
+                    <option value="NH">New Hampshire</option>
+                    <option value="NJ">New Jersey</option>
+                    <option value="NM">New Mexico</option>
+                    <option value="NY">New York</option>
+                    <option value="NC">North Carolina</option>
+                    <option value="ND">North Dakota</option>
+                    <option value="OH">Ohio</option>
+                    <option value="OK">Oklahoma</option>
+                    <option value="OR">Oregon</option>
+                    <option value="PA">Pennsylvania</option>
+                    <option value="RI">Rhode Island</option>
+                    <option value="SC">South Carolina</option>
+                    <option value="SD">South Dakota</option>
+                    <option value="TN">Tennessee</option>
+                    <option value="TX">Texas</option>
+                    <option value="UT">Utah</option>
+                    <option value="VT">Vermont</option>
+                    <option value="VA">Virginia</option>
+                    <option value="WA">Washington</option>
+                    <option value="WV">West Virginia</option>
+                    <option value="WI">Wisconsin</option>
+                    <option value="WY">Wyoming</option>
+                </select><br>
+                <label for="zip">Zip: </label><input type="text" name="zip"><br>
+                <select name="team">
+                    <option value="Sophomore">Sophomore</option>
+                    <option value="Freshman">Freshman</option>
+                    <option value="7th Grade">7th Grade</option>
+                </select>
+
+                <input type="file" name="gameStats" id="game-stats" />
+                <input type="submit" value="Upload Image" id="upload-button" name="submit">
+            </form>
+        </script>
+    </head>
+    <body>
+        <div class="modal-background"></div>    
+        <div class="content-wrapper admin">
+            <header>
+                <a href="#" id="header-logo">
+                    <img src="img/header-logo.png">
+                </a>
+                <div id="header-slogan">Wisconsin’s Premier Girls AAU Basketball Program</div>
+                <div id="header-social-icons">
+                    <a href="#" class="header-social-icon"><i class="fa fa-facebook-square"></i></a>
+                    <a href="#" class="header-social-icon"><i class="fa fa-twitter"></i></a>
+                    <a href="#" class="header-social-icon"><i class="fa fa-instagram"></i></a>
+                </div>
+            </header>
+            <h3 class="admin-h3">PLAYER ADMIN <a href="/signout" class="logout-link">logout</a></h3> 
+            <div id="tabs" class="hide">
+                <ul>
+                    <li><a href="#tabs-3">Manage Player</a></li>
+                </ul>
+                <div id="tabs-3">
+
+                    <table class="games-table">
+                        <tr>
+                            <th>Jersey</th>
+                            <th>Team</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Position</th>
+                            <th>Media</th>
+                        </tr>
+                      {{#each players}}
+                        <tr>
+                            <td>{{jersey_number}}</td>
+                            <td>{{team}}</td>
+                            <td>{{first_name}}</td>
+                            <td>{{last_name}}</td>
+                            <td>{{position}}</td>
+                            <td><a href="#" class="player-media admin-btn" data-id="{{player_id}}">View</a></td>
+                        </tr>
+                        <tr class="media-items">
+                            <td colspan="6">
+                                <div class="media-items-table">
+                                    <table class="media-items-table-outer">
+                                        <tr><th>URL</th><th>Type</th><th></th></tr>
+                                        {{#each ../media_items}}
+                                            {{#ifCond player_id '==' ../player_id}}
+                                                <tr data-media-id="{{media_id}}" class="media-item-row">
+                                                    <td>{{url}}</td><td>{{media_type}}</td>
+                                                    <td><a href="#" class="delete-media-item admin-btn" data-media-id="{{media_id}}" data-team="{{../../team}}">Delete</a></td>
+                                                </tr>
+                                            {{/ifCond}}
+                                        {{/each}}
+                                        <tr>
+                                            <td colspan="3">
+                                                
+                                                <form class="media-item-form" enctype="multipart/form-data" action= "/upload_photo" method="post">
+                                                    <input type="hidden" name="user_type" value="player">
+                                                    <table class="media-item-table"><tr><td>
+                                                        <input type="file" name="media_photo" id="media-photo" class="photo-items" />
+                                                        <input type="text" class="media-url video-items" name="media_url" value="">                                                       
+                                                    </td>
+                                                    <td>
+                                                        <select name="media_type" class="media-type">
+                                                            <option value="photo">Photo</option>
+                                                            <option value="video">Video</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><a href="#" class="add-media-item admin-btn video-items" data-id="{{player_id}}" data-team="{{team}}">Add</a><input type="submit" value="upload" id="upload-media-item" class="admin-btn photo-items"><input type="hidden" name="player_id" value="{{player_id}}"><input type="hidden" name="team" value="{{team}}"></td>
+                                                </tr></table>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                      {{/each}}
+                    </table>
+                </div>
+            
+
+        </div>
+
+        <div id="dialog" class="havoc-dialog" id="upload-box-score-form" title="Upload Box Score">
+            <form id="upload-box-score-form" class="game-data-form" enctype="multipart/form-data" action= "/add_box_score" method="post">
+              <input type="hidden" name="game_upload_id" value="">
+              <p>Choose a box score to upload and associate with this game.  Box score must be a text file in the maxpreps format.</p>
+              <input type="file" name="gameStats" id="game-stats" />
+              <input type="submit" value="Add Box Score" id="add-box-score-button" class="submit-button" name="submit">
+            </form>
+        </div>
+
+        <div id="dialog-delete-box-score" class="havoc-dialog" title="Delete Box Score">
+              <input type="hidden" name="delete_box_game_id" value="">
+              <p>Are you sure you want to delete this box score?</p>
+              <div class="modal-buttons">
+                  <div class="submit-button" id="delete-box-score-button">Delete</div>
+                  <div class="submit-button cancel-button">Cancel</div>
+              </div>
+        </div>
+
+        <div id="dialog-delete-game" class="havoc-dialog" title="Delete Game">
+              <input type="hidden" name="delete_game_id" value="">
+              <input type="hidden" name="delete_game_id_team" value="">
+              <p>Are you sure you want to delete this game?</p>
+              <div class="modal-buttons">
+                  <div class="submit-button" id="delete-game-button">Delete</div>
+                  <div class="submit-button cancel-button">Cancel</div>
+              </div>
+        </div>
+
+        <div id="dialog-delete-player" class="havoc-dialog" title="Delete Player">
+              <input type="hidden" name="delete_player_id" value="">
+              <input type="hidden" name="delete_player_id_team" value="">
+              <p>Are you sure you want to delete this player?</p>
+              <div class="modal-buttons">
+                  <div class="submit-button" id="delete-player-button">Delete</div>
+                  <div class="submit-button cancel-button">Cancel</div>
+              </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+        <script src="/js/jquery.timepicker.min.js"></script>
+    
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. 
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='https://www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+        </script>-->
+        <script>
+            $(document).ready(function() {
+
+                $("#tabs").tabs({create: function( event, ui ) {
+                    $("#tabs").removeClass('hide');
+                   }
+                });
+
+                $('select[name=media_type]').change(function(e){
+                    if ($(this).val() == "photo") {
+                        $(this).parent().parent().find('.photo-items').css('display','block');
+                        $(this).parent().parent().find('.video-items').css('display','none');
+                    } else {
+                        $(this).parent().parent().find('.photo-items').css('display','none');
+                        $(this).parent().parent().find('.video-items').css('display','block');
+                    }
+                });
+
+                $('.media-item-form').submit(function() {
+                    e.preventDefault();
+                    var add_media_row = $(this).parent().parent();
+                    $(this).ajaxSubmit({
+                        error: function(xhr) {
+                                console.log('Error: ' + xhr.status);
+                        },
+
+                        success: function(data) {
+                            //console.log("response: " + response.exists);
+                            //if (response.upload == "success") {
+
+                                console.log("uploaded box score!");
+                                var source1   = $("#media-row-template").html();
+                                var template1 = Handlebars.compile(source1);
+                                
+                                var html1    = template1(data);
+                                add_media_row.before(html1);
+                                $('input[name="media_photo"]').val('');
+                                //document.location.assign("/admin?tab=game");
+                            //}
+                        }
+                    });
+                    return false;
+                });
+
+                $('.add-media-item').click(function(e){
+                    e.preventDefault();
+                    var add_media_row = $(this).parent().parent().parent().parent().parent().parent().parent();
+                    $.post("/add_media_item", 
+                        {
+                            media_url: add_media_row.find("input[name=media_url]").val(),
+                            media_type: add_media_row.find("select[name=media_type]").val(),
+                            player_id: $(this).attr("data-id"),
+                            user_type: "player",
+                            team: $(this).attr('data-team')
+                        }).done(function(data){
+                            var source1   = $("#media-row-template").html();
+                            var template1 = Handlebars.compile(source1);
+                            
+                            var html1    = template1(data);
+                            add_media_row.before(html1);
+                            $('input[name="media_url"]').val('');
+                        });
+                });
+
+                $('.delete-media-item').click(function(e){
+                    e.preventDefault();
+                    var mediaId = $(this).attr('data-media-id');
+                    var mediaTeamId = $(this).attr('data-team');
+                    $.post("/delete_media_item", 
+                        {
+                            media_id: $(this).attr('data-media-id'),
+                            team: mediaTeamId,
+                            user_type: "player"
+                        }).done(function(data){
+                            $('.media-item-row[data-media-id="'+mediaId+'"]').remove();
+                        });
+                });
+
+                $('.cancel-button').click(function(e){
+                    console.log("");
+                    $(this).parent().parent().dialog("close");
+                });
+
+                $('.player-media').click(function(e){
+                    if (!$(this).hasClass("is-open")) {
+                        var media_items = $(this).parent().parent().next();
+                        media_items.find('.media-items-table').slideDown();
+                        $(this).addClass("is-open");
+                        $(this).html("HIDE");
+                    } else {
+                        var media_items = $(this).parent().parent().next();
+                        media_items.find('.media-items-table').slideUp();
+                        $(this).removeClass("is-open");
+                        $(this).html("VIEW");
+                    }
+                });
+
+                $('.box-upload').click(function(e){
+                    $('.modal-background').css('display','block');
+                    $( "#dialog" ).dialog({
+                        close: function( event, ui ) { $('.modal-background').css('display','none'); }
+                    });
+                    $('input[name="game_upload_id"]').val($(this).attr('data-id'));
+                });
+
+                $('.box-delete').click(function(e){
+                    $('.modal-background').css('display','block');
+                    $( "#dialog-delete-box-score" ).dialog({
+                        close: function( event, ui ) { $('.modal-background').css('display','none'); }
+                    });
+                    $('input[name="delete_box_game_id"]').val($(this).attr('data-id'));
+                });
+
+                $('.game-delete').click(function(e){
+                    $('.modal-background').css('display','block');
+                    $( "#dialog-delete-game" ).dialog({
+                        close: function( event, ui ) { $('.modal-background').css('display','none'); }
+                    });
+                    $('input[name="delete_game_id"]').val($(this).attr('data-id'));
+                    $('input[name="delete_game_id_team"]').val($(this).attr('data-team'));
+                });
+
+                $('.player-delete').click(function(e){
+                    $('.modal-background').css('display','block');
+                    $( "#dialog-delete-player" ).dialog({
+                        close: function( event, ui ) { $('.modal-background').css('display','none'); }
+                    });
+                    $('input[name="delete_player_id"]').val($(this).attr('data-id'));
+                    $('input[name="delete_player_id_team"]').val($(this).attr('data-team'));
+                });
+
+                $('#delete-box-score-button').click(function(e){
+                    $.post("/delete_box_score", 
+                        {
+                            game_id: $('input[name="delete_box_game_id"]').val()
+                        }).done(function(data){
+                            document.location.assign("/admin?tab=game");
+                        });
+                });
+
+                $('#delete-game-button').click(function(e){
+                    $.post("/delete_game", 
+                        {
+                            game_id: $('input[name="delete_game_id"]').val(),
+                            team: $('input[name="delete_game_id_team"]').val()
+                        }).done(function(data){
+                            //document.location.assign("/admin?tab=game");
+                        });
+                });
+
+                $('#delete-player-button').click(function(e){
+                    $.post("/delete_player", 
+                        {
+                            player_id: $('input[name="delete_player_id"]').val(),
+                            team: $('input[name="delete_player_id_team"]').val()
+                        }).done(function(data){
+                            document.location.assign("/admin?tab=player");
+                        });
+                });
+
+                $('#add-player-button').click(function(e){
+                    $.post("/add_player", 
+                        {
+                            jersey_number: $('input[name="jersey_number"]').val(),
+                            first_name: $('input[name="first_name"]').val(),
+                            last_name: $('input[name="last_name"]').val(),
+                            position: $('input[name="position"]').val(),
+                            team: $('select[name="team"]').val(),
+                            email: $('input[name="email"]').val()
+                        }).done(function(data){
+                            console.log("add player: " + data.player_insert);
+                            document.location.assign("/admin?tab=player");
+                        });
+                });
+
+                $('#upload-box-score-form').submit(function() {
+                    $(this).ajaxSubmit({
+                        error: function(xhr) {
+                                console.log('Error: ' + xhr.status);
+                        },
+
+                        success: function(response) {
+                            console.log("response: " + response.exists);
+                            if (response.upload == "success") {
+                                console.log("uploaded box score!");
+                                document.location.assign("/admin?tab=game");
+                            }
+                        }
+                    });
+                    return false;
+                });
+
+                $('#uploadForm').submit(function() {
+                    $('.game-exists-msg').css('display','none');
+                    $(this).ajaxSubmit({
+                        error: function(xhr) {
+                                console.log('Error: ' + xhr.status);
+                        },
+
+                        success: function(response) {
+                            console.log("response: " + response.exists);
+                            if (response.exists == "true") {
+                                $('.game-exists-msg').css('display','block');
+                            } else {
+                                document.location.assign("/admin?tab=game");
+                            }
+                        }
+                    });
+                    return false;
+                });
+
+                var queryString = window.location.search;
+                var queryData;
+                console.log("queryString: " + queryString);
+                if (queryString != "") {
+                    queryData = queryString.split('=');
+                    if (queryData[1] == "game") {
+                        $("#tabs").tabs("option", "active", 1);
+                    } else if (queryData[1] == "player") {
+                        $("#tabs").tabs("option", "active", 2);
+                    }
+                }
+
+                $('.box-view').click(function(e){
+                    var game_data;
+
+                    $.get("/game_data", { game_id: $(this).attr('data-id')}).done(
+                        function(data) {
+                            console.log("box_score.length: " + data.box_score.length);
+                            game_data = data;
+                            var source1   = $("#boxscore-template").html();
+                            var template1 = Handlebars.compile(source1);
+                            
+                            console.log("game_data: " + JSON.stringify(game_data));
+                            var html1    = template1(game_data);
+                            $('.box-score-wrapper').html("");
+                            $('.box-score-wrapper').append(html1);
+                        }
+                    );
+                    //var data = { gameDate: "5515", gameTime: "This is my first post!" };
+                    
+                });
+
+                $("#datepicker").datepicker({
+                    showOn: "both", 
+                    buttonText: "<i class='fa fa-calendar'></i>"
+                });
+                $("#timepicker").timepicker({
+                    timeFormat: 'h:mm p',
+                    interval: 15, // 15 minutes
+                    scrollbar: true
+                });                
+
+            });
+        </script>
+</body>
+</html>

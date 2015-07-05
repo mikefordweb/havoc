@@ -1,0 +1,340 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="/css/normalize.css">
+        <link href='/css/montserrat.css' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/css/font-awesome-4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/fullcalendar.min.css">
+        <link rel="stylesheet" href="/css/tinyscrollbar.css">
+        <link rel="stylesheet" href="/css/main.css">
+
+        <script id="basketball-card-template" type="text/x-handlebars-template">
+          \{{#each player_info}}
+            <div class="basketball-inner" data-jersey="\{{jersey_number}}">
+                    <div class="basketball-card-back basketball-card" data-player-id="\{{player_id}}">
+                        <div class="card-back-name-block back-block-item">
+                            <div class="card-back-first-name">\{{first_name}}</div>
+                            <div class="card-back-last-name">\{{last_name}}</div>
+                         </div>
+                         <div class="card-back-position-block back-block-item">\{{position}}</div>
+                         <div class="card-back-number-block back-block-item">\{{jersey_number}}</div>
+                         <div class="card-back-info-block back-block-item">
+                            <div class="card-back-info-text">Birthdate: 9/15/2001</div>
+                            <div class="card-back-info-text">Hometown: Brookfield</div>
+                            <div class="card-back-info-text">Class of 2017</div>
+                         </div>
+                         <div class="card-back-game-log-title">Game Log</div>
+                         
+                         <select class="season-select" name="season-select">
+                            <option value="2015" selected>2015</option>
+                         </select>
+                         <label for="season-select">Season: </label>
+
+                         <div class="stats-table-outer-wrapper">
+                            <table class="stats-table-header" id="stats-header-locked">
+                                <tr>
+                                    <td>Date</td><td>PTS</td><td>FG</td><td>FGA</td>
+                                    <td>3P</td><td>3PA</td><td>FT</td><td>FTA</td>
+                                    <td>A</td><td>ORB</td><td>DRB</td><td>TRB</td>
+                                    <td>BLK</td><td>STL</td><td>TOV</td><td>CH</td><td>PF</td>
+                                </tr>
+                            </table>
+                             <div class="stats-table-window">
+                                
+                                <table class="stats-table-header">
+                                    <tr>
+                                        <td>Date</td><td>PTS</td><td>FG</td><td>FGA</td>
+                                        <td>3P</td><td>3PA</td><td>FT</td><td>FTA</td>
+                                        <td>A</td><td>ORB</td><td>DRB</td><td>TRB</td>
+                                        <td>BLK</td><td>STL</td><td>TOV</td><td>CH</td><td>PF</td>
+                                    </tr>
+                                </table>
+                                <div class="stats-table-wrapper">
+                                    <table class="stats-table" data-jersey-number="\{{jersey_number}}">
+                                    </table>
+                                </div>
+                             </div>
+                         </div>
+                         
+                         <div class="return-to-front" data-player-id="\{{player_id}}">RETURN TO FRONT >>></div>
+                    </div>
+
+                    <div class="basketball-card-front basketball-card" data-player-id="\{{player_id}}">
+                        <div class="card-photo-window">
+                            <div class="card-logo-bug"><img src="img/card-logo-bug.png"></div>
+                            <div class="card-photo-item">
+                                \{{#each ../media_items}}
+                                \{{#ifCond player_id '==' ../player_id}}
+                                    \{{#ifCond media_type '==' "video"}}
+                                        <iframe width="464" height="327" data-player-id="\{{player_id}}" data-media-id="\{{media_id}}" class="full-video-item" src="\{{url}}" frameborder="0" allowfullscreen></iframe>
+                                    \{{/ifCond}}
+                                    \{{#ifCond media_type '==' "photo"}}
+                                        \{{#ifCond photo_dim '==' "width"}}
+                                        <img src="\{{url}}" class="full-photo-item width-photo" style="width: \{{width}}px" data-player-id="\{{player_id}}" data-media-id="\{{media_id}}">
+                                        \{{/ifCond}}
+                                        \{{#ifCond photo_dim '==' "height"}}
+                                        <img src="\{{url}}" class="full-photo-item height-photo" style="height: \{{height}}px; margin-left: \{{marginLeft}}px;"  data-player-id="\{{player_id}}" data-media-id="\{{media_id}}">
+                                        \{{/ifCond}}
+                                    \{{/ifCond}}
+                                \{{/ifCond}}
+                                \{{/each}}
+
+                            </div>
+                            <div class="card-first-name">\{{first_name}}</div>
+                            <div class="card-last-name">\{{last_name}}</div>
+                        </div>
+                        <div class="card-social-icons">
+                            <a href="\{{youtube}}" class="card-social-icon" target="_blank">
+                                <i class="fa fa-youtube social-icon"></i>
+                                <div class="social-icon-text">YOUTUBE ></DIV>
+                            </a>
+                            <a href="\{{twitter}}" class="card-social-icon" target="_blank">
+                                <i class="fa fa-twitter social-icon"></i>
+                                <div class="social-icon-text">TWITTER ></DIV>
+                            </a>
+                            <a href="\{{instagram}}" class="card-social-icon" target="_blank">
+                                <i class="fa fa-instagram social-icon"></i>
+                                <div class="social-icon-text">INSTAGRAM ></DIV>
+                            </a>
+                            <div class="card-social-icon flip-card" data-player-id="\{{player_id}}">
+                                <i class="fa fa-list-alt"></i>
+                                <div class="card-social-list-text">STATS ON BACK</div>
+                            </div>
+                        </div>
+                        <div class="card-media-title">PHOTOS and VIDEOS</div>
+                        <div class="card-media-items">
+                            \{{#each ../media_items}}
+                                \{{#ifCond player_id '==' ../player_id}}
+                                    <div class="card-media-item" data-player-id="\{{../player_id}}" data-media-id="\{{media_id}}" data-media-type="\{{media_type}}">
+                                        <div class="card-media-item-bkg"></div>
+                                        \{{#ifCond media_type '==' "video"}}
+                                            <i class="fa fa-youtube-play"></i>
+                                        \{{/ifCond}}
+                                        \{{#ifCond media_type '==' "photo"}}
+                                            <img src="\{{url}}" class="card-photo-thumb">
+                                        \{{/ifCond}}
+                                    </div>
+                                \{{/ifCond}}
+                            \{{/each}}
+                        </div>
+                        <div class="card-media-ribbon"></div>
+
+                    </div>
+                </div>
+            \{{/each}}
+        </script>
+
+        <script id="live-update-item" type="text/x-handlebars-template">
+            <div class="live-update-item">
+                <div class="live-update-item-user capitalize">\{{first_name}} \{{last_name}}</div>
+                <div class="live-update-item-event">\{{action_on_asset}}</div>
+                <div class="live-update-item-item">the \{{team_type}} \{{team_asset}}</div>
+                <div class="live-update-item-datetime">on \{{date_time}}</div>
+            </div>
+        </script>
+
+        <script id="live-update-media-item" type="text/x-handlebars-template">
+            <div class="live-update-item">
+                <div class="live-update-item-user capitalize">\{{first_name}} \{{last_name}}</div>
+                <div class="live-update-item-event">\{{action_on_asset}}</div>
+                <div class="live-update-item-item capitalize">\{{first_name}} \{{last_name}}s <a href="#" class="pc-playercard" data-player-id="\{{player_id}}"><span class="pc-player">Player</span><span class="pc-card">Card</span></a></div>
+                <div class="live-update-item-datetime">on \{{date_time}}</div>
+            </div>
+        </script>
+
+        <script id="live-update-tweet" type="text/x-handlebars-template">
+            <div class="live-update-item live-update-tweet">
+                <div class="live-update-tweet-icon"><img src="\{{twitter_icon}}"></div>
+                <div class="live-update-tweet-handle">\{{twitter_screen_name}}</div>
+                <a href="https://twitter.com/\{{twitter_name}}" class="live-update-tweet-name" target="_blank">@\{{twitter_name}}</a>
+                <div class="clear"></div>
+                <div class="live-update-tweet-message">\{{twitter_text}} 
+                \{{#ifCond url '!=' "none"}}
+                    <a href="\{{url}}" class="tweet-media-link" target="_blank">\{{url}}</a>
+                    <a href="\{{url}}" class="tweet-media-img" target="_blank"><img src="\{{media_url}}:thumb"></a>
+                \{{/ifCond}}
+                </div>
+                <div class="live-update-tweet-datetime">\{{date_time}}</div>
+            </div>
+        </script>
+
+        <script id="player-game-row" type="text/x-handlebars-template">
+            \{{#each game_player_data}}
+                <tr game-info-id="\{{game_info_id}}">
+                    <td>\{{date_time}}</td><td>\{{Points}}</td><td>\{{TwoPointsMade}}</td><td>\{{TwoPointAttempts}}</td><td>\{{ThreePointsMade}}</td><td>\{{ThreePointAttempts}}</td><td>\{{FreeThrowsMade}}</td><td>\{{FreeThrowAttempts}}</td><td>\{{Assists}}</td><td>\{{OffensiveRebounds}}</td><td>\{{DefensiveRebounds}}</td><td>\{{Rebounds}}</td><td>\{{BlockedShots}}</td><td>\{{Steals}}</td><td>\{{Turnovers}}</td><td>\{{Charges}}</td><td>\{{PersonalFouls}}</td>
+                </tr>
+            \{{/each}}
+        </script>
+
+        <script id="player-games-totals" type="text/x-handlebars-template">
+            <tr><td colspan="2" class="stats-td-label"><a href="#" class="stats-link selected-stats-link" data-stats-id="player-stats-totals">TOTALS</a></td><td colspan="2" class="stats-td-label"><a href="#" class="stats-link" data-stats-id="player-stats-avgs">AVGS</a></td></tr>
+            <tr class="player-stats-total-tr player-stats-totals">
+                <td></td><td>\{{Points}}</td><td>\{{TwoPointsMade}}</td><td>\{{TwoPointAttempts}}</td><td>\{{ThreePointsMade}}</td><td>\{{ThreePointAttempts}}</td><td>\{{FreeThrowsMade}}</td><td>\{{FreeThrowAttempts}}</td><td>\{{Assists}}</td><td>\{{OffensiveRebounds}}</td><td>\{{DefensiveRebounds}}</td><td>\{{Rebounds}}</td><td>\{{BlockedShots}}</td><td>\{{Steals}}</td><td>\{{Turnovers}}</td><td>\{{Charges}}</td><td>\{{PersonalFouls}}</td>
+            </tr>
+        </script>
+
+        <script id="player-games-avgs" type="text/x-handlebars-template">
+            <tr class="player-stats-total-tr player-stats-avgs">
+                <td></td><td>\{{Points}}</td><td>\{{TwoPointsMade}}</td><td>\{{TwoPointAttempts}}</td><td>\{{ThreePointsMade}}</td><td>\{{ThreePointAttempts}}</td><td>\{{FreeThrowsMade}}</td><td>\{{FreeThrowAttempts}}</td><td>\{{Assists}}</td><td>\{{OffensiveRebounds}}</td><td>\{{DefensiveRebounds}}</td><td>\{{Rebounds}}</td><td>\{{BlockedShots}}</td><td>\{{Steals}}</td><td>\{{Turnovers}}</td><td>\{{Charges}}</td><td>\{{PersonalFouls}}</td>
+            </tr>
+        </script>
+
+        <script id="boxscore-template" type="text/x-handlebars-template">
+            <div class="havoc-modal-game-info">
+                <table class="modal-game-data-table">
+                  \{{#each game_info}}
+                    <tr><th>Game Date/Time</th><th>Game Result</th><th>Location</th></tr>
+                    <tr>
+                        <td>\{{date_time}}</td>
+                        <td>
+                            <div class="modal-game-team-left">Wisconsin Havoc</div>
+                            <div class="modal-game-score-left">\{{havoc_score}}</div> <span class="score-divider">-</span> 
+                            <div class="modal-game-score-right">\{{opponent_score}}</div>
+                            <div class="modal-game-team-right">\{{opponent}}</div>
+                        </td>
+                        <td>\{{state}}</td>
+                    </tr>
+                  \{{/each}}
+                </table>
+            </div>
+            <div class="havoc-modal-box">
+                \{{#ifCond has_box '==' "1"}}
+                    <table class="boxscore-table">
+                        <tr>
+                            <th>Jersey</th>
+                            <th>Player</th>
+                            <th>PTS</th>
+                            <th>2FGM</th>
+                            <th>2FGA</th>
+                            <th>3FGM</th>
+                            <th>3FGA</th>
+                            <th>FTM</th>
+                            <th>FTA</th>
+                            <th>A</th>
+                            <th>OR</th>
+                            <th>DR</th>
+                            <th>R</th>
+                            <th>B</th>
+                            <th>S</th>
+                            <th>TO</th>
+                            <th>Ch</th>
+                            <th>PF</th>
+                        </tr>
+                        \{{#each box_score}}
+                        <tr>
+                            <td>\{{Jersey}}</td>
+                            <td>\{{first_name}} \{{last_name}}</td>
+                             <td>\{{Points}}</td>
+                             <td>\{{TwoPointsMade}}</td>
+                             <td>\{{TwoPointAttempts}}</td>
+                             <td>\{{ThreePointsMade}}</td>
+                             <td>\{{ThreePointAttempts}}</td>
+                             <td>\{{FreeThrowsMade}}</td>
+                             <td>\{{FreeThrowAttempts}}</td>
+                             <td>\{{Assists}}</td>
+                             <td>\{{OffensiveRebounds}}</td>
+                             <td>\{{DefensiveRebounds}}</td>
+                             <td>\{{Rebounds}}</td>
+                             <td>\{{BlockedShots}}</td>
+                             <td>\{{Steals}}</td>
+                             <td>\{{Turnovers}}</td>
+                             <td>\{{Charges}}</td>
+                             <td>\{{PersonalFouls}}</td>
+                        </tr>
+                        \{{/each}}
+                    </table>
+                \{{/ifCond}}
+            </div>
+        </script>
+    </head>
+    <body>
+        <div class="menu-bkg"></div>
+        <div class="menu-bkg-2"></div>
+        <div class="team-list-bkg"></div>         
+        <div class="content-wrapper">
+            <header>
+                <a href="#" id="header-logo">
+                    <img src="img/header-logo.png">
+                </a>
+                <div id="header-slogan">Wisconsin’s Premier Girls AAU Basketball Program</div>
+                <div id="header-social-icons">
+                    <a href="#" class="header-social-icon"><i class="fa fa-facebook-square"></i></a>
+                    <a href="#" class="header-social-icon"><i class="fa fa-twitter"></i></a>
+                    <a href="#" class="header-social-icon"><i class="fa fa-instagram"></i></a>
+                </div>
+            </header>
+
+            <ul id="top-menu">
+                <li id="teams" data-top-menu="teams">Teams
+                    <ul id="sub-menu">
+                        <li id="sophomore">Sophomore
+            <div class="player-list-wrapper">
+                <div class="player-list-left">
+                    <div class="player-arrow-opacity"></div>
+                    <i class="fa fa-chevron-left"></i>
+                </div>
+                <div class="player-list-wrapper-inner">
+                <div class="player-bkg-lines">
+                    <div class="player-bkg-yellow-line"></div>
+                    <div class="player-bkg-yellow-line"></div>
+                    <div class="player-bkg-yellow-line"></div>
+                    <div class="player-bkg-yellow-line"></div>
+                </div>
+                <ul class="player-list">
+                  {{#each players}}
+                    <li>
+                        <div class="player-icon-wrapper">
+                            <div class="player-icon-wrapper-bkg"></div>
+                            <div class="player-icon-wrapper-stripes">
+                                <div class="player-bkg-yellow-line"></div>
+                                <div class="player-bkg-yellow-line"></div>
+                                <div class="player-bkg-yellow-line"></div>
+                                <div class="player-bkg-yellow-line"></div>
+                            </div>
+                            
+                            <div class="player-icon" data-jersey="{{jersey_number}}" data-player-id="{{player_id}}">
+                                <div class="icon-player-photo"><img src="img/silhouette.png"></div>
+                                <div class="icon-photo-circle-bkg"></div>
+                                <div class="icon-photo-inner-circle"></div>
+                                <div class="inner-circle-wrapper">
+                                    <div class="icon-photo-inner-inner-circle"></div>
+                                    <div class="icon-photo-inner-inner-grow-circle"></div>
+                                </div>
+                                <div class="position-circle">{{position}}</div>
+                                <div class="player-icon-number">{{jersey_number}}</div>
+                                <div class="player-icon-first-name">{{first_name}}</div> 
+                                <div class="player-icon-last-name">{{last_name}}</div>
+                            </div>
+                        </div>
+                    </li>
+                   {{/each}}
+                    
+                </ul>
+              </div>
+              <div class="player-list-right">
+                    <div class="player-arrow-opacity"></div>
+                    <i class="fa fa-chevron-right"></i>
+                </div>
+            </div></li>
+                        <li class="non-team-menu-item-sub" id="freshman">Freshman</li>
+                        <li class="non-team-menu-item-sub" id="7thgrade">7th Grade</li>
+                    </ul>
+                </li>
+                <li class="non-team-menu-item"><a href="/tryouts">Tryouts</a></li>
+                <li class="non-team-menu-item"><a href="/schedule">Schedule</a></li>
+                <li class="non-team-menu-item"><a href="/contactus">Contact Us</a></li>
+                <li class="non-team-menu-item"><a href="/schedule">Buy Havoc Gear</a></li>
+            </ul>
+
+            <div class="sub-menu-bkg"></div>
+
+            
