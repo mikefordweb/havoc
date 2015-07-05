@@ -3,7 +3,7 @@ var signup = require('./signup');
 //var User = require('../models/user');
 var mysql = require('mysql');
 var connection = mysql.createConnection({
-  host     : '127.0.0.1',
+  host     : 'localhost',
   user     : 'root',
   password : '#havoc4110',
   database : 'havoc',
