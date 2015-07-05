@@ -55,7 +55,7 @@ exphbs.registerHelper('ifCond', function (v1, operator, v2, options) {
 );
 
 var connection = mysql.createConnection({
-  host     : 'localhost',
+  host     : '127.0.0.1',
   user     : 'root',
   password : '#havoc4110',
   database : 'havoc',
