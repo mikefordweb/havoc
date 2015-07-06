@@ -552,6 +552,26 @@ $(document).ready(function() {
                         });
                     }
 
+                    console.log("winWidth: " + winWidth);
+                    if (winWidth < 400) {
+                        $('.full-photo-item').each(function(i){
+                            if ($(this).hasClass('width-photo')) {
+                                $(this).css('width','282px');
+                            } else if ($(this).hasClass('height-photo')) {
+                                $(this).css('height','182px');
+                            }
+                        });
+                    } else if (winWidth > 400 && winWidth < 890) {
+                        $('.full-photo-item').each(function(i){
+                            if ($(this).hasClass('width-photo')) {
+                                $(this).css('width','362px');
+                            } else if ($(this).hasClass('height-photo')) {
+                                $(this).css('height','205px');
+                            }
+                        });
+                    }
+
+
                     $(".basketball-card-back").on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', 
                         function() {
                             console.log("done flipping");
@@ -658,6 +678,7 @@ $(document).ready(function() {
                 }
             });
         }
+
       if (windowWidth < 760) {
             $('.page-main-content').css('width', windowWidth-40);
             $('.player-list-wrapper').css('width', windowWidth);
@@ -665,7 +686,7 @@ $(document).ready(function() {
             $('#live-updates-content  > .scrollbar').css('height', '300px');
             $('#live-updates-content  > .scrollbar > .track').css('height', '300px');
             $('#live-updates-content > .viewport').css('height', '300px');
-            $('#live-updates-content').update();
+            //$('#live-updates-content').update();
         } else if (windowWidth > 760 && windowWidth < 1101) {
             $('.player-list-wrapper').css('width', newPlayerListWidth);
             $('.page-main-content').css('width', windowWidth-286);
@@ -673,7 +694,7 @@ $(document).ready(function() {
             $('#live-updates-content  > .scrollbar').css('height', '770px');
             $('#live-updates-content  > .scrollbar > .track').css('height', '770px');
             $('#live-updates-content > .viewport').css('height', '770px');
-            $('#live-updates-content').update();
+            //$('#live-updates-content').update();
         }
     });
 
@@ -698,7 +719,7 @@ $(document).ready(function() {
             $('#live-updates-content').css('height', '300px');
             $('#live-updates-content  > .scrollbar').css('height', '300px');
             $('#live-updates-content > .viewport').css('height', '300px');
-            $('#live-updates-content').update();
+            //$('#live-updates-content').update();
         }
 
 

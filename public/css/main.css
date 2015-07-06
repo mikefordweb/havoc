@@ -2865,5 +2865,148 @@ a.tweet-media-link:visited {
     }
 }
 
+@media (max-width: 400px) {
+    .basketball-card-main-content {
+        min-width: 320px;
+    }
+
+    .basketball-card-wrapper {
+        width: 320px;
+        height: 290px;
+    }
+
+    .card-photo-window {
+        width: 282px;
+        height: 182px;
+    }
+
+    .card-photo-item {
+        width: 282px;
+        height: 182px;
+    }
+
+    .basketball-card-front {
+        top: -290px;
+    }
+
+    .full-photo-item.height-photo {
+        margin-left: auto !important;
+        margin-right: auto;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .card-media-title {
+        bottom: 56px;
+    }
+
+    .card-social-icons {
+        position: absolute;
+        top: 209px;
+        right: 30px;
+        width: 104px;
+        height: 25px;
+    }
+
+    .card-social-icon {
+        display: inline-block;
+        width: 22px;
+        height: 20px;
+    }
+
+    .card-social-icon > i.fa-youtube, .card-social-icon > i.fa-twitter, .card-social-icon > i.fa-instagram {
+        width: 22px;
+    }
+
+    .card-social-icon > i.fa-list-alt {
+        width: 22px;
+    }
+
+    .card-back-position-block {
+        font-size: 22px;
+        line-height: 42px;
+    }
+
+    .card-back-number-block {
+        font-size: 22px;
+        line-height: 42px;
+    }
+
+    .card-back-info-block {
+        width: 25%;
+    }
+
+    .return-to-front {
+        background-color: #fff;
+    }
+
+    /*
+    .back-block-item {
+        height: 42px;
+    }
+
+    .card-back-first-name {
+        font-size: 12px;
+        line-height: 12px;
+    }
+
+    .card-back-last-name {
+        font-size: 15px;
+        line-height: 15px;
+    }
+
+    .card-back-position-block {
+        font-size: 26px;
+        line-height: 42px;
+    }
+
+    .card-back-number-block {
+        font-size: 26px;
+        line-height: 42px;
+    }
+
+    .card-back-info-text:nth-of-type(1) {
+        display: none;
+    }
+
+    .card-back-info-block {
+        padding: 2px 6px 2px 6px;
+        height: 38px;
+        width: 27%;
+    }
+
+    .card-back-info-text {
+        font-size: 10px;
+        margin-bottom: 2px;
+    }
+
+    .card-back-game-log-title {
+        display: block;
+        float: left;
+        font-size: 13px;
+        line-height: 13px;
+        margin-top: 8px;
+        margin-bottom: 4px;
+        margin-left: 11px;
+    }
+
+    label[for="season-select"] {
+        margin-top: 4px;
+        font-size: 13px;
+    }
+
+    .season-select {
+        margin-top: 3px;
+    }
+
+    .stats-table-outer-wrapper {
+        width: 89.2%;
+        height: 182px;
+    }
+
+    .stats-table-wrapper {
+        height: auto;
+    }*/
+}
 
 
