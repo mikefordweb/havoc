@@ -120,7 +120,12 @@
                                             <i class="fa fa-youtube-play"></i>
                                         \{{/ifCond}}
                                         \{{#ifCond media_type '==' "photo"}}
-                                            <img src="\{{url}}" class="card-photo-thumb">
+                                            \{{#ifCond photo_dim '==' "width"}}
+                                                <img src="\{{url}}" class="card-photo-thumb thumb-width" style="width: \{{getWidth width}}px">
+                                            \{{/ifCond}}
+                                            \{{#ifCond photo_dim '==' "height"}}
+                                                <img src="\{{url}}" class="card-photo-thumb thumb-height" style="width: \{{getHeight height}}px">
+                                            \{{/ifCond}}
                                         \{{/ifCond}}
                                     </div>
                                 \{{/ifCond}}
@@ -192,7 +197,7 @@
             <div class="havoc-modal-game-info">
                 <table class="modal-game-data-table">
                   \{{#each game_info}}
-                    <tr><th>Game Date/Time</th><th>Game Result</th><th>Location</th></tr>
+                    <tr><th>Game Date/Time</th><th>Game Result</th><th class="boxscore-location">Location</th></tr>
                     <tr>
                         <td>\{{date_time}}</td>
                         <td>
@@ -201,7 +206,7 @@
                             <div class="modal-game-score-right">\{{opponent_score}}</div>
                             <div class="modal-game-team-right">\{{opponent}}</div>
                         </td>
-                        <td>\{{state}}</td>
+                        <td class="boxscore-location">\{{state}}</td>
                     </tr>
                   \{{/each}}
                 </table>
@@ -277,56 +282,161 @@
                 <li id="teams" data-top-menu="teams">Teams
                     <ul id="sub-menu">
                         <li id="sophomore">Sophomore
-            <div class="player-list-wrapper">
-                <div class="player-list-left">
-                    <div class="player-arrow-opacity"></div>
-                    <i class="fa fa-chevron-left"></i>
-                </div>
-                <div class="player-list-wrapper-inner">
-                <div class="player-bkg-lines">
-                    <div class="player-bkg-yellow-line"></div>
-                    <div class="player-bkg-yellow-line"></div>
-                    <div class="player-bkg-yellow-line"></div>
-                    <div class="player-bkg-yellow-line"></div>
-                </div>
-                <ul class="player-list">
-                  {{#each players}}
-                    <li>
-                        <div class="player-icon-wrapper">
-                            <div class="player-icon-wrapper-bkg"></div>
-                            <div class="player-icon-wrapper-stripes">
-                                <div class="player-bkg-yellow-line"></div>
-                                <div class="player-bkg-yellow-line"></div>
-                                <div class="player-bkg-yellow-line"></div>
-                                <div class="player-bkg-yellow-line"></div>
-                            </div>
-                            
-                            <div class="player-icon" data-jersey="{{jersey_number}}" data-player-id="{{player_id}}">
-                                <div class="icon-player-photo"><img src="img/silhouette.png"></div>
-                                <div class="icon-photo-circle-bkg"></div>
-                                <div class="icon-photo-inner-circle"></div>
-                                <div class="inner-circle-wrapper">
-                                    <div class="icon-photo-inner-inner-circle"></div>
-                                    <div class="icon-photo-inner-inner-grow-circle"></div>
+                            <div class="player-list-wrapper" data-team="sophomore">
+                                <div class="player-list-left" data-team="sophomore">
+                                    <div class="player-arrow-opacity"></div>
+                                    <i class="fa fa-chevron-left"></i>
                                 </div>
-                                <div class="position-circle">{{position}}</div>
-                                <div class="player-icon-number">{{jersey_number}}</div>
-                                <div class="player-icon-first-name">{{first_name}}</div> 
-                                <div class="player-icon-last-name">{{last_name}}</div>
+                                <div class="player-list-wrapper-inner" data-team="sophomore">
+                                <div class="player-bkg-lines">
+                                    <div class="player-bkg-yellow-line"></div>
+                                    <div class="player-bkg-yellow-line"></div>
+                                    <div class="player-bkg-yellow-line"></div>
+                                    <div class="player-bkg-yellow-line"></div>
+                                </div>
+                                <ul class="player-list" data-team="sophomore">
+                                  {{#each players}}
+                                    {{#ifCond team '==' "sophomore"}}
+                                        <li>
+                                            <div class="player-icon-wrapper">
+                                                <div class="player-icon-wrapper-bkg"></div>
+                                                <div class="player-icon-wrapper-stripes">
+                                                    <div class="player-bkg-yellow-line"></div>
+                                                    <div class="player-bkg-yellow-line"></div>
+                                                    <div class="player-bkg-yellow-line"></div>
+                                                    <div class="player-bkg-yellow-line"></div>
+                                                </div>
+                                                
+                                                <div class="player-icon" data-jersey="{{jersey_number}}" data-player-id="{{player_id}}" data-team="sophomore">
+                                                    <div class="icon-player-photo"><img src="img/silhouette.png"></div>
+                                                    <div class="icon-photo-circle-bkg"></div>
+                                                    <div class="icon-photo-inner-circle"></div>
+                                                    <div class="inner-circle-wrapper">
+                                                        <div class="icon-photo-inner-inner-circle"></div>
+                                                        <div class="icon-photo-inner-inner-grow-circle"></div>
+                                                    </div>
+                                                    <div class="position-circle">{{position}}</div>
+                                                    <div class="player-icon-number">{{jersey_number}}</div>
+                                                    <div class="player-icon-first-name">{{first_name}}</div> 
+                                                    <div class="player-icon-last-name">{{last_name}}</div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    {{/ifCond}}
+                                   {{/each}}
+                                    
+                                </ul>
+                              </div>
+                              <div class="player-list-right" data-team="sophomore">
+                                    <div class="player-arrow-opacity"></div>
+                                    <i class="fa fa-chevron-right"></i>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                   {{/each}}
-                    
-                </ul>
-              </div>
-              <div class="player-list-right">
-                    <div class="player-arrow-opacity"></div>
-                    <i class="fa fa-chevron-right"></i>
-                </div>
-            </div></li>
-                        <li class="non-team-menu-item-sub" id="freshman">Freshman</li>
-                        <li class="non-team-menu-item-sub" id="7thgrade">7th Grade</li>
+                        </li>
+                        <li class="non-team-menu-item-sub" id="freshman">Freshman
+                            <div class="player-list-wrapper" data-team="freshman">
+                                <div class="player-list-left" data-team="freshman">
+                                    <div class="player-arrow-opacity"></div>
+                                    <i class="fa fa-chevron-left"></i>
+                                </div>
+                                <div class="player-list-wrapper-inner" data-team="freshman">
+                                <div class="player-bkg-lines">
+                                    <div class="player-bkg-yellow-line"></div>
+                                    <div class="player-bkg-yellow-line"></div>
+                                    <div class="player-bkg-yellow-line"></div>
+                                    <div class="player-bkg-yellow-line"></div>
+                                </div>
+                                <ul class="player-list" data-team="freshman">
+                                  {{#each players}}
+                                    {{#ifCond team '==' "freshman"}}
+                                        <li>
+                                            <div class="player-icon-wrapper">
+                                                <div class="player-icon-wrapper-bkg"></div>
+                                                <div class="player-icon-wrapper-stripes">
+                                                    <div class="player-bkg-yellow-line"></div>
+                                                    <div class="player-bkg-yellow-line"></div>
+                                                    <div class="player-bkg-yellow-line"></div>
+                                                    <div class="player-bkg-yellow-line"></div>
+                                                </div>
+                                                
+                                                <div class="player-icon" data-jersey="{{jersey_number}}" data-player-id="{{player_id}}" data-team="freshman">
+                                                    <div class="icon-player-photo"><img src="img/silhouette.png"></div>
+                                                    <div class="icon-photo-circle-bkg"></div>
+                                                    <div class="icon-photo-inner-circle"></div>
+                                                    <div class="inner-circle-wrapper">
+                                                        <div class="icon-photo-inner-inner-circle"></div>
+                                                        <div class="icon-photo-inner-inner-grow-circle"></div>
+                                                    </div>
+                                                    <div class="position-circle">{{position}}</div>
+                                                    <div class="player-icon-number">{{jersey_number}}</div>
+                                                    <div class="player-icon-first-name">{{first_name}}</div> 
+                                                    <div class="player-icon-last-name">{{last_name}}</div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    {{/ifCond}}
+                                   {{/each}}
+                                    
+                                </ul>
+                              </div>
+                              <div class="player-list-right" data-team="freshman">
+                                    <div class="player-arrow-opacity"></div>
+                                    <i class="fa fa-chevron-right"></i>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="non-team-menu-item-sub" id="7thgrade">7th Grade
+                            <div class="player-list-wrapper" data-team="7thgrade">
+                                <div class="player-list-left" data-team="7thgrade">
+                                    <div class="player-arrow-opacity"></div>
+                                    <i class="fa fa-chevron-left"></i>
+                                </div>
+                                <div class="player-list-wrapper-inner" data-team="7thgrade">
+                                <div class="player-bkg-lines">
+                                    <div class="player-bkg-yellow-line"></div>
+                                    <div class="player-bkg-yellow-line"></div>
+                                    <div class="player-bkg-yellow-line"></div>
+                                    <div class="player-bkg-yellow-line"></div>
+                                </div>
+                                <ul class="player-list" data-team="7thgrade">
+                                  {{#each players}}
+                                    {{#ifCond team '==' "7thgrade"}}
+                                        <li>
+                                            <div class="player-icon-wrapper">
+                                                <div class="player-icon-wrapper-bkg"></div>
+                                                <div class="player-icon-wrapper-stripes">
+                                                    <div class="player-bkg-yellow-line"></div>
+                                                    <div class="player-bkg-yellow-line"></div>
+                                                    <div class="player-bkg-yellow-line"></div>
+                                                    <div class="player-bkg-yellow-line"></div>
+                                                </div>
+                                                
+                                                <div class="player-icon" data-jersey="{{jersey_number}}" data-player-id="{{player_id}}" data-team="7thgrade">
+                                                    <div class="icon-player-photo"><img src="img/silhouette.png"></div>
+                                                    <div class="icon-photo-circle-bkg"></div>
+                                                    <div class="icon-photo-inner-circle"></div>
+                                                    <div class="inner-circle-wrapper">
+                                                        <div class="icon-photo-inner-inner-circle"></div>
+                                                        <div class="icon-photo-inner-inner-grow-circle"></div>
+                                                    </div>
+                                                    <div class="position-circle">{{position}}</div>
+                                                    <div class="player-icon-number">{{jersey_number}}</div>
+                                                    <div class="player-icon-first-name">{{first_name}}</div> 
+                                                    <div class="player-icon-last-name">{{last_name}}</div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    {{/ifCond}}
+                                   {{/each}}
+                                    
+                                </ul>
+                              </div>
+                              <div class="player-list-right" data-team="7thgrade">
+                                    <div class="player-arrow-opacity"></div>
+                                    <i class="fa fa-chevron-right"></i>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </li>
                 <li class="non-team-menu-item"><a href="/tryouts">Tryouts</a></li>

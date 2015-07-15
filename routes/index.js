@@ -5,6 +5,7 @@ var Twitter = require('twitter');
 var generatePassword = require('password-generator');
 var bCrypt = require('bcrypt-nodejs');
 var sizeOf = require('image-size');
+var nodemailer = require('nodemailer');
 var router = express.Router();
 
 var isAuthenticated = function (req, res, next) {
@@ -263,7 +264,7 @@ module.exports = function(passport) {
 
 	router.get('/live_updates', function(req, res, next) {
 
-		console.log("req.xhr: " + req.xhr);
+		//console.log("req.xhr: " + req.xhr);
 		
 		var tweets_json;
 
@@ -277,19 +278,19 @@ module.exports = function(passport) {
 		var params = {screen_name: 'wisconsinhavoc', count: '5'};
 		var live_updates_items = [];
 		client.get('statuses/user_timeline', params, function(error, tweets, response){
-		  console.log("Get tweets:error: " + error);
+		  //console.log("Get tweets:error: " + error);
 		  if (!error) {
-		    console.log("Tweets: " + JSON.stringify(tweets));
+		    //console.log("Tweets: " + JSON.stringify(tweets));
 		    tweets_json = tweets;
 
-		    console.log("tweets_json.length: " + tweets_json.length);
+		    //console.log("tweets_json.length: " + tweets_json.length);
 
 		    var twitter_screen_name = tweets_json[0].user.name;
 		    var twitter_name = tweets_json[0].user.screen_name;
 		    var twitter_icon_src = tweets_json[0].user.profile_image_url;
 
 		    for (var i = 0; i < tweets_json.length; i++) {
-		    	console.log("tweets_json[i].text: " + tweets_json[i].text);
+		    	//console.log("tweets_json[i].text: " + tweets_json[i].text);
 		    	var live_update_item = {};
 		    	live_update_item.date_time = beautifyDatetime(tweets_json[i].created_at);
 		    	live_update_item.item_type = "tweet";
@@ -298,7 +299,7 @@ module.exports = function(passport) {
 		    	tweets_json[i].text = tweets_json[i].text.replace("&amp;", "&");
 				    	
 		    	var tweet_obj = {};
-		    	console.log("tweet media: " + tweets_json[i].entities.media);
+		    	//console.log("tweet media: " + tweets_json[i].entities.media);
 		    	if (typeof tweets_json[i].entities.media != 'undefined') {
 			    	for (var j = 0; j < tweets_json[i].entities.media.length; j++) {
 				    	var url = tweets_json[i].entities.media[j].url;
@@ -330,7 +331,6 @@ module.exports = function(passport) {
 			    	activity_obj.username = results1[i].user;
 			    	activity_obj.first_name = results1[i].first_name;
 			    	activity_obj.last_name = results1[i].last_name;
-			    	console.log("results1[i].team: " + results1[i].team);
 			    	activity_obj.team = results1[i].team;
 			    	activity_obj.action = results1[i].action;
 			    	activity_obj.table_changed = results1[i].table_changed;
@@ -404,8 +404,9 @@ module.exports = function(passport) {
 		var box_score = [];
 		
 		if (req.query.game_id) {var game_id = req.query.game_id;} else {var game_id = 0;}
+		if (req.query.team) {var team = req.query.team;} else {var team = 0;}
 		var db = req.connection;
-		db.query("SELECT * FROM players", function(err, results){
+		db.query("SELECT * FROM players WHERE team = '"+team+"'", function(err, results){
 			db.query("SELECT * FROM game_lines WHERE game_info_id = '" + game_id + "'", function(err, results1){
 
 		          for (var j = 0; j < results.length; j++) {
@@ -434,121 +435,145 @@ module.exports = function(passport) {
 	router.get('/game_player_data', function(req, res, next) {
 
 		if (req.query.jersey_id) {var jersey_id = req.query.jersey_id;} else {var jersey_id = 0;}
+		if (req.query.team) {var team = req.query.team;} else {var team = "";}
 		var db = req.connection;
-		db.query("SELECT * FROM game_lines WHERE jersey = '" + jersey_id + "'", function(err, results1){
-			  //var game_info_id_array = [];
-			  console.log("game_lines: " + JSON.stringify(results1));
-			  player_totals = {};
-			  player_totals.Points = 0;
-			  player_totals.TwoPointsMade = 0;
-			  player_totals.TwoPointAttempts = 0;
-			  player_totals.ThreePointsMade = 0;
-			  player_totals.ThreePointAttempts = 0;
-			  player_totals.FreeThrowsMade = 0;
-			  player_totals.FreeThrowAttempts = 0;
-			  player_totals.Assists = 0;
-			  player_totals.OffensiveRebounds = 0;
-			  player_totals.DefensiveRebounds = 0;
-			  player_totals.Rebounds = 0;
-			  player_totals.BlockedShots = 0;
-			  player_totals.Steals = 0;
-			  player_totals.Turnovers = 0;
-			  player_totals.Charges = 0;
-			  player_totals.PersonalFouls = 0;
+		var team_games = [];
 
-			  var game_info_id_str = "";
+		db.query("SELECT * FROM game_info WHERE team = '" + team + "'", function(err, results10){
+			console.log("team: " + team);
+			console.log("results10.length: " + results10.length);
+			for (var j = 0; j < results10.length; j++) {
+				team_games[j] = results10[j].game_info_id;
+			}
 
-		      for (var j = 0; j < results1.length; j++) {
-		      	//game_info_id_array.push(results1[j]);
-		      	  player_totals.Points += results1[j].Points;
-		      	  player_totals.TwoPointsMade += results1[j].TwoPointsMade;
-				  player_totals.TwoPointAttempts += results1[j].TwoPointAttempts;
-				  player_totals.ThreePointsMade += results1[j].ThreePointsMade;
-				  player_totals.ThreePointAttempts += results1[j].ThreePointAttempts;
-				  player_totals.FreeThrowsMade += results1[j].FreeThrowsMade;
-				  player_totals.FreeThrowAttempts += results1[j].FreeThrowAttempts;
-				  player_totals.Assists += results1[j].Assists;
-				  player_totals.OffensiveRebounds += results1[j].OffensiveRebounds;
-				  player_totals.DefensiveRebounds += results1[j].DefensiveRebounds;
-				  player_totals.Rebounds += results1[j].Rebounds;
-				  player_totals.BlockedShots += results1[j].BlockedShots;
-				  player_totals.Steals += results1[j].Steals;
-				  player_totals.Turnovers += results1[j].Turnovers;
-				  player_totals.Charges += results1[j].Charges;
-				  player_totals.PersonalFouls += results1[j].PersonalFouls;
-		      	if (j<(results1.length-1)) {
-		      		game_info_id_str += "'"+results1[j].game_info_id+"',";
-		      	} else {
-		      		game_info_id_str += "'"+results1[j].game_info_id+"'";
-		      	}
-		      }
+			console.log("team_games: " + JSON.stringify(team_games));
 
-		      var num_games = results1.length;
+			db.query("SELECT * FROM game_lines WHERE jersey = '" + jersey_id + "'", function(err, results1){
+				  
+					  var teamFilteredResults = [];
 
-			  player_avgs = {};
-			  player_avgs.Points = roundToTwo(player_totals.Points / num_games);
-			  player_avgs.TwoPointsMade = roundToTwo(player_totals.TwoPointsMade / num_games);
-			  player_avgs.TwoPointAttempts = roundToTwo(player_totals.TwoPointAttempts / num_games);
-			  player_avgs.ThreePointsMade = roundToTwo(player_totals.ThreePointsMade / num_games);
-			  player_avgs.ThreePointAttempts = roundToTwo(player_totals.ThreePointAttempts / num_games);
-			  player_avgs.FreeThrowsMade = roundToTwo(player_totals.FreeThrowsMade / num_games);
-			  player_avgs.FreeThrowAttempts = roundToTwo(player_totals.FreeThrowAttempts / num_games);
-			  player_avgs.Assists = roundToTwo(player_totals.Assists / num_games);
-			  player_avgs.OffensiveRebounds = roundToTwo(player_totals.OffensiveRebounds / num_games);
-			  player_avgs.DefensiveRebounds = roundToTwo(player_totals.DefensiveRebounds / num_games);
-			  player_avgs.Rebounds = roundToTwo(player_totals.Rebounds / num_games);
-			  player_avgs.BlockedShots = roundToTwo(player_totals.BlockedShots / num_games);
-			  player_avgs.Steals = roundToTwo(player_totals.Steals / num_games);
-			  player_avgs.Turnovers = roundToTwo(player_totals.Turnovers / num_games);
-			  player_avgs.Charges = roundToTwo(player_totals.Charges / num_games);
-			  player_avgs.PersonalFouls = roundToTwo(player_totals.PersonalFouls / num_games);
+					  for (var k = 0; k < team_games.length; k++) {
+					  	for (var m = 0; m < results1.length; m++) {
+					  		console.log("team_games1: " + team_games[m]);
+					  		console.log("results1[m].game_info_id: " + results1[m].game_info_id);
+					  		if (team_games[k] == results1[m].game_info_id) {
+					  			teamFilteredResults.push(results1[m]);
+					  		}
+					  	}
+					  }
 
-			  console.log("num_games: " + num_games);
-			  console.log("player_totals.TwoPointsMade: " + player_totals.TwoPointsMade);
-			  console.log("roundToTwo(player_totals.TwoPointsMade / num_games): " + roundToTwo(player_totals.TwoPointsMade / num_games));
+					  console.log("game_lines: " + JSON.stringify(teamFilteredResults));
+					  player_totals = {};
+					  player_totals.Points = 0;
+					  player_totals.TwoPointsMade = 0;
+					  player_totals.TwoPointAttempts = 0;
+					  player_totals.ThreePointsMade = 0;
+					  player_totals.ThreePointAttempts = 0;
+					  player_totals.FreeThrowsMade = 0;
+					  player_totals.FreeThrowAttempts = 0;
+					  player_totals.Assists = 0;
+					  player_totals.OffensiveRebounds = 0;
+					  player_totals.DefensiveRebounds = 0;
+					  player_totals.Rebounds = 0;
+					  player_totals.BlockedShots = 0;
+					  player_totals.Steals = 0;
+					  player_totals.Turnovers = 0;
+					  player_totals.Charges = 0;
+					  player_totals.PersonalFouls = 0;
 
-		      db.query("SELECT * FROM game_info WHERE game_info_id IN (" + game_info_id_str
-		      	+ ")", function(err, results2){
-		      	db.query("SELECT * FROM players WHERE jersey_number = '" + jersey_id + "'", function(err, results3){
-		      		db.query("SELECT * FROM media WHERE player_id = '" + results3[0].player_id + "'", function(err, results4){
-		      			for (var k = 0; k < results4.length; k++) {
-		      				if (results4[k].media_type == "photo") {
-			      				var dimensions = sizeOf('./public/'+results4[k].url);
-			      				console.log("image size: w: " + dimensions.width + " h: " + dimensions.height);
-			      				if (dimensions.width > dimensions.height) {
-			      					results4[k].photo_dim = 'width';
-			      					console.log("results4[k].width: " + results4[k].width);
-			      					if (dimensions.width > 464) {
-			      						results4[k].width = '464';
-			      					} else {
-			      						results4[k].width = dimensions.width;
-			      					}
-			      				} else {
-			      					results4[k].photo_dim = 'height';
-			      					console.log("results4[k].height: " + results4[k].height);
-			      					if (dimensions.height > 327) {
-			      						results4[k].height = '327';
-			      					} else {
-			      						results4[k].height = dimensions.height;
-			      					}
-			      					var widthPercentage = dimensions.height / dimensions.width;
-			      					var photoWidth = Math.ceil(327 / widthPercentage);
-			      					console.log("photoWidth: " + photoWidth);
-			      					results4[k].marginLeft = Math.round((464 - photoWidth)/2);
-			      				}
+					  var game_info_id_str = "";
 
-			      				if (dimensions.width <= '464' && dimensions.height <= '327') {
-			      					results4[k].photo_dim = 'none'
-			      				}
+				      for (var j = 0; j < teamFilteredResults.length; j++) {
+				      	//game_info_id_array.push(results1[j]);
+				      	  player_totals.Points += teamFilteredResults[j].Points;
+				      	  player_totals.TwoPointsMade += teamFilteredResults[j].TwoPointsMade;
+						  player_totals.TwoPointAttempts += teamFilteredResults[j].TwoPointAttempts;
+						  player_totals.ThreePointsMade += teamFilteredResults[j].ThreePointsMade;
+						  player_totals.ThreePointAttempts += teamFilteredResults[j].ThreePointAttempts;
+						  player_totals.FreeThrowsMade += teamFilteredResults[j].FreeThrowsMade;
+						  player_totals.FreeThrowAttempts += teamFilteredResults[j].FreeThrowAttempts;
+						  player_totals.Assists += teamFilteredResults[j].Assists;
+						  player_totals.OffensiveRebounds += teamFilteredResults[j].OffensiveRebounds;
+						  player_totals.DefensiveRebounds += teamFilteredResults[j].DefensiveRebounds;
+						  player_totals.Rebounds += teamFilteredResults[j].Rebounds;
+						  player_totals.BlockedShots += teamFilteredResults[j].BlockedShots;
+						  player_totals.Steals += teamFilteredResults[j].Steals;
+						  player_totals.Turnovers += teamFilteredResults[j].Turnovers;
+						  player_totals.Charges += teamFilteredResults[j].Charges;
+						  player_totals.PersonalFouls += teamFilteredResults[j].PersonalFouls;
+				      	if (j<(teamFilteredResults.length-1)) {
+				      		game_info_id_str += "'"+teamFilteredResults[j].game_info_id+"',";
+				      	} else {
+				      		game_info_id_str += "'"+teamFilteredResults[j].game_info_id+"'";
+				      	}
+				      }
+
+				      var num_games = teamFilteredResults.length;
+
+					  player_avgs = {};
+					  player_avgs.Points = roundToTwo(player_totals.Points / num_games);
+					  player_avgs.TwoPointsMade = roundToTwo(player_totals.TwoPointsMade / num_games);
+					  player_avgs.TwoPointAttempts = roundToTwo(player_totals.TwoPointAttempts / num_games);
+					  player_avgs.ThreePointsMade = roundToTwo(player_totals.ThreePointsMade / num_games);
+					  player_avgs.ThreePointAttempts = roundToTwo(player_totals.ThreePointAttempts / num_games);
+					  player_avgs.FreeThrowsMade = roundToTwo(player_totals.FreeThrowsMade / num_games);
+					  player_avgs.FreeThrowAttempts = roundToTwo(player_totals.FreeThrowAttempts / num_games);
+					  player_avgs.Assists = roundToTwo(player_totals.Assists / num_games);
+					  player_avgs.OffensiveRebounds = roundToTwo(player_totals.OffensiveRebounds / num_games);
+					  player_avgs.DefensiveRebounds = roundToTwo(player_totals.DefensiveRebounds / num_games);
+					  player_avgs.Rebounds = roundToTwo(player_totals.Rebounds / num_games);
+					  player_avgs.BlockedShots = roundToTwo(player_totals.BlockedShots / num_games);
+					  player_avgs.Steals = roundToTwo(player_totals.Steals / num_games);
+					  player_avgs.Turnovers = roundToTwo(player_totals.Turnovers / num_games);
+					  player_avgs.Charges = roundToTwo(player_totals.Charges / num_games);
+					  player_avgs.PersonalFouls = roundToTwo(player_totals.PersonalFouls / num_games);
+
+
+			      db.query("SELECT * FROM game_info WHERE game_info_id IN (" + game_info_id_str
+			      	+ ")", function(err, results2){
+			      	db.query("SELECT * FROM players WHERE jersey_number = '" + jersey_id + "' and team = '"+team+"'", function(err, results3){
+			      		db.query("SELECT * FROM media WHERE player_id = '" + results3[0].player_id + "'", function(err, results4){
+			      			for (var k = 0; k < results4.length; k++) {
+			      				if (results4[k].media_type == "photo") {
+				      				var dimensions = sizeOf('./public/'+results4[k].url);
+				      				console.log("image size: w: " + dimensions.width + " h: " + dimensions.height);
+				      				if (dimensions.width > dimensions.height) {
+				      					results4[k].photo_dim = 'width';
+				      					console.log("results4[k].width: " + results4[k].width);
+				      					if (dimensions.width > 464) {
+				      						results4[k].width = '464';
+				      					} else {
+				      						results4[k].width = dimensions.width;
+				      					}
+				      				} else {
+				      					results4[k].photo_dim = 'height';
+				      					console.log("results4[k].height: " + results4[k].height);
+				      					if (dimensions.height > 327) {
+				      						results4[k].height = '327';
+				      					} else {
+				      						results4[k].height = dimensions.height;
+				      					}
+				      					var widthPercentage = dimensions.height / dimensions.width;
+				      					var photoWidth = Math.ceil(327 / widthPercentage);
+				      					console.log("photoWidth: " + photoWidth);
+				      					results4[k].marginLeft = Math.round((464 - photoWidth)/2);
+				      				}
+
+				      				if (dimensions.width <= '464' && dimensions.height <= '327') {
+				      					results4[k].photo_dim = 'none'
+				      				}
+				      			}
+
 			      			}
 
-		      			}
+			      			res.json({game_player_data: teamFilteredResults, game_dates: results2, player_info: results3, media_items: results4, player_totals: player_totals, player_avgs: player_avgs});
+			      		});
+			      	});
+			      });
+			});
 
-		      			res.json({game_player_data: results1, game_dates: results2, player_info: results3, media_items: results4, player_totals: player_totals, player_avgs: player_avgs});
-		      		});
-		      	});
-		      });
 		});
+		
 	});
 
 	router.post('/delete_box_score', isAuthenticated, function(req, res, next) {
@@ -592,14 +617,16 @@ module.exports = function(passport) {
 
 	router.post('/add_player', isAuthenticated, function(req, res, next) {
 		if (req.body.jersey_number) {var jersey_number = req.body.jersey_number;} else {var jersey_number = 0;}
-		if (req.body.first_name) {var first_name = req.body.first_name;} else {var first_name = 0;}
-		if (req.body.last_name) {var last_name = req.body.last_name;} else {var last_name = 0;}
-		if (req.body.position) {var position = req.body.position;} else {var position = 0;}
-		if (req.body.team) {var team = req.body.team;} else {var team = 0;}
-		if (req.body.email) {var email = req.body.email;} else {var email = 0;}
-		if (req.body.youtube) {var youtube = req.body.youtube;} else {var youtube = 0;}
-		if (req.body.instagram) {var instagram = req.body.instagram;} else {var instagram = 0;}
-		if (req.body.twitter) {var twitter = req.body.twitter;} else {var twitter = 0;}
+		if (req.body.first_name) {var first_name = req.body.first_name;} else {var first_name = "";}
+		if (req.body.last_name) {var last_name = req.body.last_name;} else {var last_name = "";}
+		if (req.body.position) {var position = req.body.position;} else {var position = "";}
+		if (req.body.team) {var team = req.body.team;} else {var team = "";}
+		if (req.body.email) {var email = req.body.email;} else {var email = "";}
+		if (req.body.youtube) {var youtube = req.body.youtube;} else {var youtube = "";}
+		if (req.body.instagram) {var instagram = req.body.instagram;} else {var instagram = "";}
+		if (req.body.twitter) {var twitter = req.body.twitter;} else {var twitter ="";}
+
+		console.log("PLAYER TEAM: " + team);
 
 		var db = req.connection;
 		db.query("INSERT INTO players (jersey_number, first_name, last_name, position, team, youtube, instagram, twitter) VALUES ('" + jersey_number + "','" + first_name + "', '" + last_name + "', '" + position + "', '" + team + "', '" + youtube + "', '" + instagram + "', '" + twitter + "')", function(err, result){
@@ -784,6 +811,56 @@ module.exports = function(passport) {
 			return true;
 		});
 	}
+
+	router.post('/contact_us', function(req, res, next) {
+		console.log("in contact_us");
+		if (req.body.first_name) {var first_name = req.body.first_name;} else {var first_name = "";}
+		if (req.body.last_name) {var last_name = req.body.last_name;} else {var last_name = "";}
+		if (req.body.email_address) {var email_address = req.body.email_address;} else {var email_address = "";}
+		if (req.body.user_message) {var user_message = req.body.user_message;} else {var user_message = "";}
+
+		console.log("first_name: " + first_name);
+		console.log("last_name: " + last_name);
+
+		var email_content = "<h2>WisconsinHavoc.com Contact Us Form</h2>";
+		email_content += "<p><strong>First Name: </strong> " + first_name + "</p>";
+		email_content += "<p><strong>Last Name: </strong> " + last_name + "</p>";
+		email_content += "<p><strong>Email: </strong> " + email_address + "</p>";
+		email_content += "<p><strong>Message: </strong> " + user_message + "</p>";
+
+		var text_content = "WisconsinHavoc.com Contact Us Form\r\n";
+		text_content += "First Name: " + first_name + "\r\n";
+		text_content += "Last Name: " + last_name + "\r\n";
+		text_content += "Email: " + email_address + "\r\n";
+		text_content += "Message: " + user_message + "\r\n";
+
+		var transporter = nodemailer.createTransport({
+		    service: 'Gmail',
+		    auth: {
+		        user: 'wisconsinhavoc@gmail.com',
+		        pass: '#havoc4110'
+		    }
+		});
+
+		var mailOptions = {
+		    from: 'Contact Us <bryan@wisconsinhavoc.com>', // sender address
+		    to: 'floyd1985@gmail.com', // list of receivers
+		    subject: 'Wisconsin Havoc Contact Us Form', // Subject line
+		    text: text_content, // plaintext body
+		    html: email_content // html body
+		};
+
+		// send mail with defined transport object
+		transporter.sendMail(mailOptions, function(error, info){
+		    if(error){
+		        return console.log(error);
+		    }
+		    console.log('Message sent: ' + info.response);
+
+		});
+
+		res.json({submit: "success"});
+	});
 
 	router.post('/upload_game', isAuthenticated, function(req, res, next) {
 		console.log("1:upload_game: " + JSON.stringify(req.files));

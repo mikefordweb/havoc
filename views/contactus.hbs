@@ -2,7 +2,84 @@
 
             <div class="schedule-main page-main-content">
                 <div class="page-h2-bkg"></div><h2 class="page-main-h2">Contact Us</h2><div class="page-h2-bkg"></div>
+
+                <div class="form-success-content">
+                	<p class="content-text">Thank you for inquiring!  We will respond as soon as we can!</p>
+                	<p class="content-text">Thanks,<br>Coach Bryan Nolasco</p>
+                </div>
+
+                <div class="form-field-content">
+	                <p class="content-text">Use the form below to contact Wisconsin Havoc</p>
+
+	                <form id="contact-us-form" enctype="multipart/form-data" action= "/contact_us" method="post">
+			            <section class="content bgcolor-6">
+							<span class="input__main input--juro">
+								<input class="input__field input__field--juro" type="text" name="first_name" id="input-28" />
+								<label class="input__label input__label--juro" for="input-28">
+									<span class="input__label-content input__label-content--juro">First Name</span>
+								</label>
+							</span>
+							<span class="input__main input--juro">
+								<input class="input__field input__field--juro" type="text" id="input-29" name="last_name" />
+								<label class="input__label input__label--juro" for="input-29">
+									<span class="input__label-content input__label-content--juro">Last Name</span>
+								</label>
+							</span>
+							<span class="input__main input--juro">
+								<input class="input__field input__field--juro" type="text" id="input-30" name="email_address" />
+								<label class="input__label input__label--juro" for="input-30">
+									<span class="input__label-content input__label-content--juro">Email</span>
+								</label>
+							</span>
+
+							<span class="input__main_textarea input--juro">
+								<textarea class="input-textarea input__field input__field--juro" name="user_message" id="input-30" rows="8" cols="15" /></textarea>
+								<label class="input__label_textarea input__label--juro" for="input-30">
+									<span class="input__label-content input__label-content--juro">Message</span>
+								</label>
+							</span>
+						</section>
+						<input class="contact-us-button" id="submit-contact-us" type="submit" name="Submit">
+	                </form>
+	            </div>
+
             </div>
+            <script src="js/classie.js"></script>
+            <script>
+			(function() {
+				// trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+				if (!String.prototype.trim) {
+					(function() {
+						// Make sure we trim BOM and NBSP
+						var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+						String.prototype.trim = function() {
+							return this.replace(rtrim, '');
+						};
+					})();
+				}
+
+				[].slice.call( document.querySelectorAll( '.input__field' ) ).forEach( function( inputEl ) {
+					// in case the input is already filled..
+					if( inputEl.value.trim() !== '' ) {
+						classie.add( inputEl.parentNode, 'input--filled' );
+					}
+
+					// events:
+					inputEl.addEventListener( 'focus', onInputFocus );
+					inputEl.addEventListener( 'blur', onInputBlur );
+				} );
+
+				function onInputFocus( ev ) {
+					classie.add( ev.target.parentNode, 'input--filled' );
+				}
+
+				function onInputBlur( ev ) {
+					if( ev.target.value.trim() === '' ) {
+						classie.remove( ev.target.parentNode, 'input--filled' );
+					}
+				}
+			})();
+		</script>
 
             <div class="basketball-card-main-content">
                 <div class="basketball-card-wrapper"></div>

@@ -14,6 +14,7 @@ html {
     color: #222;
     font-size: 1em;
     line-height: 1.4;
+    font-family: Arial;
 }
 
 .clear {
@@ -511,6 +512,7 @@ footer {
 }
 
 .player-list-right {
+    display: none;
     position: absolute;
     top: 0;
     right: 0;
@@ -1217,11 +1219,12 @@ footer {
     cursor: pointer;
 }
 
-.card-media-item > img {
-    position: absolute;
+.card-media-item. > img {
+    display: block;
+    position: relative;
     z-index: 120;
-    top: 6px;
-    left: 9px;
+    top: 0px;
+    margin: 0 auto;
 }
 
 .card-media-item-bkg {
@@ -1230,9 +1233,20 @@ footer {
     height: 21px;
     position: absolute;
     background-color: #5e92cd;
-    z-index: 110;
+    z-index: 0;
     top: 14px;
     left: 0px;
+}
+
+.card-photo-thumb {
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 6px;
+}
+
+.thumb-width {
+    margin-top: 11px;
 }
 
 .card-media-item.selected > .card-media-item-bkg {
@@ -1971,6 +1985,21 @@ label[for="timepicker"] {
 
 }
 
+.contact-us-button {
+    background-color: #fcc33b;
+    border: none;
+    border-radius: 4px;
+    margin-right: 24px;
+    font-size: 22px;
+    line-height: 26px;
+    font-weight: bold;
+    padding: 4px 10px 4px 10px;
+    cursor: pointer;
+    color: #0f1d3f;
+    display: block;
+    float: right;
+}
+
 .modal-buttons {
     float: right;
     margin-top: 22px;
@@ -2116,10 +2145,8 @@ input[name="position"] {
     border:0;
 }
 
-.card-photo-thumb {
+.card-photo-thumb-width {
     display: block;
-    width: 48px;
-    height: 37px;
 }
 
 .full-video-item {
@@ -2226,6 +2253,10 @@ ul.calendar-menu {
 
 .fc-event-container:hover {
     cursor: pointer;
+}
+
+.fc-event-container {
+    padding: 2px 0px 0px 0px !important;
 }
 
 .single-event-day > .fc-content {
@@ -2595,6 +2626,200 @@ a.tweet-media-link:visited {
     width: 100%;
 }
 
+.last-name-sm {
+    font-size: 20px !important;
+}
+
+.content-text {
+    color: #fff;
+}
+
+/*** JURO form elements ***/
+
+.form-field-content {
+    display: block;
+}
+
+.form-success-content {
+    display: none;
+}
+
+.input__main {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    margin: 16px 32px 16px 0px;
+    max-width: 250px;
+    width: calc(100% - 24px);
+    vertical-align: top;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.input__main_textarea {
+    position: relative;
+    z-index: 1;
+    display: block;
+    margin: 16px 32px 16px 0px;
+    width: calc(100% - 24px);
+    vertical-align: top;
+    height: 200px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.input__field {
+    position: relative;
+    display: block;
+    float: right;
+    padding: 14px;
+    width: 60%;
+    border: none;
+    border-radius: 0;
+    background: #f0f0f0;
+    color: #aaa;
+    font-weight: bold;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-appearance: none; /* for box shadows to show on iOS */
+    -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.input__field:focus {
+    outline: none;
+    -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.input__label {
+    display: inline-block;
+    float: right;
+    padding: 0 16px;
+    width: 40%;
+    color: #6a7989;
+    font-weight: bold;
+    font-size: 20px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.input__label_textarea {
+    display: inline-block;
+    float: right;
+    padding: 0 16px;
+    width: 40%;
+    color: #6a7989;
+    font-weight: bold;
+    font-size: 20px;
+    height: 200px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.input__label-content {
+    position: relative;
+    display: block;
+    padding: 22px 0;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.input--juro {
+    overflow: hidden;
+    -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.input-textarea {
+    resize: none;
+}
+
+.input__field--juro {
+    position: absolute;
+    z-index: 100;
+    padding: 36px 14px 0;
+    width: 100%;
+    background: transparent;
+    color: #5e92cd;
+    font-size: 14px;
+    -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.input__label--juro {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    text-align: left;
+    -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.input__label-content--juro {
+    padding: 22px 16px;
+    -webkit-transform-origin: 0% 50%;
+    transform-origin: 0% 50%;
+    -webkit-transition: -webkit-transform 0.3s, color 0.3s;
+    transition: transform 0.3s, color 0.3s;
+
+    text-rendering: geometricPrecision;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.input__label--juro::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0px solid transparent;
+    -webkit-transition: border-width 0.3s, border-color 0.3s;
+    transition: border-width 0.3s, border-color 0.3s;
+    -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.input__field--juro:focus + .input__label--juro::before,
+.input--filled .input__label--juro::before {
+    border-width: 8px;
+    border-color: #5e92cd;
+    border-top-width: 26px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.input__field--juro:focus + .input__label--juro .input__label-content--juro,
+.input--filled .input__label--juro .input__label-content--juro {
+    color: #fff;
+    -webkit-transform: translate3d(0, -22px, 0) scale3d(0.75, 0.75, 1);
+    transform: translate3d(0, -22px, 0) scale3d(0.75, 0.75, 1) translateZ(1px);
+    -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+
+/*** Responsive stuff ***/
+
 @media (max-width: 1115px) {
     .menu-bkg {
         display: none;
@@ -2611,6 +2836,116 @@ a.tweet-media-link:visited {
 
     #sub-menu > li {
         font-size: 12px;
+    }
+}
+
+@media (max-width: 850px) {
+    .havoc-modal-body {
+        overflow-x: scroll;
+    }
+    .box-score-modal {
+        width: 88%;
+    }
+
+    .modal-h2-bkg.left {
+        width: 64%;
+    }
+
+    .modal-main-h2 {
+        width: 26%;
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+        text-align: center;
+    }
+
+    .modal-h2-bkg.right {
+        width: 9%;
+    }
+
+    #top-menu > li {
+        font-size: 14px;
+    }
+
+    #sub-menu > li {
+        font-size: 14px;
+    }
+
+    .non-team-menu-item > a {
+        padding: 0 14px 0 14px;
+    }
+
+    #top-menu > li#teams {
+      padding: 0 14px 0 14px;
+    }
+
+    .live-updates-wrapper {
+        position: relative;
+        margin: 0 auto;
+        width: 98%;
+        top: inherit;
+        right: inherit;
+    }
+
+    .live-updates-header {
+        width: 98%;
+        margin: 0 auto;
+    }
+
+    .live-update-item {
+        width: 99%;
+    }
+
+    #live-updates-content {
+        width: 98%;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    #live-updates-content .scrollbar {
+        position: absolute;
+        right: 0;
+        z-index: 200;
+    }
+
+    #live-updates-content .viewport {
+        width: 100%;
+    }
+
+    .sub-menu-bkg {
+        right: inherit;
+    }
+
+    .basketball-card-main-content {
+        margin: 0 auto;
+        min-width: 560px;
+    }
+
+    .content-wrapper {
+        min-height: inherit;
+    }
+
+    .basketball-card-wrapper {
+        margin: 0 auto 170px auto;
+    }
+}
+
+@media (max-width: 770px) {
+    .modal-main-h2 {
+        font-size: 20px !important;
+    }
+}
+
+@media (max-width: 698px) {
+    #header-slogan {
+        display: none;
+    }
+}
+
+@media (max-width: 619px) {
+
+    .basketball-card-main-content {
+        margin: 0 auto;
+        min-width: 420px;
     }
 
     .basketball-card-wrapper {
@@ -2678,14 +3013,6 @@ a.tweet-media-link:visited {
 
     .social-icon-text {
         display: none;
-        /*position: absolute;
-        bottom: 10px;
-        font-size: 8px;
-        line-height: 10px;
-        font-weight: bold;
-        display: none;
-        width: 100%;
-        text-align: center;*/
     }
 
     .card-social-icon:hover > .social-icon {
@@ -2765,29 +3092,8 @@ a.tweet-media-link:visited {
     .stats-table-wrapper {
         height: auto;
     }
-}
 
-@media (max-width: 830px) {
-    #top-menu > li {
-        font-size: 13px;
-    }
-
-    #sub-menu > li {
-        font-size: 11px;
-    }
-
-    .non-team-menu-item > a {
-        padding: 0 10px 0 10px;
-    }
-
-    #top-menu > li#teams {
-      padding: 0 10px 0 10px;
-    }
-}
-
-@media (max-width: 775px) {
-
-    .live-updates-wrapper {
+    /*.live-updates-wrapper {
         position: relative;
         margin: 0 auto;
         width: 90%;
@@ -2832,14 +3138,22 @@ a.tweet-media-link:visited {
     .basketball-card-wrapper {
         margin: 0 auto 170px auto;
     }
+    */
 }
 
-@media (max-width: 698px) {
-    #header-slogan {
+
+@media (max-width: 560px) {
+    .modal-main-h2 {
+        font-size: 16px !important;
+        line-height: 16px;
+    }
+    .boxscore-location {
         display: none;
     }
+    .modal-game-data-table {
+        font-size: 12px;
+    }
 }
-
 
 @media (max-width: 521px) {
     #top-menu > li:last-of-type {
@@ -2865,7 +3179,27 @@ a.tweet-media-link:visited {
     }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 434px) {
+    .modal-main-h2 {
+        font-size: 12px !important;
+        line-height: 12px;
+    }
+    #top-menu > li {
+        font-size: 12px;
+    }
+
+    #sub-menu > li {
+        font-size: 11px;
+    }
+
+    .non-team-menu-item > a {
+        padding: 0 8px 0 7px;
+    }
+
+    #top-menu > li#teams {
+      padding: 0 7px 0 7px;
+    }
+
     .basketball-card-main-content {
         min-width: 320px;
     }
