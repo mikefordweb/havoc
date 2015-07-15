@@ -31,7 +31,21 @@
         <script src="/js/moment.min.js"></script>
         <script src="/js/fullcalendar.min.js"></script>
         <script src="/js/jquery.tinyscrollbar.min.js"></script>
+        <script src="/js/modernizr.custom.js"></script>
         <script src="/js/havoc.js"></script>
+
+        <script>
+            Modernizr.load({
+                test: Modernizr.touch,
+                yep : '/js/jquery.touchSwipe.min.js',
+            });
+
+            if (Modernizr.touch) { 
+                alert('Touch Screen');
+            } else { 
+                alert('No Touch Screen');
+            }
+        </script>
         
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. 
         <script>
