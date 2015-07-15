@@ -73,6 +73,13 @@ $(document).ready(function() {
             return action_on_asset;
         }
 
+        if (Modernizr.touch) { 
+            //alert('Touch Screen');
+
+        } else { 
+            //alert('No Touch Screen');
+        }
+
         $('form#contact-us-form').submit(function(event) {
 
             // get the form data
@@ -601,14 +608,14 @@ $(document).ready(function() {
                     });
                 $('.player-icon').hover(function(e){
                     //console.log("player icon hover");
-                    if (!$(this).hasClass('player-icon-selected')) {
+                    if (!$(this).hasClass('player-icon-selected') && !Modernizr.touch) {
                         console.log("player icon not selected");
                         $(this).addClass('icon-player-hover');
                         //$(this).find('.icon-photo-inner-inner-new-circle').addClass('icon-photo-inner-inner-move');
                         $(this).find('.icon-photo-inner-inner-grow-circle').addClass('icon-photo-inner-inner-grow');
                     }
                 }, function(e){
-                    if (!$(this).hasClass('player-icon-selected')) {
+                    if (!$(this).hasClass('player-icon-selected') && !Modernizr.touch) {
                         $(this).addClass('icon-player-hover-out');
                         $(this).find('.icon-photo-inner-inner-grow-circle').addClass('icon-photo-inner-inner-shrink');
                     }
