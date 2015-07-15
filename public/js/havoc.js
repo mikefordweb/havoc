@@ -512,9 +512,52 @@ $(document).ready(function() {
                     //$('.player-list-wrapper').css('display','none');
                     $('.team-list-bkg').css('display','none');
                 });*/
-
+                
+                var previousPosition = 0;
+                
                 $('#sub-menu > li').hover(function(e){
                     var currentItem = $(this).attr('id');
+                    $(".player-list-wrapper-inner").draggable({ axis: "x",
+                        drag: function( event, ui ) {
+                            console.log("$(this).attr('data-team'): " + $(this).attr('data-team'));
+                            var currentTeam = $(this).attr('data-team');
+                            // Keep the left edge of the element
+                            // at least 100 pixels from the container
+                            console.log("previousPosition: " + previousPosition);
+
+                            console.log("ui.position.left: " + ui.position.left);
+                            var direction = "";
+                            if (previousPosition < ui.position.left) {
+                                direction = "right";
+                            } else  if (previousPosition > ui.position.left) {
+                                direction = "left";
+                            }
+
+                            if (direction == "right" && ui.position.left > 0) {
+                                ui.position.left = 0;
+                            }
+
+                            var innerLeft = parseInt($('.player-list-wrapper-inner[data-team="'+currentItem+'"]').css('left'));
+                            var playerListWidth = parseInt($('.player-list-wrapper[data-team="'+currentItem+'"]').css('width'));
+                            var innerPlayerListWidth = parseInt($('.player-list-wrapper-inner[data-team="'+currentItem+'"]').css('width'));
+
+                            var leftMax = parseInt($('.player-list-wrapper-inner[data-team="'+currentItem+'"]').css('width')) - parseInt($('.player-list-wrapper[data-team="'+currentItem+'"]').css('width'));
+
+                            //console.log("innerPlayerListWidth: " + innerPlayerListWidth);
+                            //console.log("playerListWidth: " + playerListWidth);
+                            //console.log("innerLeft: " + innerLeft);
+                            var leftAnim = innerPlayerListWidth - playerListWidth + innerLeft - 5;
+                            console.log("leftAnim:drag: " + leftAnim);
+
+                            if (direction == "left" && leftAnim <= 0) {
+                                console.log("setting left: " + -leftMax);
+                                ui.position.left = -leftMax;
+                            }
+
+                            previousPosition = ui.position.left;
+                            //ui.position.left = Math.min( 100, ui.position.left );
+                        }
+                    });
                     console.log("sub-menu hover: " + currentItem);
                     for (var k = 0; k < subMenuItems.length; k++) {
                         if (subMenuItems[k] != currentItem) {
