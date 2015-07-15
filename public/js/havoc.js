@@ -624,6 +624,10 @@ $(document).ready(function() {
                 
 
                 $('.player-icon').click(function(e){
+                    if (Modernizr.touch) {
+                        $(this).addClass('icon-player-hover');
+                        $(this).find('.icon-photo-inner-inner-grow-circle').addClass('icon-photo-inner-inner-grow');
+                    }
                     var currentTeam = $(this).attr("data-team");
                     console.log("currentTeam: " + currentTeam);
                     $('.page-main-content').css('display','none');
