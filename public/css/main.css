@@ -1203,12 +1203,37 @@ footer {
     font-family: 'Montserrat', sans-serif;
 }
 
-.card-media-items {
+.thumbs-left {
+    display: none;
+    position: absolute;
+    bottom: 18px;
+    left: 3px;
+    z-index: 105;
+    color: #5e92cd;
+}
+
+.thumbs-right {
+    display: none;
+    position: absolute;
+    bottom: 18px;
+    right: 3px;
+    z-index: 105;
+    color: #5e92cd;
+}
+
+.card-media-items-wrapper {
     position: absolute;
     bottom: 12px;
     left: 22px;
     z-index: 100;
-    width: 100%;
+    width: 92%;
+    overflow: hidden;
+}
+
+.card-media-items {
+    left: 0;
+    display: block;
+    position: relative;
 }
 
 .card-media-item {
@@ -2633,6 +2658,8 @@ a.tweet-media-link:visited {
 .content-text {
     color: #fff;
 }
+
+
 
 /*** JURO form elements ***/
 

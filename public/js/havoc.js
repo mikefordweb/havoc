@@ -186,6 +186,32 @@ $(document).ready(function() {
             }
         );
 
+        $(document).on('click', '.thumbs-right',function(e){
+            var cardThumbsLeftPositive = -parseInt($('.card-media-items').css('left'));
+            console.log("$('.card-media-items').css('left'): " + $('.card-media-items').css('left'));
+            var cardThumbsOver = parseInt($('.card-media-items').css('width')) - parseInt($('.card-media-items-wrapper').css('width'))-14;
+            console.log("cardThumbsOver: " + cardThumbsOver);
+            console.log("cardThumbsLeftPositive: " + cardThumbsLeftPositive);
+            if (cardThumbsLeftPositive < cardThumbsOver) {
+                $('.card-media-items').animate({
+                    left: '-=70px'
+                }, function(){
+                    console.log("card-media-items:left: " + $(this).css('left'));
+                });
+            }
+        });
+
+        $(document).on('click', '.thumbs-left',function(e){
+            console.log("$('.card-media-items').css('left'): " + $('.card-media-items').css('left'));
+            if (parseInt($('.card-media-items').css('left')) < 0) {
+                $('.card-media-items').animate({
+                    left: '+=70px'
+                }, function(){
+                    console.log("card-media-items:right: " + $(this).css('left'));
+                });
+            }
+        });
+
         $(document).on('click','.stats-link',function(e){
             e.preventDefault();
             $('.stats-link').removeClass('selected-stats-link');
@@ -508,9 +534,9 @@ $(document).ready(function() {
                     //}
                 }, function(e) {
                     console.log("#sub-menu > li: hover off");
+                    $('.team-list-bkg').css('display','none');
                     if (!$('.player-icon').hasClass('player-icon-selected')) {
                         $('.player-list-wrapper').css('display','none');
-                        $('.team-list-bkg').css('display','none');
                     } else {
                         $('.player-list-wrapper').css('display','none');
                         var selectedTeam = $('.player-icon.player-icon-selected').attr("data-team");
@@ -694,6 +720,22 @@ $(document).ready(function() {
                         });
                     }
 
+                    var thumbswidth = $('.basketball-inner').width();
+                    $('.card-media-items-wrapper').css('width',(parseInt(thumbswidth)-44)+'px');
+                    var cardThumbWidth = $('.card-media-item').css("width");
+                    var cardThumbs = $('.card-media-item').length;
+                    var cardThumbsWrapper = (parseInt(cardThumbWidth)+4) * parseInt(cardThumbs);
+                    $('.card-media-items').css('width',cardThumbsWrapper+40);
+
+                    console.log("$('.card-media-items').css('width'): " + $('.card-media-items').css('width'));
+                    console.log("$('.card-media-items-wrapper').css('width'): " + $('.card-media-items-wrapper').css('width'));
+                    var cardMediaItemsWidth = $('.card-media-items').css('width');
+                    var cardMediaItemsWrapperWidth = $('.card-media-items-wrapper').css('width');
+
+                    if (parseInt(cardMediaItemsWidth) > parseInt(cardMediaItemsWrapperWidth)) {
+                        $('.thumbs-left').css('display','block');
+                        $('.thumbs-right').css('display','block');
+                    }
 
                     $(".basketball-card-back").on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', 
                         function() {

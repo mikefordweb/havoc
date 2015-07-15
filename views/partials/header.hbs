@@ -111,25 +111,33 @@
                             </div>
                         </div>
                         <div class="card-media-title">PHOTOS and VIDEOS</div>
-                        <div class="card-media-items">
-                            \{{#each ../media_items}}
-                                \{{#ifCond player_id '==' ../player_id}}
-                                    <div class="card-media-item" data-player-id="\{{../player_id}}" data-media-id="\{{media_id}}" data-media-type="\{{media_type}}">
-                                        <div class="card-media-item-bkg"></div>
-                                        \{{#ifCond media_type '==' "video"}}
-                                            <i class="fa fa-youtube-play"></i>
-                                        \{{/ifCond}}
-                                        \{{#ifCond media_type '==' "photo"}}
-                                            \{{#ifCond photo_dim '==' "width"}}
-                                                <img src="\{{url}}" class="card-photo-thumb thumb-width" style="width: \{{getWidth width}}px">
+                        <div class="thumbs-left">
+                            <i class="fa fa-chevron-left"></i>
+                        </div>
+                        <div class="card-media-items-wrapper">
+                            <div class="card-media-items">
+                                \{{#each ../media_items}}
+                                    \{{#ifCond player_id '==' ../player_id}}
+                                        <div class="card-media-item" data-player-id="\{{../player_id}}" data-media-id="\{{media_id}}" data-media-type="\{{media_type}}">
+                                            <div class="card-media-item-bkg"></div>
+                                            \{{#ifCond media_type '==' "video"}}
+                                                <i class="fa fa-youtube-play"></i>
                                             \{{/ifCond}}
-                                            \{{#ifCond photo_dim '==' "height"}}
-                                                <img src="\{{url}}" class="card-photo-thumb thumb-height" style="width: \{{getHeight height}}px">
+                                            \{{#ifCond media_type '==' "photo"}}
+                                                \{{#ifCond photo_dim '==' "width"}}
+                                                    <img src="\{{url}}" class="card-photo-thumb thumb-width" style="width: \{{getWidth width}}px">
+                                                \{{/ifCond}}
+                                                \{{#ifCond photo_dim '==' "height"}}
+                                                    <img src="\{{url}}" class="card-photo-thumb thumb-height" style="width: \{{getHeight height}}px">
+                                                \{{/ifCond}}
                                             \{{/ifCond}}
-                                        \{{/ifCond}}
-                                    </div>
-                                \{{/ifCond}}
-                            \{{/each}}
+                                        </div>
+                                    \{{/ifCond}}
+                                \{{/each}}
+                            </div>
+                        </div>
+                        <div class="thumbs-right">
+                            <i class="fa fa-chevron-right"></i>
                         </div>
                         <div class="card-media-ribbon"></div>
 
