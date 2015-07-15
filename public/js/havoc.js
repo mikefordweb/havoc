@@ -625,6 +625,7 @@ $(document).ready(function() {
 
                 $('.player-icon').click(function(e){
                     if (Modernizr.touch) {
+                        alert("IS TOUCH!");
                         $(this).addClass('icon-player-hover');
                         $(this).find('.icon-photo-inner-inner-grow-circle').addClass('icon-photo-inner-inner-grow');
                     }
