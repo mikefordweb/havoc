@@ -836,6 +836,12 @@ $(document).ready(function() {
                     $(this).css('height','205px');
                 }
             });
+            var thumbswidth = $('.basketball-inner').width();
+            $('.card-media-items-wrapper').css('width',(parseInt(thumbswidth)-44)+'px');
+            var cardThumbWidth = $('.card-media-item').css("width");
+            var cardThumbs = $('.card-media-item').length;
+            var cardThumbsWrapper = (parseInt(cardThumbWidth)+4) * parseInt(cardThumbs);
+            $('.card-media-items').css('width',cardThumbsWrapper+40);
         } else if (windowWidth < 419) {
             $('.full-photo-item').each(function(i){
                 if ($(this).hasClass('width-photo')) {
@@ -844,6 +850,12 @@ $(document).ready(function() {
                     $(this).css('height','182px');
                 }
             });
+            var thumbswidth = $('.basketball-inner').width();
+            $('.card-media-items-wrapper').css('width',(parseInt(thumbswidth)-44)+'px');
+            var cardThumbWidth = $('.card-media-item').css("width");
+            var cardThumbs = $('.card-media-item').length;
+            var cardThumbsWrapper = (parseInt(cardThumbWidth)+4) * parseInt(cardThumbs);
+            $('.card-media-items').css('width',cardThumbsWrapper+40);
         }
 
         if (windowWidth > 604) {
@@ -854,6 +866,12 @@ $(document).ready(function() {
                     $(this).css('height','327px');
                 }
             });
+            var thumbswidth = $('.basketball-inner').width();
+            $('.card-media-items-wrapper').css('width',(parseInt(thumbswidth)-44)+'px');
+            var cardThumbWidth = $('.card-media-item').css("width");
+            var cardThumbs = $('.card-media-item').length;
+            var cardThumbsWrapper = (parseInt(cardThumbWidth)+4) * parseInt(cardThumbs);
+            $('.card-media-items').css('width',cardThumbsWrapper+40);
         }
 
       if (windowWidth < 850) {
