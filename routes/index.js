@@ -545,6 +545,9 @@ module.exports = function(passport) {
 				      					} else {
 				      						results4[k].width = dimensions.width;
 				      					}
+				      					var heightPercentage = dimensions.width / dimensions.height;
+				      					var photoHeight = Math.ceil(464 / heightPercentage);
+				      					results4[k].marginTop= Math.round((327 - photoHeight)/2);
 				      				} else {
 				      					results4[k].photo_dim = 'height';
 				      					console.log("results4[k].height: " + results4[k].height);

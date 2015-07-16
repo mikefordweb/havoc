@@ -79,7 +79,7 @@
                                     \{{/ifCond}}
                                     \{{#ifCond media_type '==' "photo"}}
                                         \{{#ifCond photo_dim '==' "width"}}
-                                        <img src="\{{url}}" class="full-photo-item width-photo" style="width: \{{width}}px" data-player-id="\{{player_id}}" data-media-id="\{{media_id}}">
+                                        <img src="\{{url}}" class="full-photo-item width-photo" style="width: \{{width}}px;margin-top: \{{marginTop}}px;" data-player-id="\{{player_id}}" data-media-id="\{{media_id}}">
                                         \{{/ifCond}}
                                         \{{#ifCond photo_dim '==' "height"}}
                                         <img src="\{{url}}" class="full-photo-item height-photo" style="height: \{{height}}px; margin-left: \{{marginLeft}}px;"  data-player-id="\{{player_id}}" data-media-id="\{{media_id}}">
