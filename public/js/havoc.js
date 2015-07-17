@@ -530,8 +530,11 @@ $(document).ready(function() {
                     if ($('.player-list[data-team="'+currentItem+'"] > li').length) {
                         $(".player-list-wrapper-inner").draggable({ axis: "x",
                             drag: function( event, ui ) {
+
                                 console.log("$(this).attr('data-team'): " + $(this).attr('data-team'));
+                                
                                 var currentTeam = $(this).attr('data-team');
+                                $('.player-list-wrapper[data-team="'+currentTeam+'"]').css('display','block');
                                 // Keep the left edge of the element
                                 // at least 100 pixels from the container
                                 console.log("previousPosition: " + previousPosition);
