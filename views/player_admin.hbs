@@ -195,6 +195,11 @@
                         <tr class="media-items">
                             <td colspan="6">
                                 <div class="media-items-table">
+                                    <label for="player_youtube">YouTube:</label><input name="youtubeURL" class="player-link-item" value="{{youtube}}" data-player-id="{{player_id}}"><br>
+                                    <label for="player_instagram">Instagram:</label><input name="instagramURL" class="player-link-item" value="{{instagram}}" data-player-id="{{player_id}}"><br>
+                                    <label for="player_twitter">Twitter:</label><input name="twitterURL" class="player-link-item" value="{{twitter}}" data-player-id="{{player_id}}"><br>
+                                    <a href="#" class="save-player-data admin-btn" data-player-id="{{player_id}}">Save Links</a>
+                                    <div class="clear"></div>
                                     <table class="media-items-table-outer">
                                         <tr><th>URL</th><th>Type</th><th></th></tr>
                                         {{#each ../media_items}}

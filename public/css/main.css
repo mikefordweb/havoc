@@ -2727,7 +2727,9 @@ a.tweet-media-link:visited {
     color: #fff;
 }
 
-
+#tabs-nav {
+    display: none;
+}
 
 /*** JURO form elements ***/
 

@@ -8,6 +8,12 @@ var sizeOf = require('image-size');
 var nodemailer = require('nodemailer');
 var router = express.Router();
 
+String.prototype.capitalize = function(){
+            return this.toLowerCase().replace( /\b\w/g, function (m) {
+                return m.toUpperCase();
+            });
+        };
+
 var isAuthenticated = function (req, res, next) {
 	// if user is authenticated in the session, call the next() to call the next request handler 
 	// Passport adds this method to request object. A middleware is allowed to add properties to
@@ -236,7 +242,7 @@ module.exports = function(passport) {
 		} else {
 			console.log("coaches admin");
 			db.query("SELECT * FROM game_info", function(err, results){
-		          console.log("game_info:result: " + JSON.stringify(results));
+		          //console.log("game_info:result: " + JSON.stringify(results));
 		          for (var j = 0; j < results.length; j++) {
 		          	var gameDateTime = moment(results[j].date_time);
 		          	results[j].game_date = gameDateTime.format("MM/D/YYYY");
@@ -251,9 +257,9 @@ module.exports = function(passport) {
 		          games_list = results;
 		          db.query("SELECT * FROM players ORDER BY last_name DESC", function(err, results1){
 		          	db.query("SELECT * FROM media", function(err2, results2){
-		          		console.log("render admin:games_list: " + JSON.stringify(games_list));
-		          		console.log("render admin:results1: " + JSON.stringify(results1));
-		          		console.log("render admin:results2: " + JSON.stringify(results2));
+		          		//console.log("render admin:games_list: " + JSON.stringify(games_list));
+		          		//console.log("render admin:results1: " + JSON.stringify(results1));
+		          		//console.log("render admin:results2: " + JSON.stringify(results2));
 		          		res.render('admin', {games: games_list, players: results1, media_items: results2});
 		          	});
 		          });
@@ -612,9 +618,9 @@ module.exports = function(passport) {
 
 		var db = req.connection;
 		db.query("DELETE FROM players WHERE player_id = '" + player_id + "'", function(err, result){
-			log_activity("admin", "delete", "players", '0', team, player_id, req);
-			deleteAccount(player_id, db, res);
-			//res.json({player_delete:"success"});
+			db.query("DELETE FROM users WHERE player_id = '" + player_id + "'", function(err, result){
+	          res.json({player_delete:"success"});
+	    	});
 	    });
 	});
 
@@ -649,16 +655,46 @@ module.exports = function(passport) {
 		db.query("INSERT INTO users (username, password, email, first_name, last_name, role, player_id) VALUES ('" + username + "','" + pwd + "', '" + email + "', '" + first_name.toLowerCase() + "', '" + last_name.toLowerCase() + "', 'player', '"+playerID+"')", function(err, result){
 	          // console.log("err: " + err);
 	          // send email with credentials to user
-	          console.log("NEW PLAYER ACCOUNT: username: " + username + " - password: " + newPassword);
-	          res.json({player_insert:"success"});
-	    });
-	}
+	          //console.log("NEW PLAYER ACCOUNT: username: " + username + " - password: " + newPassword);
+	        var email_content = "<h2>WisconsinHavoc.com Account Login Information</h2>";
+	        email_content += "<h3>Hi " + first_name.capitalize() + ", </h3>";
+			email_content += "<p>An account has been created for you on WisconsinHavoc.com!</p>";
+			email_content += "<p>Go here <a href='http://localhost:3000/admin'>http://localhost:3000/admin</a> and log in using the credentials below to start managing your PlayerCard.</p>";
+			email_content += "<p><strong>Username: </strong> " + username + "</p>";
+			email_content += "<p><strong>Password: </strong> " + newPassword + "</p>";
 
-	function deleteAccount (playerID, db, res) {
-		db.query("DELETE FROM users WHERE player_id = '" + playerID + "')", function(err, result){
-	          // console.log("err: " + err);
-	          // send email with credentials to user
-	          res.json({player_delete:"success"});
+			var text_content = "WisconsinHavoc.com Account Login Information\r\n\r\n";
+			text_content += "Hi " + first_name.capitalize() + "\r\n\r\n";
+			text_content += "An account has been created for you on WisconsinHavoc.com!\r\n\r\n";
+			text_content += "Go here http://104.131.83.40:3000/admin and log in using the credentials below to start managing your PlayerCard.\r\n\r\n";
+			text_content += "Username: " + username + "\r\n";
+			text_content += "Password: " + newPassword + "\r\n\r\n";
+
+			var transporter = nodemailer.createTransport({
+			    service: 'Gmail',
+			    auth: {
+			        user: 'wisconsinhavoc@gmail.com',
+			        pass: '#havoc4110'
+			    }
+			});
+
+			var mailOptions = {
+			    from: 'Contact Us <bryan@wisconsinhavoc.com>', // sender address
+			    to: email, // list of receivers
+			    subject: 'Wisconsin Havoc New Account Information', // Subject line
+			    text: text_content, // plaintext body
+			    html: email_content // html body
+			};
+
+			// send mail with defined transport object
+			transporter.sendMail(mailOptions, function(error, info){
+			    if(error){
+			        return console.log(error);
+			    }
+			    console.log('Message sent: ' + info.response);
+
+			});
+	        res.json({player_insert:"success"});
 	    });
 	}
 
@@ -686,9 +722,9 @@ module.exports = function(passport) {
 
 	router.post('/save_player_data', isAuthenticated, function(req, res, next) {
 		//if (req.body.media_order) {var media_order = req.body.media_order;} else {var media_order = 0;}
-		if (req.body.youtube_url) {var youtube_url = req.body.youtube_url;} else {var youtube_url = 0;}
-		if (req.body.twitter_url) {var twitter_url = req.body.twitter_url;} else {var twitter_url = 0;}
-		if (req.body.instagram_url) {var instagram_url = req.body.instagram_url;} else {var instagram_url = 0;}
+		if (req.body.youtube_url) {var youtube_url = req.body.youtube_url;} else {var youtube_url = "";}
+		if (req.body.twitter_url) {var twitter_url = req.body.twitter_url;} else {var twitter_url = "";}
+		if (req.body.instagram_url) {var instagram_url = req.body.instagram_url;} else {var instagram_url = "";}
 		if (req.body.player_id) {var player_id = req.body.player_id;} else {var player_id = 0;}
 		var db = req.connection;
 		db.query("UPDATE players SET youtube='"+youtube_url+"', instagram='"+instagram_url+"', twitter='"+twitter_url+"' WHERE player_id = '" + player_id + "'", function(err, result){

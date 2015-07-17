@@ -1,5 +1,6 @@
+           //$('#tabs-nav').css('display','none');
            $(document).ready(function() {
-
+                $('#tabs-nav').css('display','block');
                 $("#tabs").tabs({create: function( event, ui ) {
                     $("#tabs").removeClass('hide');
                    }
