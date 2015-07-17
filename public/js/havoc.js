@@ -496,7 +496,9 @@ $(document).ready(function() {
                     });
                     console.log("player selected == false");
                     if (playerSelected == false) {
-                        $('.player-list-wrapper').css('display','none');
+                        if (!Modernizr.touch) {
+                            $('.player-list-wrapper').css('display','none');
+                        }
                         $('.player-icon').removeClass('player-icon-selected');
                         $('.player-icon').removeClass('icon-player-hover');
                         $('.player-icon').removeClass('icon-player-hover-out');
