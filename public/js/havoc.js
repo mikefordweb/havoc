@@ -524,7 +524,6 @@ $(document).ready(function() {
                 
                 $('#sub-menu > li').hover(function(e){
                     var currentItem = $(this).attr('id');
-
                     console.log("$('.player-list[data-team='+currentItem+'] > li').length: " + $('.player-list[data-team="'+currentItem+'"] > li').length);
 
                     if ($('.player-list[data-team="'+currentItem+'"] > li').length) {
@@ -594,13 +593,16 @@ $(document).ready(function() {
                     }
                 }, function(e) {
                     console.log("#sub-menu > li: hover off");
-                    $('.team-list-bkg').css('display','none');
-                    if (!$('.player-icon').hasClass('player-icon-selected')) {
-                        $('.player-list-wrapper').css('display','none');
-                    } else {
-                        $('.player-list-wrapper').css('display','none');
-                        var selectedTeam = $('.player-icon.player-icon-selected').attr("data-team");
-                        $('.player-list-wrapper[data-team="'+selectedTeam+'"]').css('display','block');
+
+                    if (!Modernizr.touch) {
+                        $('.team-list-bkg').css('display','none');
+                        if (!$('.player-icon').hasClass('player-icon-selected')) {
+                            $('.player-list-wrapper').css('display','none');
+                        } else {
+                            $('.player-list-wrapper').css('display','none');
+                            var selectedTeam = $('.player-icon.player-icon-selected').attr("data-team");
+                            $('.player-list-wrapper[data-team="'+selectedTeam+'"]').css('display','block');
+                        }
                     }
                 });
 
