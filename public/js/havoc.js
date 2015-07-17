@@ -603,6 +603,8 @@ $(document).ready(function() {
                             var selectedTeam = $('.player-icon.player-icon-selected').attr("data-team");
                             $('.player-list-wrapper[data-team="'+selectedTeam+'"]').css('display','block');
                         }
+                    } else {
+                        $('.player-list-wrapper[data-team="'+selectedTeam+'"]').css('display','block');
                     }
                 });
 
