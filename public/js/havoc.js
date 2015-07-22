@@ -323,7 +323,7 @@ $(document).ready(function() {
                     }
                     element.attr('data-id', event.data_id);
                 },
-                events: '/game_calendar?team=sophomore'
+                events: '/game_calendar?team=2018nat'
             });
         
 
@@ -343,22 +343,22 @@ $(document).ready(function() {
                 var playerListWidthPX2 = 0;
                 var playerListWidthPX3 = 0;
 
-                console.log("$('.player-list[data-team=sophomore] > li').length: " + $('.player-list[data-team="sophomore"] > li').length);
-                $('.player-list[data-team="sophomore"] > li').each(function(e){
+                console.log("$('.player-list[data-team=2018nat] > li').length: " + $('.player-list[data-team="2018nat"] > li').length);
+                $('.player-list[data-team="2018nat"] > li').each(function(e){
                     playerListWidthPX1 += 120;
                 });
-                $('.player-list-wrapper-inner[data-team="sophomore"]').css('width',playerListWidthPX1+40);
+                $('.player-list-wrapper-inner[data-team="2018nat"]').css('width',playerListWidthPX1+40);
 
-                console.log("$('.player-list[data-team=freshman] > li').length: " + $('.player-list[data-team="freshman"] > li').length);
-                $('.player-list[data-team="freshman"] > li').each(function(e){
+                console.log("$('.player-list[data-team=2018reg] > li').length: " + $('.player-list[data-team="2018reg"] > li').length);
+                $('.player-list[data-team="2018reg"] > li').each(function(e){
                     playerListWidthPX2 += 120;
                 });
-                $('.player-list-wrapper-inner[data-team="freshman"]').css('width',playerListWidthPX2+40);
+                $('.player-list-wrapper-inner[data-team="2018reg"]').css('width',playerListWidthPX2+40);
 
-                $('.player-list[data-team="7thgrade"] > li').each(function(e){
+                $('.player-list[data-team="2020team"] > li').each(function(e){
                     playerListWidthPX3 += 120;
                 });
-                $('.player-list-wrapper-inner[data-team="7thgrade"]').css('width',playerListWidthPX3+40);
+                $('.player-list-wrapper-inner[data-team="2020team"]').css('width',playerListWidthPX3+40);
 
                 $('.player-list-right').hover(function(e){
                     var currentItem = $(this).attr('data-team');
@@ -477,10 +477,10 @@ $(document).ready(function() {
                     console.log("froshLeft: " + froshLeft);
                     console.log("seventhLeft: " + seventhLeft);
                     $('.player-list-wrapper').each(function(i){
-                        if ($(this).parent().attr("id") == "freshman") {
+                        if ($(this).parent().attr("id") == "2018reg") {
                             $(this).css("left", "-"+froshLeft+"px");
                         }
-                        if ($(this).parent().attr("id") == "7thgrade") {
+                        if ($(this).parent().attr("id") == "2020team") {
                             $(this).css("left", "-"+(seventhLeft+4)+"px");
                         }
                     });
