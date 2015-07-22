@@ -323,7 +323,7 @@ $(document).ready(function() {
                     }
                     element.attr('data-id', event.data_id);
                 },
-                events: '/game_calendar?team=2018nat'
+                events: '/game_calendar?team=2018national'
             });
         
 
@@ -343,17 +343,17 @@ $(document).ready(function() {
                 var playerListWidthPX2 = 0;
                 var playerListWidthPX3 = 0;
 
-                console.log("$('.player-list[data-team=2018nat] > li').length: " + $('.player-list[data-team="2018nat"] > li').length);
-                $('.player-list[data-team="2018nat"] > li').each(function(e){
+                console.log("$('.player-list[data-team=2018national] > li').length: " + $('.player-list[data-team="2018national"] > li').length);
+                $('.player-list[data-team="2018national"] > li').each(function(e){
                     playerListWidthPX1 += 120;
                 });
-                $('.player-list-wrapper-inner[data-team="2018nat"]').css('width',playerListWidthPX1+40);
+                $('.player-list-wrapper-inner[data-team="2018national"]').css('width',playerListWidthPX1+40);
 
-                console.log("$('.player-list[data-team=2018reg] > li').length: " + $('.player-list[data-team="2018reg"] > li').length);
-                $('.player-list[data-team="2018reg"] > li').each(function(e){
+                console.log("$('.player-list[data-team=2018regional] > li').length: " + $('.player-list[data-team="2018regional"] > li').length);
+                $('.player-list[data-team="2018regional"] > li').each(function(e){
                     playerListWidthPX2 += 120;
                 });
-                $('.player-list-wrapper-inner[data-team="2018reg"]').css('width',playerListWidthPX2+40);
+                $('.player-list-wrapper-inner[data-team="2018regional"]').css('width',playerListWidthPX2+40);
 
                 $('.player-list[data-team="2020team"] > li').each(function(e){
                     playerListWidthPX3 += 120;
@@ -477,7 +477,7 @@ $(document).ready(function() {
                     console.log("froshLeft: " + froshLeft);
                     console.log("seventhLeft: " + seventhLeft);
                     $('.player-list-wrapper').each(function(i){
-                        if ($(this).parent().attr("id") == "2018reg") {
+                        if ($(this).parent().attr("id") == "2018regional") {
                             $(this).css("left", "-"+froshLeft+"px");
                         }
                         if ($(this).parent().attr("id") == "2020team") {
