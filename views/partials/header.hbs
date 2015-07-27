@@ -15,6 +15,8 @@
         <link rel="stylesheet" href="/css/font-awesome-4.3.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="/css/fullcalendar.min.css">
         <link rel="stylesheet" href="/css/tinyscrollbar.css">
+        <link href="http://vjs.zencdn.net/4.11/video-js.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/vicons-font.css">
         <link rel="stylesheet" href="/css/main.css">
 
         <script id="basketball-card-template" type="text/x-handlebars-template">
@@ -279,6 +281,7 @@
                     <img src="img/header-logo.png">
                 </a>
                 <div id="header-slogan">Wisconsin’s Premier Girls AAU Basketball Program</div>
+                <div class="header-video">Show Video <i class="fa fa-film"></i></div>
                 <div id="header-social-icons">
                     <a href="#" class="header-social-icon"><i class="fa fa-facebook-square"></i></a>
                     <a href="#" class="header-social-icon"><i class="fa fa-twitter"></i></a>
@@ -287,9 +290,11 @@
             </header>
 
             <ul id="top-menu">
-                <li id="teams" data-top-menu="teams">Teams
+                <li id="teams" data-top-menu="teams">
+                    <div class="top-menu-button button--sacnite">Teams</div>
                     <ul id="sub-menu">
-                        <li id="2018national">2018 National
+                        <li id="2018national">
+                            <div class="sub-menu-button button--sacnite1">2018 National</div>
                             <div class="player-list-wrapper" data-team="2018national">
                                 <div class="player-list-left" data-team="2018national">
                                     <div class="player-arrow-opacity"></div>
@@ -340,8 +345,8 @@
                                     <i class="fa fa-chevron-right"></i>
                                 </div>
                             </div>
-                        </li>
-                        <li class="non-team-menu-item-sub" id="2018regional">2018 Regional
+                        </li><li class="non-team-menu-item-sub" id="2018regional">
+                            <div class="sub-menu-button button--sacnite1">2018 Regional</div>
                             <div class="player-list-wrapper" data-team="2018regional">
                                 <div class="player-list-left" data-team="2018regional">
                                     <div class="player-arrow-opacity"></div>
@@ -392,8 +397,8 @@
                                     <i class="fa fa-chevron-right"></i>
                                 </div>
                             </div>
-                        </li>
-                        <li class="non-team-menu-item-sub" id="2020team">2020
+                        </li><li class="non-team-menu-item-sub" id="2020team">
+                            <div class="sub-menu-button button--sacnite1">2020</div>
                             <div class="player-list-wrapper" data-team="2020team">
                                 <div class="player-list-left" data-team="2020team">
                                     <div class="player-arrow-opacity"></div>
@@ -444,13 +449,13 @@
                                     <i class="fa fa-chevron-right"></i>
                                 </div>
                             </div>
-                        </li>
+                        </li><li class="sub-menu-li-spacer"></li>
+                        
                     </ul>
-                </li>
-                <li class="non-team-menu-item"><a href="/tryouts">Tryouts</a></li>
-                <li class="non-team-menu-item"><a href="/schedule">Schedule</a></li>
-                <li class="non-team-menu-item"><a href="/contactus">Contact Us</a></li>
-                <li class="non-team-menu-item"><a href="/schedule">Buy Havoc Gear</a></li>
+                </li><li class="non-team-menu-item"><a href="/tryouts"><div class="top-menu-button button--sacnite">Tryouts</div></a>
+                </li><li class="non-team-menu-item"><a href="/schedule"><div class="top-menu-button button--sacnite">Schedule</div></a>
+                </li><li class="non-team-menu-item"><a href="/contactus"><div class="top-menu-button button--sacnite">Contact Us</div></a>
+                </li><li class="non-team-menu-item"><a href="/blog"><div class="top-menu-button button--sacnite">Coach Bryan's Blog</div></a></li><li class="top-menu-li-spacer" id="top-menu-li-spacer">&nbsp;</li>
             </ul>
 
             <div class="sub-menu-bkg"></div>

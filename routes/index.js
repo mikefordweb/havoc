@@ -210,6 +210,36 @@ module.exports = function(passport) {
 	    });
 	});
 
+	router.get('/blog', function(req, res, next) {
+		console.log("in get /");
+		console.log("req.xhr: " + req.xhr);
+		var db = req.connection;
+		var games_list, players_list;
+		console.log("in get /: " + db);
+
+		db.query("SELECT * FROM game_info", function(err, results){
+			console.log("1res render index");
+	          console.log("game_info:result: " + JSON.stringify(results));
+	          for (var j = 0; j < results.length; j++) {
+	          	var gameDateTime = moment(results[j].date_time);
+	          	results[j].game_date = gameDateTime.format("MM/D/YYYY");
+	          	results[j].game_time = gameDateTime.format("h:mm a");
+	          	console.log("results[j].has_box: " + results[j].has_box);
+	          	if (results[j].has_box) {
+	          		results[j].box_exists = "true";
+	          	} else {
+	          		results[j].box_exists = "false";
+	          	}
+	          }
+	          games_list = results;
+	          db.query("SELECT * FROM players ORDER BY jersey_number ASC", function(err, results1){
+	          	db.query("SELECT * FROM media", function(err2, results2){
+	          		console.log("res render index");
+	          		res.render('tryouts', {games: games_list, players: results1, media_items: results2});
+	          	});
+	          });
+	    });
+	});
 
 	router.get('/admin', isAuthenticated, function(req, res, next) {
 		var db = req.connection;

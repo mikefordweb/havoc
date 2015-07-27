@@ -1,4 +1,126 @@
+var pausePlayerOnClick = true;
+
 $(document).ready(function() {
+        var player = videojs('vid1', function(){
+
+        });
+
+        player.on('play', function() {
+            pausePlayerOnClick = true;
+            console.log("player playing");
+            this.bigPlayButton.hide();
+            this.posterImage.hide();
+        });
+
+    if (!$('.page-main-content').hasClass('index-main')) {
+        pausePlayerOnClick = false;
+        $('.close-video').addClass('video-closed').attr('style','color: rgb(252, 195, 59); z-index: 1030; background-color: rgb(252, 195, 59)');
+        $('.close-video-text').css('display','none');
+        $('.show-video-text').attr('display: block; color: rgb(15, 29, 63)');
+        $('.video-js').addClass('video-non-index');
+    } else {
+
+    }
+
+    if ($('#vid1').hasClass('shrink-me')) {
+        $('.header-video').removeClass('video-open');
+    } else {
+        $('.header-video').addClass('video-open');
+        $('.header-video').html('Close Video X');
+    }
+
+    $('.header-video').click(function(){
+        console.log("header-video click");
+        if ($(this).hasClass('video-open')) {
+            //if (pausePlayerOnClick == true) {
+                console.log("pausing player via code");
+                player.pause();
+                player.posterImage.show();
+                player.bigPlayButton.show();
+                player.currentTime(0);
+                $('.video-js').removeClass('vjs-has-started');
+                $('.video-js').removeClass('vjs-waiting');
+            //}
+            $(this).removeClass('video-open');
+            $(this).html('Show Video <div class="fa fa-film"></div>');
+            $('#vid1').addClass('shrink-me');
+        } else {
+            $(this).addClass('video-open');
+            $(this).html('Close Video X');
+            $('#vid1').removeClass('shrink-me');
+        }
+        
+    });
+
+    $('.close-video').click(function(){
+        //$('.close-video').unbind("mouseover","mouseout");
+        console.log("pausePlayerOnClick: " + pausePlayerOnClick);
+        if ($(this).hasClass('video-closed')) {
+            $('.show-video-text').css('display','none');
+            $('.close-video').css('background-color','transparent');
+            $('.close-video-text').css('display','block');
+            $('.close-video').css('z-index','1010');
+            
+            $('#vid1').removeClass("shrink-me");
+            $(this).removeClass('video-closed');
+        } else {
+            player.pause();
+            $('#vid1').addClass("shrink-me");
+            $('.close-video').addClass('video-closed');
+            $('.close-video').addClass('video-closing');
+        }
+    });
+
+    $(".close-video").on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', 
+        function() {
+
+            if ($(this).hasClass('video-closed')) {
+                    $('.show-video-text').attr('style','');
+                    $('.team-list-bkg').css('display','none');
+                    $('.close-video').removeClass('video-closing');
+                    $('.close-video').css('background-color','#fcc33b');
+                    $('.close-video-text').css('display','none');
+                    $('.close-video').css('z-index','1030');
+                    $('.show-video-text').fadeIn();
+                if (pausePlayerOnClick == true) {
+                    console.log("pausing player via code");
+                    player.posterImage.show();
+                    player.bigPlayButton.show();
+                    player.currentTime(0);
+                    $('.video-js').removeClass('vjs-has-started');
+                    $('.video-js').removeClass('vjs-waiting');
+                }
+            } else {
+                //$('.close-video-text').fadeIn();
+            }
+        }
+    );
+
+    $('.close-video').hover(function(){
+        console.log("close video hover");
+        if ($(this).hasClass('video-closed')) {
+            //console.log("video closed colors");
+            $('.show-video-text').css('color','#fcc33b');
+            $('.close-video').css('background-color','#0f1d3f');
+        } else {
+            //console.log("video open colors");
+            $('.close-video').css('color','#fcc33b');
+            $('.close-video').css('background-color','#0f1d3f');
+        }
+    }, function () {
+        if ($(this).hasClass('video-closed')) {
+            //console.log("off:video closed colors");
+            if (!$(this).hasClass('video-closing')){
+                //console.log("!off:video closing colors");
+                $('.show-video-text').css('color','#0f1d3f');
+                $('.close-video').css('background-color','#fcc33b');
+            }
+        } else {
+            //console.log("off:video open colors");
+            $('.close-video').css('color','#fff');
+            $('.close-video').css('background-color','inherit');
+        }
+    });
 
     Handlebars.registerHelper('getWidth', function(_width) {
         return (_width *.088);
@@ -464,9 +586,32 @@ $(document).ready(function() {
                     }
                 );
 
+                var hoverNonTeamItem = false;
+
+                $('#top-menu li#teams > .top-menu-button').on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', 
+                        function() {
+                            if (hoverNonTeamItem == false || $('#top-menu li#teams').hasClass('selected')) {
+                                $(this).addClass('teams-hover-on');
+                                $(this).removeClass('button--sacnite');
+                            }
+                        }
+                    );
+
+                $('.non-team-menu-item').hover(function(e){
+                    hoverNonTeamItem = true;
+                    if (!$('#top-menu li#teams').hasClass('selected')) {
+                        $('#top-menu li#teams > .top-menu-button').removeClass('teams-hover-on');
+                        $('#top-menu li#teams > .top-menu-button').addClass('button--sacnite');
+                    }
+                }, function(){
+                    hoverNonTeamItem = false;
+                });
+
                 $('#top-menu li#teams').hover(function(e){
                     //console.log("hover top menu on");
-                    var froshLeft = (parseInt($('#sub-menu > li:nth-of-type(1)').css('padding-left')) + parseInt($('#sub-menu > li:nth-of-type(1)').css('padding-right')) + parseInt($('#sub-menu > li:nth-of-type(1)').css('width')));
+                    //$('#top-menu li#teams > .top-menu-button').removeClass('button--sacnite');
+                    hoverNonTeamItem = false;
+                    var froshLeft = (parseInt($('#sub-menu > li:nth-of-type(1)').css('padding-left')) + parseInt($('#sub-menu > li:nth-of-type(1)').css('padding-right')) + parseInt($('#sub-menu > li:nth-of-type(1)').css('width')) - 4);
                     var seventhLeft = (froshLeft + parseInt($('#sub-menu > li:nth-of-type(2)').css('padding-left')) + parseInt($('#sub-menu > li:nth-of-type(2)').css('padding-right')) + parseInt($('#sub-menu > li:nth-of-type(2)').css('width')));
                     console.log("left right hide");
                     if (!$('.player-icon').hasClass('player-icon-selected')) {    
@@ -487,6 +632,14 @@ $(document).ready(function() {
                     //$('#'+currentItem+' > .player-list-wrapper').css('display','block');
                 }, function(e) {
                     //console.log("hover top menu off");
+                    hoverNonTeamItem = true;
+
+                    if (!$('#top-menu li#teams').hasClass('selected')) {
+                        $('#top-menu li#teams > .top-menu-button').removeClass('teams-hover-on');
+                        $('#top-menu li#teams > .top-menu-button').addClass('button--sacnite');
+                    } else {
+                        $('#top-menu li#teams > .top-menu-button').removeClass('button--sacnite');
+                    }
                     
                     var playerSelected = false;
                     $('.player-icon').each(function(e){
@@ -494,7 +647,7 @@ $(document).ready(function() {
                             playerSelected = true;
                         }
                     });
-                    console.log("player selected == false");
+                    
                     if (playerSelected == false) {
                         if (!Modernizr.touch) {
                             $('.player-list-wrapper').css('display','none');
@@ -510,23 +663,31 @@ $(document).ready(function() {
 
                     }
                 });
-                
-                /*$('#sub-menu > li').hover(function(e){
-                    console.log("sub-menu li hover");
-                    if (!$('.player-icon').hasClass('player-icon-selected')) {
-                        $('.player-list-wrapper').css('display','block');
-                        $('.team-list-bkg').css('display','block');
+
+                $('.sub-menu-button').on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', 
+                    function() {
+                        console.log("sub anim done: " + $(this).attr('class'));
+                        if ($(this).hasClass('hovering-off')) {
+                            $(this).removeClass('sub-hover-on');
+                            $(this).addClass('button--sacnite1');
+                            $(this).removeClass('hovering-off');
+                        } else {
+                            $(this).addClass('sub-hover-on');
+                            $(this).removeClass('button--sacnite1');
+                        }
                     }
-                }, function(){
-                    //$('.player-list-wrapper').css('display','none');
-                    $('.team-list-bkg').css('display','none');
-                });*/
-                
+                );
+
                 var previousPosition = 0;
+
+                var hoveringOffArea = false;
                 
                 $('#sub-menu > li').hover(function(e){
+                    //console.log("sub-menu > li:hover: " + $(this).attr('class'));
+                    $(this).find('.sub-menu-button').addClass('sub-hover-on');
+                    //$(this).find('.sub-menu-button').removeClass('button--sacnite1');
+
                     var currentItem = $(this).attr('id');
-                    console.log("$('.player-list[data-team='+currentItem+'] > li').length: " + $('.player-list[data-team="'+currentItem+'"] > li').length);
 
                     if ($('.player-list[data-team="'+currentItem+'"] > li').length) {
                         $(".player-list-wrapper-inner").draggable({ axis: "x",
@@ -573,7 +734,7 @@ $(document).ready(function() {
                                 //ui.position.left = Math.min( 100, ui.position.left );
                             }
                         });
-                        console.log("sub-menu hover: " + currentItem);
+                        
                         for (var k = 0; k < subMenuItems.length; k++) {
                             if (subMenuItems[k] != currentItem) {
                                 $('#'+subMenuItems[k]).find('.player-icon').removeClass('icon-player-hover');
@@ -582,8 +743,6 @@ $(document).ready(function() {
                                 $('#'+subMenuItems[k]).find('.icon-photo-inner-inner-grow-circle').removeClass('icon-photo-inner-inner-shrink');
                             }
                         }
-                        console.log("player-list-wrapper-inner: " + parseInt($('#'+currentItem+' > .player-list-wrapper').css('width')));
-                        console.log("player-list-wrapper: " + parseInt($('#'+currentItem+' > .player-list-wrapper > .player-list-wrapper-inner').css('width')));
                         
                         if (parseInt($('#'+currentItem+' > .player-list-wrapper').css('width')) < parseInt($('#'+currentItem+' > .player-list-wrapper > .player-list-wrapper-inner').css('width'))){
                             $('.player-list-right[data-team="'+currentItem+'"]').css('display','block');
@@ -594,8 +753,11 @@ $(document).ready(function() {
                         $('.team-list-bkg').css('display','block');
                     }
                 }, function(e) {
-                    console.log("#sub-menu > li: hover off");
-
+                    hoveringOffArea = true;
+                    //console.log("sub-menu li: hover off:" + $(this).attr('class'));
+                    $(this).find('.sub-menu-button').addClass('hovering-off');
+                    $(this).find('.sub-menu-button').removeClass('sub-hover-on');
+                    $(this).find('.sub-menu-button').addClass('button--sacnite1');
                     if (!Modernizr.touch) {
                         $('.team-list-bkg').css('display','none');
                         if (!$('.player-icon').hasClass('player-icon-selected')) {
@@ -667,6 +829,7 @@ $(document).ready(function() {
                     $('.player-list-wrapper[data-team="'+currentTeam+'"]').css('display','block');
                     $('.team-list-bkg').css('display','none');
                     $('#teams').addClass('selected');
+                    $('#teams > .top-menu-button').removeClass('button--sacnite');
 
                     $('#'+currentTeam).addClass('selected');
 
@@ -897,6 +1060,12 @@ $(document).ready(function() {
       }
 
       console.log("window width1: " + windowWidth);
+      if (windowWidth < 1117) {
+        var vidWidth = windowWidth - 246;
+        $('#vid1').css('width',vidWidth+'px');
+        var vidHeight = vidWidth * .5629;
+        $('#vid1').css('height',vidHeight+'px');
+      }
 
       if (windowWidth < 604 && windowWidth > 419) {
             $('.full-photo-item').each(function(i){
@@ -945,14 +1114,33 @@ $(document).ready(function() {
         }
 
       if (windowWidth < 850) {
+            var vidWidth = windowWidth;
+            $('#vid1').css('width',vidWidth+'px');
+            var vidHeight = vidWidth * .5629;
+            $('#vid1').css('height',vidHeight+'px');
             $('.page-main-content').css('width', windowWidth-40);
             $('.player-list-wrapper').css('width', windowWidth);
             $('#live-updates-content').css('height', '300px');
             $('#live-updates-content  > .scrollbar').css('height', '300px');
             $('#live-updates-content  > .scrollbar > .track').css('height', '300px');
             $('#live-updates-content > .viewport').css('height', '300px');
+            var menuWidth = parseInt($('li#teams').css('width'));
+            $('.non-team-menu-item').each(function(){
+                menuWidth += parseInt($(this).css('width'));
+            });
+            console.log("menu width: " + menuWidth);
+            var fillerWidth = windowWidth - menuWidth;
+            $('.top-menu-li-spacer').css('width', fillerWidth+'px');
+            if (windowWidth < 608) {
+                console.log("fillerWidth: " + fillerWidth);
+                $('.top-menu-li-spacer').css('width', (fillerWidth-1)+'px');
+            }
             //$('#live-updates-content').update();
         } else if (windowWidth > 850 && windowWidth < 1101) {
+            var vidWidth = windowWidth - 246;
+            $('#vid1').css('width',vidWidth+'px');
+            var vidHeight = vidWidth * .5629;
+            $('#vid1').css('height',vidHeight+'px');
             $('.player-list-wrapper').css('width', newPlayerListWidth);
             $('.page-main-content').css('width', windowWidth-286);
             $('#live-updates-content').css('height', '770px');
@@ -965,6 +1153,13 @@ $(document).ready(function() {
 
       var winWidth = $(window).width();
       console.log("winWidth: " + winWidth);
+
+      if (winWidth < 1117) {
+        var vidWidth = winWidth - 246;
+        $('#vid1').css('width',vidWidth+'px');
+        var vidHeight = vidWidth * .5629;
+        $('#vid1').css('height',vidHeight+'px');
+      }
 
         if (winWidth < 1101) {
             var diffWidth = 1101 - winWidth;
@@ -985,6 +1180,26 @@ $(document).ready(function() {
             $('#live-updates-content  > .scrollbar').css('height', '300px');
             $('#live-updates-content > .viewport').css('height', '300px');
             //$('#live-updates-content').update();
+            var menuWidth = parseInt($('li#teams').css('width'));
+            $('.non-team-menu-item').each(function(){
+                menuWidth += parseInt($(this).css('width'));
+            });
+            console.log("menu width: " + menuWidth);
+            var fillerWidth = winWidth - menuWidth;
+            $('.top-menu-li-spacer').css('width', fillerWidth+'px');
+            if (winWidth < 608) {
+                console.log("fillerWidth: " + fillerWidth);
+                $('.top-menu-li-spacer').css('width', (fillerWidth-1)+'px');
+                $('li#top-menu-li-spacer').css('top', '1px');
+            } else {
+                $('li#top-menu-li-spacer').css('top', '0px');
+            }
+            if (winWidth < 1117) {
+                var vidWidth = winWidth;
+                $('#vid1').css('width',vidWidth+'px');
+                var vidHeight = vidWidth * .5629;
+                $('#vid1').css('height',vidHeight+'px');
+            }
         }
 
 
