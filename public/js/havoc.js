@@ -12,7 +12,7 @@ $(document).ready(function() {
             this.posterImage.hide();
         });
 
-    if (!$('.page-main-content').hasClass('index-main')) {
+    //if (!$('.page-main-content').hasClass('index-main')) {
         pausePlayerOnClick = false;
         $('.close-video').addClass('video-closed').attr('style','color: rgb(252, 195, 59); z-index: 1030; background-color: rgb(252, 195, 59)');
         $('.close-video-text').css('display','none');
@@ -20,9 +20,9 @@ $(document).ready(function() {
         //$('.video-js').addClass('shrink-me');
         $('.video-js').css('display','none');
         
-    } else {
+    //} else {
 
-    }
+    //}
 
     if ($('#vid1').hasClass('shrink-me')) {
         $('.header-video').removeClass('video-open');
