@@ -17,7 +17,9 @@ $(document).ready(function() {
         $('.close-video').addClass('video-closed').attr('style','color: rgb(252, 195, 59); z-index: 1030; background-color: rgb(252, 195, 59)');
         $('.close-video-text').css('display','none');
         $('.show-video-text').attr('display: block; color: rgb(15, 29, 63)');
-        $('.video-js').addClass('shrink-me');
+        //$('.video-js').addClass('shrink-me');
+        $('.video-js').css('display','none');
+        
     } else {
 
     }
@@ -53,6 +55,7 @@ $(document).ready(function() {
     });
 
     $('.close-video').click(function(){
+        $('.video-js').css('display','block');
         //$('.close-video').unbind("mouseover","mouseout");
         console.log("pausePlayerOnClick: " + pausePlayerOnClick);
         if ($(this).hasClass('video-closed')) {
