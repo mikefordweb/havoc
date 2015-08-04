@@ -65,6 +65,18 @@
                 \{{/each}}
             </table>
         </script>
+        <script id="blog-template" type="text/x-handlebars-template">
+            <div class="blog-template">
+                <label for="blog-title">Blog Title:</label>
+                <input type="text" name="blog-title">
+
+                <label for="blog-content">Blog Content:</label>
+                <textarea name="blog-content" cols="87" rows="20"></textarea>
+                <br>
+
+                <input type="submit" value="Submit" id="blog-button" class="submit-button" name="submit" data-blog-id="\{{blog_id}}">
+            </div>
+        </script>
         <script id="media-row-template" type="text/x-handlebars-template">
             <tr data-media-id="\{{media_id}}" class="media-item-row">
                 <td>\{{media_url}}</td><td>\{{media_type}}</td>
@@ -168,6 +180,7 @@
                     <li><a href="#tabs1">Add New Game</a></li>
                     <li><a href="#tabs2">Manage Games</a></li>
                     <li><a href="#tabs3">Manage Players</a></li>
+                    <li><a href="#tabs4">Manage Blog</a></li>
                 </ul>
                 <div id="tabs1">
                     <div class="game-exists-msg">NOTICE: Game Exists!  A game's unique identifiers are date and time.</div>
@@ -367,6 +380,28 @@
                         <label for="player_instagram">Instagram:</label><input name="player_instagram" class="player-link-item" value="{{instagram}}"><br>
                         <label for="player_twitter">Twitter:</label><input name="player_twitter" class="player-link-item" value="{{twitter}}"><br>
                         <div class="submit-button" id="add-player-button">Add Player</div>
+                    </div>
+                </div>
+                <div id="tabs4">
+                    <div class="big-button" id="new-blog-entry">New Blog Entry</div>
+                    <table class="games-table">
+                        <tr>
+                            <th>Date</th>
+                            <th>Title</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        {{#each blog}}
+                            <tr>
+                                <td>{{edit_date}}</td>
+                                <td class="blog-title-td">{{blog_title}}</td>
+                                <td><a href="#" class="edit-blog-item admin-btn" data-blog-id="{{blog_entry_id}}">Edit</a></td>
+                                <td><a href="#" class="delete-blog-item admin-btn" data-blog-id="{{blog_entry_id}}">Delete</a></td>
+                            </tr>
+                        {{/each}}
+                    </table>
+                    <div class="edit-blog-content">
+
                     </div>
                 </div>
             </div>

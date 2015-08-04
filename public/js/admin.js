@@ -246,6 +246,40 @@
                     }
                 }
 
+                $('#new-blog-entry').click(function(e){
+                    var source   = $("#blog-template").html();
+                    var template = Handlebars.compile(source);
+                    var newBlogEntry = {"blog_id":0};
+                    var html    = template(newBlogEntry);
+
+                    $('.edit-blog-content').html("");
+                    $('.edit-blog-content').append(html);
+                });
+
+                $(document).on('click', '#blog-button', function(e){
+                    e.preventDefault();
+                    $.post("/update_blog", 
+                        {
+                            blog_id: $(this).attr('data-blog-id'),
+                            blog_title: $('input[name="blog-title"]').val(),
+                            blog_content: $('textarea[name="blog-content"]').val()
+                        }).done(function(data){
+                            location.reload();
+                        });
+                });
+
+                $('.edit-blog-item').click(function(e){
+                    e.preventDefault();
+                    $.post("/get_blog", 
+                        {
+                            blog_id: $(this).attr('data-blog-id'),
+                            blog_title: $('input[name="blog-title"]').val(),
+                            blog_content: $('textarea[name="blog-content"]').val()
+                        }).done(function(data){
+                            location.reload();
+                        });
+                });
+
                 $('.box-view').click(function(e){
                     var game_data;
 
@@ -265,6 +299,8 @@
                     //var data = { gameDate: "5515", gameTime: "This is my first post!" };
                     
                 });
+
+
 
                 $("#datepicker").datepicker({
                     showOn: "both", 

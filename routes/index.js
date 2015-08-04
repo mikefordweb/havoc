@@ -287,10 +287,9 @@ module.exports = function(passport) {
 		          games_list = results;
 		          db.query("SELECT * FROM players ORDER BY last_name DESC", function(err, results1){
 		          	db.query("SELECT * FROM media", function(err2, results2){
-		          		//console.log("render admin:games_list: " + JSON.stringify(games_list));
-		          		//console.log("render admin:results1: " + JSON.stringify(results1));
-		          		//console.log("render admin:results2: " + JSON.stringify(results2));
-		          		res.render('admin', {games: games_list, players: results1, media_items: results2});
+		          		db.query("SELECT * FROM blog", function(err3, results3){
+		          			res.render('admin', {games: games_list, players: results1, media_items: results2, blog: results3});
+		          		});
 		          	});
 		          });
 		    });
@@ -613,6 +612,39 @@ module.exports = function(passport) {
 
 		});
 		
+	});
+
+	router.post('/update_blog', isAuthenticated, function(req, res, next) {
+		if (req.body.blog_id) {var blog_id = req.body.blog_id;} else {var blog_id = 0;}
+		if (req.body.blog_title) {var blog_title = req.body.blog_title;} else {var blog_title = "";}
+		if (req.body.blog_content) {var blog_content = req.body.blog_content;} else {var blog_content = "";}
+
+		var db = req.connection;
+		var rightNow = moment().format('YYYY-MM-DD HH:mm:ss');
+
+		console.log("blog_id: " + blog_id);
+		console.log("rightNow: " + rightNow);
+
+		if (blog_id == 0) {
+			db.query("INSERT INTO blog (blog_title, blog_media, blog_text, creation_date, edit_date) VALUES ('" 
+				+ blog_title + "', '', '"+blog_content+"', '"+rightNow+"', '"+rightNow+"')", function(err, result){
+				res.json({update_blog:"success"});
+		    });
+		} else {
+			db.query("UPDATE blog SET blog_title = '"+blog_title+"', blog_content = '"+blog_content+
+				"' blog_media = '', edit_date = '"+rightNow+"' WHERE blog_entry_id = '" + blog_id + "'", function(err, result){
+				res.json({update_blog:"success"});
+		    });
+		}
+		
+	});
+
+	router.post('/blogs', isAuthenticated, function(req, res, next) {
+		if (req.body.blog_id) {var blog_id = req.body.blog_id;} else {var blog_id = 0;}
+
+		db.query("SELECT * FROM blog", function(err, result){
+			res.json({blogs:result});
+	    });
 	});
 
 	router.post('/delete_box_score', isAuthenticated, function(req, res, next) {
