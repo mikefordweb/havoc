@@ -924,7 +924,7 @@ footer {
 }
 
 .video-non-index {
-    top: -25px;
+    display: none;
 }
 
 .page-main-content {
@@ -987,6 +987,7 @@ footer {
     position: absolute;
     transition:all 0.7s ease;
     z-index: 2000;
+    top: 157px;
 }
 
 .video-js {
