@@ -929,6 +929,7 @@ footer {
 
 .page-main-content {
     position: relative;
+    margin-left: 20px;
 }
 
 .main-content {
@@ -984,6 +985,7 @@ footer {
 }
 
 #vid1 {
+    display: none;
     position: absolute;
     transition:all 0.7s ease;
     z-index: 2000;
@@ -2460,13 +2462,90 @@ input[name="position"] {
     display: none;
 }
 
+/*** BLOG ***/
+
+.blog-page-content {
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.blog-page-item {
+    position: relative;
+    width: 100%;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 20px;
+    padding-top: 6px;
+    min-height: 121px;
+}
+
+.blog-page-title {
+    font-size: 24px;
+    line-height: 50px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.blog-page-date {
+    position: absolute;
+    right: 0;
+    top: 6px;
+}
+
+.blog-date-day {
+    position: relative;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 60px;
+    line-height: 60px;
+    font-weight: bold;
+    color: #5e92cd;
+}
+
+.blog-date-year {
+    position: relative;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    line-height: 24px;
+    color: #fff;
+    text-align: center;
+}
+
+.blog-date-month {
+    position: relative;
+    font-family: 'Montserrat', sans-serif;
+    top: -2px;
+    font-size: 24px;
+    line-height: 24px;
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.blog-date-time {
+    position: relative;
+    font-family: 'Montserrat', sans-serif;
+    top: 2px;
+    font-size: 13px;
+    line-height: 13px;
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;   
+}
+
+.blog-page-text {
+    color: #fff;
+    width: 86%;
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: normal;
+}
+
 /*** SCHEDULE ***/
 
 .schedule-main {
     width: 770px;
     position: relative;
     margin-top: 8px;
-    margin-left: 20px;
     padding-bottom: 60px;
     z-index: 980;
 }
@@ -2899,7 +2978,7 @@ a.tweet-media-link:visited {
 }
 
 #live-updates-content { width: 244px; height: 770px;margin: 0px 0 0px; border-left: 2px solid #fcc33b; }
-#live-updates-content .viewport { width: 234px; height: 770px; overflow: hidden; position: relative; }
+#live-updates-content .viewport { width: 234px; height: 770px; overflow: hidden; position: relative; border-bottom: 2px solid #fcc33b; }
 #live-updates-content .overview { list-style: none; position: absolute; left: 0; top: 0; padding: 0; margin: 0; }
 #live-updates-content .scrollbar{ background: transparent url(images/bg-scrollbar-track-y.png) no-repeat 0 0; background-size: 100% 100%; position: relative; background-position: 0 0; float: right; width: 10px; }
 #live-updates-content .track { background: transparent url(images/bg-scrollbar-trackend-y.png) no-repeat 0 100%; height: 100%; width:8px; position: relative; padding: 0 1px; }
@@ -3184,7 +3263,7 @@ a.tweet-media-link:visited {
     }
 }
 
-@media (max-width: 850px) {
+@media (max-width: 865px) {
     .havoc-modal-body {
         overflow-x: scroll;
     }
@@ -3438,53 +3517,6 @@ a.tweet-media-link:visited {
     .stats-table-wrapper {
         height: auto;
     }
-
-    /*.live-updates-wrapper {
-        position: relative;
-        margin: 0 auto;
-        width: 90%;
-        top: inherit;
-        right: inherit;
-    }
-
-    .live-updates-header {
-        width: 90%;
-        margin: 0 auto;
-    }
-
-    #live-updates-content {
-        width: 90%;
-        margin: 0 auto;
-        position: relative;
-    }
-
-    #live-updates-content .scrollbar {
-        position: absolute;
-        right: 0;
-        z-index: 200;
-    }
-
-    #live-updates-content .viewport {
-        width: 100%;
-    }
-
-    .sub-menu-bkg {
-        right: inherit;
-    }
-
-    .basketball-card-main-content {
-        margin: 0 auto;
-        min-width: 420px;
-    }
-
-    .content-wrapper {
-        min-height: inherit;
-    }
-
-    .basketball-card-wrapper {
-        margin: 0 auto 170px auto;
-    }
-    */
 }
 
 @media (max-width: 607px) {
@@ -3499,6 +3531,10 @@ a.tweet-media-link:visited {
     #sub-menu > li {
         font-size: 11px;
     }
+
+    li#top-menu-li-spacer {
+        top: 1px;
+    }
 }
 
 @media (max-width: 560px) {
@@ -3512,12 +3548,17 @@ a.tweet-media-link:visited {
     .modal-game-data-table {
         font-size: 12px;
     }
+    #coach-blog-item.non-team-menu-item {
+        display: none;
+    }
+    #top-menu-li-spacer.top-menu-li-spacer {
+        width: 100% !important;
+        top: -26px !important;
+        z-index: -1;
+    }
 }
 
 @media (max-width: 521px) {
-    #top-menu > li:last-of-type {
-        display: none;
-    }
 
     #header-social-icons {
         right: 8px;
@@ -3527,6 +3568,10 @@ a.tweet-media-link:visited {
     .header-social-icon {
         display: block;
         margin-left: 6px;
+    }
+
+    .header-video {
+        right: 40px;
     }
 
     .calendar-menu li {
@@ -3539,6 +3584,10 @@ a.tweet-media-link:visited {
 }
 
 @media (max-width: 434px) {
+    h2.page-main-h2 {
+        font-size: 20px;
+    }
+
     .modal-main-h2 {
         font-size: 12px !important;
         line-height: 12px;

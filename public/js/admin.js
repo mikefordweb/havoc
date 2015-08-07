@@ -249,7 +249,7 @@
                 $('#new-blog-entry').click(function(e){
                     var source   = $("#blog-template").html();
                     var template = Handlebars.compile(source);
-                    var newBlogEntry = {"blog_id":0};
+                    var newBlogEntry = {"blog_entry_id":0};
                     var html    = template(newBlogEntry);
 
                     $('.edit-blog-content').html("");
@@ -264,7 +264,7 @@
                             blog_title: $('input[name="blog-title"]').val(),
                             blog_content: $('textarea[name="blog-content"]').val()
                         }).done(function(data){
-                            location.reload();
+                            location.assign("/admin#tabs4");
                         });
                 });
 
@@ -272,11 +272,15 @@
                     e.preventDefault();
                     $.post("/get_blog", 
                         {
-                            blog_id: $(this).attr('data-blog-id'),
-                            blog_title: $('input[name="blog-title"]').val(),
-                            blog_content: $('textarea[name="blog-content"]').val()
+                            blog_id: $(this).attr('data-blog-id')
                         }).done(function(data){
-                            location.reload();
+                            var source1   = $("#blog-template").html();
+                            var template1 = Handlebars.compile(source1);
+                            
+                            console.log("blog data: " + JSON.stringify(data.blog[0]));
+                            var html1    = template1(data.blog[0]);
+                            $('.edit-blog-content').html("");
+                            $('.edit-blog-content').append(html1);
                         });
                 });
 

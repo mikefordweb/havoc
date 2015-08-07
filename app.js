@@ -14,6 +14,21 @@ var fs = require('fs');
 
 var app = express();
 
+    exphbs.registerHelper('dateItem', function(whichItem, date_time) {
+        var new_date = moment(date_time);
+
+        switch (whichItem) {
+            case "day":
+                return new_date.format('DD');
+            case "year":
+                return new_date.format('YYYY');
+            case "month":
+                return new_date.format('MMM');
+            case "time":
+                return new_date.format('h:mm a');
+        }
+    });
+
 exphbs.registerHelper('ifCond', function (v1, operator, v2, options) {
             //console.log("in ifCond");
             switch (operator)

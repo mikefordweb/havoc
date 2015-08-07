@@ -234,10 +234,20 @@ module.exports = function(passport) {
 	          games_list = results;
 	          db.query("SELECT * FROM players ORDER BY jersey_number ASC", function(err, results1){
 	          	db.query("SELECT * FROM media", function(err2, results2){
-	          		console.log("res render index");
-	          		res.render('tryouts', {games: games_list, players: results1, media_items: results2});
+	          		db.query("SELECT * FROM blog", function(err3, results3){
+		        		res.render('blog', {games: games_list, players: results1, media_items: results2, blog: results3});
+	          		});
 	          	});
 	          });
+	    });
+	});
+
+	router.post('/get_blog', isAuthenticated, function(req, res, next) {
+		if (req.body.blog_id) {var blog_id = req.body.blog_id;} else {var blog_id = 0;}
+		var db = req.connection;
+
+		db.query("SELECT * FROM blog WHERE blog_entry_id = '"+blog_id+"'", function(err, results){
+			res.json({blog: results});
 	    });
 	});
 
@@ -631,8 +641,8 @@ module.exports = function(passport) {
 				res.json({update_blog:"success"});
 		    });
 		} else {
-			db.query("UPDATE blog SET blog_title = '"+blog_title+"', blog_content = '"+blog_content+
-				"' blog_media = '', edit_date = '"+rightNow+"' WHERE blog_entry_id = '" + blog_id + "'", function(err, result){
+			db.query("UPDATE blog SET blog_title = '"+blog_title+"', blog_text = '"+blog_content+
+				"', blog_media = '', edit_date = '"+rightNow+"' WHERE blog_entry_id = '" + blog_id + "'", function(err, result){
 				res.json({update_blog:"success"});
 		    });
 		}

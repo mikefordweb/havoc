@@ -67,14 +67,16 @@
         </script>
         <script id="blog-template" type="text/x-handlebars-template">
             <div class="blog-template">
+                <label for="blog-date">Blog Date:</label>
+                <span>\{{creation_date}}</span>
                 <label for="blog-title">Blog Title:</label>
-                <input type="text" name="blog-title">
+                <input type="text" name="blog-title" value="\{{blog_title}}">
 
                 <label for="blog-content">Blog Content:</label>
-                <textarea name="blog-content" cols="87" rows="20"></textarea>
+                <textarea name="blog-content" cols="87" rows="20">\{{blog_text}}</textarea>
                 <br>
 
-                <input type="submit" value="Submit" id="blog-button" class="submit-button" name="submit" data-blog-id="\{{blog_id}}">
+                <input type="submit" value="Submit" id="blog-button" class="submit-button" name="submit" data-blog-id="\{{blog_entry_id}}">
             </div>
         </script>
         <script id="media-row-template" type="text/x-handlebars-template">

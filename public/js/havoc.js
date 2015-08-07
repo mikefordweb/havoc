@@ -12,17 +12,16 @@ $(document).ready(function() {
             this.posterImage.hide();
         });
 
-    //if (!$('.page-main-content').hasClass('index-main')) {
+    if ($('.page-main-content').hasClass('index-main')) {
+        
+        $('.video-js').css('display','block');
+        
+    } else {
         pausePlayerOnClick = false;
         $('.close-video').addClass('video-closed').attr('style','color: rgb(252, 195, 59); z-index: 1030; background-color: rgb(252, 195, 59)');
         $('.close-video-text').css('display','none');
         $('.show-video-text').attr('display: block; color: rgb(15, 29, 63)');
-        //$('.video-js').addClass('shrink-me');
-        $('.video-js').css('display','none');
-        
-    //} else {
-
-    //}
+    }
 
     if ($('#vid1').hasClass('shrink-me')) {
         $('.header-video').removeClass('video-open');
@@ -139,6 +138,17 @@ $(document).ready(function() {
 
     Handlebars.registerHelper('getHeight', function(_height) {
         return (_height *.088);
+    });
+
+    Handlebars.registerHelper('dateItem', function(whichItem, date_time) {
+        var new_date = moment(date_time);
+
+        switch (whichItem) {
+            case "day":
+                return new_date.format('DD');
+            case "year":
+                return new_date.format('YYYY');
+        }
     });
 
         Handlebars.registerHelper('ifCond', function(v1, operator, v2, options) {
@@ -1170,7 +1180,15 @@ $(document).ready(function() {
         $('#vid1').css('width',vidWidth+'px');
         var vidHeight = vidWidth * .5629;
         $('#vid1').css('height',vidHeight+'px');
+      } else if (winWidth > 1101) {
+        console.log("player-list-wrapper width: " + newPlayerListWidth);
+        $('.player-list-wrapper').css('width', '854px');
+        $('#sub-menu').css('width', '841px');
+        $('.basketball-card-main-content').css('width','77%');
+        $('.page-main-content').css('width', '770px');
       }
+
+
 
         if (winWidth < 1101) {
             var diffWidth = 1101 - winWidth;

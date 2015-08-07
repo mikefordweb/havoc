@@ -3,8 +3,25 @@
 	            
                 <div class="page-header-wrap">	
                 	<div class="page-h2-bkg"></div><h2 class="page-main-h2">Coach Bryan's Blog</h2><div class="page-h2-bkg"></div>
+                            </div>
+
+                    <div class="blog-page-content">
+                        {{#each blog}}
+                            <div class="blog-page-item">
+                                <div class="blog-page-title">{{blog_title}}</div>
+                                <div class="blog-page-date">
+                                    <div class="blog-date-day">{{{dateItem "day" creation_date}}}</div>
+                                    <div class="blog-date-month">{{{dateItem "month" creation_date}}}</div>
+                                    <div class="blog-date-year">{{{dateItem "year" creation_date}}}</div>
+                                    <div class="blog-date-time">{{{dateItem "time" creation_date}}}</div>
+                                </div>
+                                <div class="blog-page-text">
+                                    {{blog_text}}
+                                </div>
+                            </div>
+                        {{/each}}
+                    </div>
                 </div>
-            </div>
 
             <div class="basketball-card-main-content">
                 <div class="basketball-card-wrapper"></div>
