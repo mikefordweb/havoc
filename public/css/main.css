@@ -412,7 +412,6 @@ footer {
     text-transform: uppercase;
     font-size: 16px;
     cursor: pointer;
-    top: -1px;
 }
 
 .top-menu-button {
@@ -3532,9 +3531,9 @@ a.tweet-media-link:visited {
         font-size: 11px;
     }
 
-    li#top-menu-li-spacer {
+    /*li#top-menu-li-spacer {
         top: 1px;
-    }
+    }*/
 }
 
 @media (max-width: 560px) {
@@ -3551,11 +3550,11 @@ a.tweet-media-link:visited {
     #coach-blog-item.non-team-menu-item {
         display: none;
     }
-    #top-menu-li-spacer.top-menu-li-spacer {
+    /*#top-menu-li-spacer.top-menu-li-spacer {
         width: 100% !important;
         top: -26px !important;
         z-index: -1;
-    }
+    }*/
 }
 
 @media (max-width: 521px) {
@@ -3678,6 +3677,19 @@ a.tweet-media-link:visited {
 
     .return-to-front {
         background-color: #fff;
+    }
+}
+
+@media (max-width: 376px) {
+    #top-menu > li {
+        font-size: 11px;
+    }
+
+    #sub-menu > li {
+        font-size: 10px;
+    }
+    .top-menu-button {
+        padding: 0 8px 0 8px;
     }
 }
 
@@ -3831,12 +3843,22 @@ a.tweet-media-link:visited {
 .top-menu-li-spacer {
     position: relative;
     background-color: #fcc33b;
+    color: #fcc33b !important;
     cursor: default !important;
     width: 200px;
-    height: 26px;
-    top: 0px;
 }
 
-li#top-menu-li-spacer {
-    top: 0px;
+.top-menu-li-spacer > a {
+    color: #fcc33b !important;
+    text-decoration: none;
+    line-height: 26px;
+    display: block;
 }
+
+.top-menu-li-spacer > a:hover {
+    cursor: default;
+}
+
+/*li#top-menu-li-spacer {
+    top: 0px;
+}*/

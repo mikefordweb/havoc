@@ -1,16 +1,16 @@
 var pausePlayerOnClick = true;
 
 $(document).ready(function() {
-        var player = videojs('vid1', function(){
+    var player = videojs('vid1', function(){
 
-        });
+    });
 
-        player.on('play', function() {
-            pausePlayerOnClick = true;
-            console.log("player playing");
-            this.bigPlayButton.hide();
-            this.posterImage.hide();
-        });
+    player.on('play', function() {
+        pausePlayerOnClick = true;
+        console.log("player playing");
+        this.bigPlayButton.hide();
+        this.posterImage.hide();
+    });
 
     if ($('.page-main-content').hasClass('index-main')) {
         
@@ -71,6 +71,7 @@ $(document).ready(function() {
             $('#vid1').addClass("shrink-me");
             $('.close-video').addClass('video-closed');
             $('.close-video').addClass('video-closing');
+            
         }
     });
 
@@ -490,18 +491,18 @@ $(document).ready(function() {
                 $('.player-list[data-team="2018national"] > li').each(function(e){
                     playerListWidthPX1 += 120;
                 });
-                $('.player-list-wrapper-inner[data-team="2018national"]').css('width',playerListWidthPX1+40);
+                $('.player-list-wrapper-inner[data-team="2018national"]').css('width',playerListWidthPX1+50);
 
                 console.log("$('.player-list[data-team=2018regional] > li').length: " + $('.player-list[data-team="2018regional"] > li').length);
                 $('.player-list[data-team="2018regional"] > li').each(function(e){
                     playerListWidthPX2 += 120;
                 });
-                $('.player-list-wrapper-inner[data-team="2018regional"]').css('width',playerListWidthPX2+40);
+                $('.player-list-wrapper-inner[data-team="2018regional"]').css('width',playerListWidthPX2+50);
 
                 $('.player-list[data-team="2020team"] > li').each(function(e){
                     playerListWidthPX3 += 120;
                 });
-                $('.player-list-wrapper-inner[data-team="2020team"]').css('width',playerListWidthPX3+40);
+                $('.player-list-wrapper-inner[data-team="2020team"]').css('width',playerListWidthPX3+50);
 
                 $('.player-list-right').hover(function(e){
                     var currentItem = $(this).attr('data-team');
@@ -607,11 +608,13 @@ $(document).ready(function() {
                     }
                 );
 
+                console.log("1:setting hoverNonTeamItem = false");
                 var hoverNonTeamItem = false;
 
                 $('#top-menu li#teams > .top-menu-button').on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', 
                         function() {
                             if (hoverNonTeamItem == false || $('#top-menu li#teams').hasClass('selected')) {
+                                console.log("add teams on: hoverNonTeamItem: " + hoverNonTeamItem);
                                 $(this).addClass('teams-hover-on');
                                 $(this).removeClass('button--sacnite');
                             }
@@ -619,18 +622,21 @@ $(document).ready(function() {
                     );
 
                 $('.non-team-menu-item').hover(function(e){
+                    console.log("2:setting hoverNonTeamItem = true");
                     hoverNonTeamItem = true;
                     if (!$('#top-menu li#teams').hasClass('selected')) {
                         $('#top-menu li#teams > .top-menu-button').removeClass('teams-hover-on');
                         $('#top-menu li#teams > .top-menu-button').addClass('button--sacnite');
                     }
                 }, function(){
-                    hoverNonTeamItem = false;
+                    //console.log("3:setting hoverNonTeamItem = false");
+                    //hoverNonTeamItem = false;
                 });
 
                 $('#top-menu li#teams').hover(function(e){
                     //console.log("hover top menu on");
                     //$('#top-menu li#teams > .top-menu-button').removeClass('button--sacnite');
+                    console.log("4:setting hoverNonTeamItem = false");
                     hoverNonTeamItem = false;
                     var froshLeft = (parseInt($('#sub-menu > li:nth-of-type(1)').css('padding-left')) + parseInt($('#sub-menu > li:nth-of-type(1)').css('padding-right')) + parseInt($('#sub-menu > li:nth-of-type(1)').css('width')) - 4);
                     var seventhLeft = (froshLeft + parseInt($('#sub-menu > li:nth-of-type(2)').css('padding-left')) + parseInt($('#sub-menu > li:nth-of-type(2)').css('padding-right')) + parseInt($('#sub-menu > li:nth-of-type(2)').css('width')));
@@ -652,7 +658,8 @@ $(document).ready(function() {
                     });
                     //$('#'+currentItem+' > .player-list-wrapper').css('display','block');
                 }, function(e) {
-                    //console.log("hover top menu off");
+                    //console.log("hover top menu off")
+                    console.log("5:setting hoverNonTeamItem = true");
                     hoverNonTeamItem = true;
 
                     if (!$('#top-menu li#teams').hasClass('selected')) {
@@ -775,12 +782,15 @@ $(document).ready(function() {
                     }
                 }, function(e) {
                     hoveringOffArea = true;
+
                     //console.log("sub-menu li: hover off:" + $(this).attr('class'));
                     $(this).find('.sub-menu-button').addClass('hovering-off');
                     $(this).find('.sub-menu-button').removeClass('sub-hover-on');
                     $(this).find('.sub-menu-button').addClass('button--sacnite1');
                     if (!Modernizr.touch) {
                         $('.team-list-bkg').css('display','none');
+                        console.log("6:setting hovernotteamitem=true");
+                        hoverNonTeamItem = true;
                         if (!$('.player-icon').hasClass('player-icon-selected')) {
                             $('.player-list-wrapper').css('display','none');
                         } else {
@@ -1149,6 +1159,9 @@ $(document).ready(function() {
             $('.non-team-menu-item').each(function(){
                 menuWidth += parseInt($(this).css('width'));
             });
+            if ($('#coach-blog-item.non-team-menu-item').css('display') == "none") {
+                menuWidth -= parseInt($('#coach-blog-item.non-team-menu-item').css('width'));
+            }
             console.log("menu width: " + menuWidth);
             var fillerWidth = windowWidth - menuWidth;
             $('.top-menu-li-spacer').css('width', fillerWidth+'px');
@@ -1213,15 +1226,15 @@ $(document).ready(function() {
             $('.non-team-menu-item').each(function(){
                 menuWidth += parseInt($(this).css('width'));
             });
+            if ($('#coach-blog-item.non-team-menu-item').css('display') == "none") {
+                menuWidth -= parseInt($('#coach-blog-item.non-team-menu-item').css('width'));
+            }
             console.log("menu width: " + menuWidth);
             var fillerWidth = winWidth - menuWidth;
             $('.top-menu-li-spacer').css('width', fillerWidth+'px');
             if (winWidth < 608) {
                 console.log("fillerWidth: " + fillerWidth);
                 $('.top-menu-li-spacer').css('width', (fillerWidth-1)+'px');
-                $('li#top-menu-li-spacer').css('top', '1px');
-            } else {
-                $('li#top-menu-li-spacer').css('top', '0px');
             }
             if (winWidth < 1117) {
                 var vidWidth = winWidth;
