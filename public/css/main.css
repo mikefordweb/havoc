@@ -942,7 +942,7 @@ footer {
     display: none !important;
 }
 
-.close-video {
+.video-toggle {
     position: absolute;
     display: block;
     right: 246px;
@@ -957,30 +957,17 @@ footer {
     cursor: pointer;
     padding: 0 14px 0 14px;
     z-index: 1010;
-    transition: top 0.7s ease;
 }
 
-.close-video-text {
+.video-text {
     position: relative;
     line-height: 27px;
     height: 27px;
 }
 
-.show-video-text > i.fa-film {
+.video-text > i.fa-film {
     position: relative;
     top: -1px;
-}
-
-.show-video-text {
-    position: relative;
-    display: none;
-    color: #0f1d3f;
-    line-height: 26px;
-}
-
-.video-closed {
-    top: 105px;
-    line-height: 26px;
 }
 
 #vid1 {
@@ -989,13 +976,6 @@ footer {
     transition:all 0.7s ease;
     z-index: 2000;
     top: 157px;
-}
-
-.video-js {
-}
-
-.vjs-big-play-button {
-
 }
 
 .vjs-default-skin:hover .vjs-big-play-button,
@@ -1251,6 +1231,8 @@ footer {
     border: 8px solid #fcc33b;
     overflow: hidden;
     background-color: #000;
+    background-image: url(../img/player-card-photo-bkg.jpg);
+    background-size: 480px 343px;
 }
 
 .card-photo-item {

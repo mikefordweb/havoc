@@ -584,7 +584,6 @@ module.exports = function(passport) {
 				      				console.log("image size: w: " + dimensions.width + " h: " + dimensions.height);
 				      				if (dimensions.width > dimensions.height) {
 				      					results4[k].photo_dim = 'width';
-				      					console.log("results4[k].width: " + results4[k].width);
 				      					if (dimensions.width > 464) {
 				      						results4[k].width = '464';
 				      					} else {
@@ -595,7 +594,6 @@ module.exports = function(passport) {
 				      					results4[k].marginTop= Math.round((327 - photoHeight)/2);
 				      				} else {
 				      					results4[k].photo_dim = 'height';
-				      					console.log("results4[k].height: " + results4[k].height);
 				      					if (dimensions.height > 327) {
 				      						results4[k].height = '327';
 				      					} else {
@@ -608,7 +606,10 @@ module.exports = function(passport) {
 				      				}
 
 				      				if (dimensions.width <= '464' && dimensions.height <= '327') {
-				      					results4[k].photo_dim = 'none'
+				      					results4[k].photo_dim = 'none';
+				      					console.log("sm:image size: w: " + dimensions.width + " h: " + dimensions.height);
+				      					results4[k].width = dimensions.width;
+				      					results4[k].height = dimensions.height;
 				      				}
 				      			}
 

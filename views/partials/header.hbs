@@ -86,6 +86,9 @@
                                         \{{#ifCond photo_dim '==' "height"}}
                                         <img src="\{{url}}" class="full-photo-item height-photo" style="height: \{{height}}px; margin-left: \{{marginLeft}}px;"  data-player-id="\{{player_id}}" data-media-id="\{{media_id}}">
                                         \{{/ifCond}}
+                                        \{{#ifCond photo_dim '==' "none"}}
+                                        <img src="\{{url}}" class="full-photo-item" style="height: \{{height}}px; width: \{{width}}px;"  data-player-id="\{{player_id}}" data-media-id="\{{media_id}}">
+                                        \{{/ifCond}}
                                     \{{/ifCond}}
                                 \{{/ifCond}}
                                 \{{/each}}
@@ -130,7 +133,10 @@
                                                     <img src="\{{url}}" class="card-photo-thumb thumb-width" style="width: \{{getWidth width}}px">
                                                 \{{/ifCond}}
                                                 \{{#ifCond photo_dim '==' "height"}}
-                                                    <img src="\{{url}}" class="card-photo-thumb thumb-height" style="width: \{{getHeight height}}px">
+                                                    <img src="\{{url}}" class="card-photo-thumb thumb-height" style="height: \{{getHeight height}}px">
+                                                \{{/ifCond}}
+                                                \{{#ifCond photo_dim '==' "none"}}
+                                                    <img src="\{{url}}" class="card-photo-thumb" style="\{{getNoneWidthHeight width height}}">
                                                 \{{/ifCond}}
                                             \{{/ifCond}}
                                         </div>
@@ -281,7 +287,7 @@
                     <img src="img/header-logo.png">
                 </a>
                 <div id="header-slogan">Wisconsin’s Premier Girls AAU Basketball Program</div>
-                <div class="header-video">Show Video <i class="fa fa-film"></i></div>
+                <!--<div class="header-video">Show Video <i class="fa fa-film"></i></div>-->
                 <div id="header-social-icons">
                     <a href="#" class="header-social-icon"><i class="fa fa-facebook-square"></i></a>
                     <a href="#" class="header-social-icon"><i class="fa fa-twitter"></i></a>
@@ -458,7 +464,9 @@
                 </li><li class="non-team-menu-item" id="coach-blog-item"><a href="/blog"><div class="top-menu-button button--sacnite">Coach Bryan's Blog</div></a></li><li class="top-menu-li-spacer" id="top-menu-li-spacer">
                 <a href="#">&nbsp;</a></li>
             </ul>
-
+            <div class="video-toggle">
+                <div class="video-text"></div>
+            </div>
             <div class="sub-menu-bkg"></div>
             <video id="vid1" src="" class="video-js vjs-default-skin" muted="muted" controls width="854" height="483" data-setup='{ "autoplay": false, "preload": "auto", "techOrder": ["youtube"], "src": "https://www.youtube.com/watch?v=hpHGURYrncg" }'>
                 </video>
