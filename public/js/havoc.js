@@ -68,11 +68,18 @@ $(document).ready(function() {
     );*/
 
     Handlebars.registerHelper('getWidth', function(_width) {
+        console.log("natWidth:.088: " + (_width * .088));
         return (_width *.088);
     });
 
     Handlebars.registerHelper('getHeight', function(_height) {
         return (_height *.088);
+    });
+
+    Handlebars.registerHelper('getMarginTop', function(_natHeight) {
+        console.log("_natHeight: " + (_natHeight*.07));
+        console.log("15 - (_natHeight - 21)/2: " + (15 - ((_natHeight*.07) - 21)/2));
+        return 15 - ((_natHeight*.07) - 21)/2;
     });
 
     Handlebars.registerHelper('getNoneWidthHeight', function(_width, _height) {
@@ -82,11 +89,11 @@ $(document).ready(function() {
         console.log("_width, _height: " + _width +", "+ _height);
 
         if (_width > _height) {
-            return "width: " + max_width + "px";
+            return "width: " + max_width + "px; margin-top: " + (15 - (max_height - 21)/2) + "px;";
         } else if (_width < _height) {
-            return "height: " + max_height + "px";
+            return "height: " + max_height + "px; margin-top: " + (15 - (max_height - 21)/2) + "px;";
         } else {
-            return "width: " + max_width + "px; height: " + max_width + "px";
+            return "width: " + max_width + "px; height: " + max_width + "px; margin-top: " + (15 - (max_height - 21)/2) + "px;";
         }
     });
 
@@ -237,6 +244,9 @@ $(document).ready(function() {
 
                         if (live_update_item.team_asset == "media") {
                             var source1   = $("#live-update-media-item").html();
+                        } else if (live_update_item.team_asset == "blog") {
+                            live_update_item.blog_id = data.live_update_items[i].item_obj.record_id;
+                            var source1   = $("#live-update-blog-item").html();
                         } else {
                             var source1   = $("#live-update-item").html();
                         }

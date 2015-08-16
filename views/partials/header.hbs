@@ -30,9 +30,9 @@
                          <div class="card-back-position-block back-block-item">\{{position}}</div>
                          <div class="card-back-number-block back-block-item">\{{jersey_number}}</div>
                          <div class="card-back-info-block back-block-item">
-                            <div class="card-back-info-text">Birthdate: 9/15/2001</div>
+                            <!--<div class="card-back-info-text">Birthdate: 9/15/2001</div>
                             <div class="card-back-info-text">Hometown: Brookfield</div>
-                            <div class="card-back-info-text">Class of 2017</div>
+                            <div class="card-back-info-text">Class of 2017</div>-->
                          </div>
                          <div class="card-back-game-log-title">Game Log</div>
                          
@@ -87,7 +87,7 @@
                                         <img src="\{{url}}" class="full-photo-item height-photo" style="height: \{{height}}px; margin-left: \{{marginLeft}}px;"  data-player-id="\{{player_id}}" data-media-id="\{{media_id}}">
                                         \{{/ifCond}}
                                         \{{#ifCond photo_dim '==' "none"}}
-                                        <img src="\{{url}}" class="full-photo-item" style="height: \{{height}}px; width: \{{width}}px;"  data-player-id="\{{player_id}}" data-media-id="\{{media_id}}">
+                                        <img src="\{{url}}" class="full-photo-item" style="height: \{{height}}px; width: \{{width}}px;margin-top: \{{marginTop}}px;margin-left: \{{marginLeft}}px;"  data-player-id="\{{player_id}}" data-media-id="\{{media_id}}">
                                         \{{/ifCond}}
                                     \{{/ifCond}}
                                 \{{/ifCond}}
@@ -130,10 +130,10 @@
                                             \{{/ifCond}}
                                             \{{#ifCond media_type '==' "photo"}}
                                                 \{{#ifCond photo_dim '==' "width"}}
-                                                    <img src="\{{url}}" class="card-photo-thumb thumb-width" style="width: \{{getWidth width}}px">
+                                                    <img src="\{{url}}" class="card-photo-thumb thumb-width" style="margin-top: \{{getMarginTop natHeight}}px; width: \{{getWidth width}}px;">
                                                 \{{/ifCond}}
                                                 \{{#ifCond photo_dim '==' "height"}}
-                                                    <img src="\{{url}}" class="card-photo-thumb thumb-height" style="height: \{{getHeight height}}px">
+                                                    <img src="\{{url}}" class="card-photo-thumb thumb-height" style="margin-top: \{{getMarginTop natHeight}}px; height: \{{getHeight height}}px">
                                                 \{{/ifCond}}
                                                 \{{#ifCond photo_dim '==' "none"}}
                                                     <img src="\{{url}}" class="card-photo-thumb" style="\{{getNoneWidthHeight width height}}">
@@ -168,6 +168,14 @@
                 <div class="live-update-item-user capitalize">\{{first_name}} \{{last_name}}</div>
                 <div class="live-update-item-event">\{{action_on_asset}}</div>
                 <div class="live-update-item-item capitalize">\{{first_name}} \{{last_name}}s <a href="#" class="pc-playercard" data-player-id="\{{player_id}}"><span class="pc-player">Player</span><span class="pc-card">Card</span></a></div>
+                <div class="live-update-item-datetime">on \{{date_time}}</div>
+            </div>
+        </script>
+
+        <script id="live-update-blog-item" type="text/x-handlebars-template">
+            <div class="live-update-item">
+                <div class="live-update-item-user capitalize">\{{first_name}} \{{last_name}}</div>
+                <div class="live-update-item-event">added a <a href="/blog#\{{blog_id}}" class="blog-entry-link">new blog entry</a></div>
                 <div class="live-update-item-datetime">on \{{date_time}}</div>
             </div>
         </script>

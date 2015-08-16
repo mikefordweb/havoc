@@ -1419,6 +1419,7 @@ footer {
     left: 0;
     display: block;
     position: relative;
+    margin-top: 6px;
 }
 
 .card-media-item {
@@ -1452,11 +1453,6 @@ footer {
     display: block;
     position: relative;
     margin: 0 auto;
-    margin-top: 6px;
-}
-
-.thumb-width {
-    margin-top: 11px;
 }
 
 .card-media-item.selected > .card-media-item-bkg {
@@ -1541,7 +1537,9 @@ footer {
 .card-back-info-block {
     width: 31%;
     height: 46px;
-    padding: 7px;  
+    padding: 7px;
+    background-image: linear-gradient(#fcc33b 70%, #fff 30%);
+    background-size: 32px 6px; 
 }
 
 .card-back-info-text {
@@ -2092,6 +2090,24 @@ label[for="timepicker"] {
     vertical-align: top;
 }
 
+.blog-table {
+    display: block;
+    vertical-align: top;
+}
+
+.blog-table th {
+    padding: 0 12px;
+    line-height: 28px;
+    text-align: center;
+}
+
+.blog-table td {
+    padding: 0 10px;
+    text-align: center;
+    line-height: 24px;
+}
+
+
 .boxscore-table {
   vertical-align: top;
   margin: 0 auto;
@@ -2230,11 +2246,10 @@ label[for="timepicker"] {
 
 .edit-blog-content {
     position: relative;
-    display: inline-block;
+    display: block;
     width: 550px;
     vertical-align: top;
     margin-left: 20px;
-    top: -58px;
 }
 
 textarea[name="blog-content"] {
@@ -2251,11 +2266,6 @@ textarea[name="blog-content"] {
     cursor: pointer;
     color: #0f1d3f;
     display: inline-block;
-}
-
-.blog-table {
-    display: inline-block;
-    vertical-align: top;
 }
 
 .submit-button {
@@ -2453,15 +2463,29 @@ input[name="position"] {
 .blog-page-item {
     position: relative;
     width: 100%;
-    border-top: 1px solid #fff;
-    border-bottom: 1px solid #fff;
+    margin-bottom: 20px;
     padding-bottom: 20px;
     padding-top: 6px;
     min-height: 121px;
+
+}
+
+.blog-page-item-bkg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    opacity: .1;
+}
+
+.blog-page-item-content {
+    padding: 0 0 0 20px;
 }
 
 .blog-page-title {
-    font-size: 24px;
+    font-size: 20px;
     line-height: 50px;
     font-weight: bold;
     color: #fff;
@@ -2469,7 +2493,7 @@ input[name="position"] {
 
 .blog-page-date {
     position: absolute;
-    right: 0;
+    right: 20px;
     top: 6px;
 }
 
@@ -2515,7 +2539,7 @@ input[name="position"] {
 
 .blog-page-text {
     color: #fff;
-    width: 86%;
+    width: 84%;
     font-size: 12px;
     line-height: 20px;
     font-weight: normal;
@@ -3125,6 +3149,7 @@ a.tweet-media-link:visited {
     position: relative;
     display: block;
     padding: 22px 0;
+    color: #fff;
     width: 100%;
     -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -3146,7 +3171,7 @@ a.tweet-media-link:visited {
     padding: 36px 14px 0;
     width: 100%;
     background: transparent;
-    color: #5e92cd;
+    color: #fff;
     font-size: 14px;
     -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -3156,7 +3181,7 @@ a.tweet-media-link:visited {
     padding: 0;
     width: 100%;
     height: 100%;
-    background: #fff;
+    background: #273351;
     text-align: left;
     -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -3839,6 +3864,12 @@ a.tweet-media-link:visited {
 
 .top-menu-li-spacer > a:hover {
     cursor: default;
+}
+
+.blog-entry-link {
+    font-size: 14px;
+    font-weight: bold;
+    color: #5e92cd;
 }
 
 /*li#top-menu-li-spacer {

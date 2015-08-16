@@ -380,6 +380,7 @@ module.exports = function(passport) {
 			    	activity_obj.action = results1[i].action;
 			    	activity_obj.table_changed = results1[i].table_changed;
 			    	activity_obj.player_id = results1[i].player_id;
+			    	activity_obj.record_id = results1[i].record_id;
 			    	live_update_item.item_obj = activity_obj;
 			    	live_updates_items.push(live_update_item);
 			    }
@@ -586,8 +587,10 @@ module.exports = function(passport) {
 				      					results4[k].photo_dim = 'width';
 				      					if (dimensions.width > 464) {
 				      						results4[k].width = '464';
+				      						results4[k].natHeight = dimensions.height;
 				      					} else {
 				      						results4[k].width = dimensions.width;
+				      						results4[k].natHeight = dimensions.height;
 				      					}
 				      					var heightPercentage = dimensions.width / dimensions.height;
 				      					var photoHeight = Math.ceil(464 / heightPercentage);
@@ -596,8 +599,10 @@ module.exports = function(passport) {
 				      					results4[k].photo_dim = 'height';
 				      					if (dimensions.height > 327) {
 				      						results4[k].height = '327';
+				      						results4[k].natWidth = dimensions.width;
 				      					} else {
 				      						results4[k].height = dimensions.height;
+				      						results4[k].natWidth = dimensions.width;
 				      					}
 				      					var widthPercentage = dimensions.height / dimensions.width;
 				      					var photoWidth = Math.ceil(327 / widthPercentage);
@@ -610,6 +615,10 @@ module.exports = function(passport) {
 				      					console.log("sm:image size: w: " + dimensions.width + " h: " + dimensions.height);
 				      					results4[k].width = dimensions.width;
 				      					results4[k].height = dimensions.height;
+				      					console.log("dimensions.height: " + dimensions.height);
+				      					console.log("marginTop: " + (327 - dimensions.height)/2);
+				      					results4[k].marginTop= Math.round((327 - dimensions.height)/2);
+				      					results4[k].marginLeft = Math.round((464 - dimensions.width)/2);
 				      				}
 				      			}
 
@@ -639,11 +648,13 @@ module.exports = function(passport) {
 		if (blog_id == 0) {
 			db.query("INSERT INTO blog (blog_title, blog_media, blog_text, creation_date, edit_date) VALUES ('" 
 				+ blog_title + "', '', '"+blog_content+"', '"+rightNow+"', '"+rightNow+"')", function(err, result){
+				log_activity("admin", "insert", "blog", '0', 'none', result.insertId, req);
 				res.json({update_blog:"success"});
 		    });
 		} else {
 			db.query("UPDATE blog SET blog_title = '"+blog_title+"', blog_text = '"+blog_content+
 				"', blog_media = '', edit_date = '"+rightNow+"' WHERE blog_entry_id = '" + blog_id + "'", function(err, result){
+				log_activity("admin", "update", "blog", '0', 'none', result.insertId, req);
 				res.json({update_blog:"success"});
 		    });
 		}

@@ -7,16 +7,19 @@
 
                     <div class="blog-page-content">
                         {{#each blog}}
-                            <div class="blog-page-item">
-                                <div class="blog-page-title">{{blog_title}}</div>
-                                <div class="blog-page-date">
-                                    <div class="blog-date-day">{{{dateItem "day" creation_date}}}</div>
-                                    <div class="blog-date-month">{{{dateItem "month" creation_date}}}</div>
-                                    <div class="blog-date-year">{{{dateItem "year" creation_date}}}</div>
-                                    <div class="blog-date-time">{{{dateItem "time" creation_date}}}</div>
-                                </div>
-                                <div class="blog-page-text">
-                                    {{blog_text}}
+                            <div class="blog-page-item" id="{{blog_entry_id}}">
+                                <div class="blog-page-item-bkg"></div>
+                                <div class="blog-page-item-content">
+                                    <div class="blog-page-title">{{blog_title}}</div>
+                                    <div class="blog-page-date">
+                                        <div class="blog-date-day">{{{dateItem "day" creation_date}}}</div>
+                                        <div class="blog-date-month">{{{dateItem "month" creation_date}}}</div>
+                                        <div class="blog-date-year">{{{dateItem "year" creation_date}}}</div>
+                                        <div class="blog-date-time">{{{dateItem "time" creation_date}}}</div>
+                                    </div>
+                                    <div class="blog-page-text">
+                                        {{blog_text}}
+                                    </div>
                                 </div>
                             </div>
                         {{/each}}

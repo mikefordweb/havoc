@@ -264,7 +264,7 @@
                             blog_title: $('input[name="blog-title"]').val(),
                             blog_content: $('textarea[name="blog-content"]').val()
                         }).done(function(data){
-                            location.assign("/admin#tabs4");
+                            location.assign("/admin");
                         });
                 });
 
