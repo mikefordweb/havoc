@@ -1017,7 +1017,7 @@ $(document).ready(function() {
 
                 var queryString = window.location.search;
                 var queryData;
-                console.log("queryString: " + queryString);
+                //console.log("queryString: " + queryString);
                 if (queryString != "") {
                     queryData = queryString.split('=');
                     console.log("queryData[0]: " + queryData[0]);
@@ -1036,20 +1036,20 @@ $(document).ready(function() {
       var newPlayerListWidth = 854 - diffWidth;
       var subMenuWidth = 841 - diffWidth;
       if (windowWidth < 1101) {
-        console.log("player-list-wrapper width: " + newPlayerListWidth);
+        //console.log("player-list-wrapper width: " + newPlayerListWidth);
         $('.player-list-wrapper').css('width', newPlayerListWidth);
         $('#sub-menu').css('width', windowWidth);
         $('.basketball-card-main-content').css('width',windowWidth-246);
         $('.page-main-content').css('width', windowWidth-286);
       } else if (windowWidth > 1101) {
-        console.log("player-list-wrapper width: " + newPlayerListWidth);
+        //console.log("player-list-wrapper width: " + newPlayerListWidth);
         $('.player-list-wrapper').css('width', '854px');
         $('#sub-menu').css('width', '841px');
         $('.basketball-card-main-content').css('width','77%');
         $('.page-main-content').css('width', '770px');
       }
 
-      console.log("window width1: " + windowWidth);
+      //console.log("window width1: " + windowWidth);
       if (windowWidth < 1117) {
         var vidWidth = windowWidth - 246;
         $('#vid1').css('width',vidWidth+'px');
