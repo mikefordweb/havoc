@@ -2,7 +2,7 @@ var pausePlayerOnClick = true;
 
 $(document).ready(function() {
     var player = videojs('vid1', function(){
-        
+
     });
 
     player.on('play', function() {
@@ -612,7 +612,7 @@ $(document).ready(function() {
                             $(this).css("left", "-"+froshLeft+"px");
                         }
                         if ($(this).parent().attr("id") == "2020team") {
-                            $(this).css("left", "-"+(seventhLeft+4)+"px");
+                            $(this).css("left", "-"+(seventhLeft)+"px");
                         }
                     });
                     //$('#'+currentItem+' > .player-list-wrapper').css('display','block');
