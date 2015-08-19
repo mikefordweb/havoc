@@ -2,7 +2,7 @@ var pausePlayerOnClick = true;
 
 $(document).ready(function() {
     var player = videojs('vid1', function(){
-
+        
     });
 
     player.on('play', function() {
