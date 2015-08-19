@@ -715,6 +715,8 @@ module.exports = function(passport) {
 		if (req.body.position) {var position = req.body.position;} else {var position = "";}
 		if (req.body.team) {var team = req.body.team;} else {var team = "";}
 		if (req.body.email) {var email = req.body.email;} else {var email = "";}
+		if (req.body.school) {var school = req.body.school;} else {var school = "";}
+		if (req.body.grad_year) {var grad_year = req.body.grad_year;} else {var grad_year = "";}
 		if (req.body.youtube) {var youtube = req.body.youtube;} else {var youtube = "";}
 		if (req.body.instagram) {var instagram = req.body.instagram;} else {var instagram = "";}
 		if (req.body.twitter) {var twitter = req.body.twitter;} else {var twitter ="";}
@@ -722,7 +724,7 @@ module.exports = function(passport) {
 		console.log("PLAYER TEAM: " + team);
 
 		var db = req.connection;
-		db.query("INSERT INTO players (jersey_number, first_name, last_name, position, team, youtube, instagram, twitter) VALUES ('" + jersey_number + "','" + first_name + "', '" + last_name + "', '" + position + "', '" + team + "', '" + youtube + "', '" + instagram + "', '" + twitter + "')", function(err, result){
+		db.query("INSERT INTO players (jersey_number, first_name, last_name, email, high_school, grad_year, position, team, youtube, instagram, twitter) VALUES ('" + jersey_number + "','" + first_name + "', '" + last_name + "', '" + email + "', '" + school + "', '" + grad_year + "', '" + position + "', '" + team + "', '" + youtube + "', '" + instagram + "', '" + twitter + "')", function(err, result){
 	          console.log("err: " + err);
 	          console.log("insert success: " + result.insertId);
 	          log_activity("admin", "insert", "players", '0', team, result.insertId, req);

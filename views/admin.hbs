@@ -308,6 +308,9 @@
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Position</th>
+                            <th>Email</th>
+                            <th>School</th>
+                            <th>Grad Year</th>
                             <th>Action</th>
                             <th>Media</th>
                         </tr>
@@ -318,6 +321,9 @@
                             <td>{{first_name}}</td>
                             <td>{{last_name}}</td>
                             <td>{{position}}</td>
+                            <td>{{email}}</td>
+                            <td>{{high_school}}</td>
+                            <td>{{grad_year}}</td>
                             <td><a href="#" class="player-delete admin-btn" data-id="{{player_id}}" data-team="{{team}}">Delete</a></td>
                             <td><a href="#" class="player-media admin-btn" data-id="{{player_id}}">View</a></td>
                         </tr>
@@ -378,6 +384,17 @@
                             <option value="2020team">2020 Team</option>
                         </select><br>
                         <label for="position">Email: </label><input type="text" name="email"><br>
+                        <label for="position">School: </label><input type="text" name="school"><br>
+                        <label for="position">Grad Year: </label><select name="grad_year">
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                        </select><br>
+                        
                         <label for="player_youtube">YouTube:</label><input name="player_youtube" class="player-link-item" value="{{youtube}}"><br>
                         <label for="player_instagram">Instagram:</label><input name="player_instagram" class="player-link-item" value="{{instagram}}"><br>
                         <label for="player_twitter">Twitter:</label><input name="player_twitter" class="player-link-item" value="{{twitter}}"><br>

@@ -189,6 +189,8 @@
                             position: $('input[name="position"]').val(),
                             team: $('#team_select4').val(),
                             email: $('input[name="email"]').val(),
+                            school: $('input[name="school"]').val(),
+                            grad_year: $('select[name="grad_year"]').val(),
                             youtube: $('input[name="player_youtube"]').val(),
                             instagram: $('input[name="player_instagram"]').val(),
                             twitter: $('input[name="player_twitter"]').val()

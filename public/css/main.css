@@ -1538,8 +1538,8 @@ footer {
     width: 31%;
     height: 46px;
     padding: 7px;
-    background-image: linear-gradient(#fcc33b 70%, #fff 30%);
-    background-size: 32px 6px; 
+    /*background-image: linear-gradient(#fcc33b 70%, #fff 30%);
+    background-size: 32px 6px; */
 }
 
 .card-back-info-text {
@@ -2086,7 +2086,7 @@ label[for="timepicker"] {
 }
 
 .games-table {
-    display: inline-block;
+    display: block;
     vertical-align: top;
 }
 
@@ -2175,8 +2175,9 @@ label[for="timepicker"] {
 
 .add-player-form {
     position: relative;
-    display: inline-block;
-    margin-left: 40px;
+    display: block;
+    float: left;
+    margin-top: 20px;
 }
 
 .save-player-data {
