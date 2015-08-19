@@ -32,7 +32,9 @@ $(document).ready(function() {
             $('.video-text').html('Close Video X');
             $('#vid1').removeClass("shrink-me");
         } else {
-            player.pause();
+            if (typeof player !== undefined) {
+                player.pause();
+            }
             console.log("closing video");
             $('#vid1').addClass("shrink-me");
             $(this).addClass('video-closed');
