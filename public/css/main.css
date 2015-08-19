@@ -3271,6 +3271,10 @@ a.tweet-media-link:visited {
 }
 
 @media (max-width: 865px) {
+    .video-toggle {
+        right: 0px;
+    }
+
     .havoc-modal-body {
         overflow-x: scroll;
     }
