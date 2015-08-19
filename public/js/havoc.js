@@ -34,6 +34,9 @@ $(document).ready(function() {
         } else {
             if (typeof player !== 'undefined') {
                 player.pause();
+                player.posterImage.show();
+                player.bigPlayButton.show();
+                player.currentTime(0);
             }
             console.log("closing video");
             $('#vid1').addClass("shrink-me");
