@@ -765,7 +765,7 @@ module.exports = function(passport) {
 			});
 
 			var mailOptions = {
-			    from: 'Contact Us <bryan@wisconsinhavoc.com>', // sender address
+			    from: 'Contact Us <bryan.nolasco@wisconsinhavoc.com>', // sender address
 			    to: email, // list of receivers
 			    subject: 'Wisconsin Havoc New Account Information', // Subject line
 			    text: text_content, // plaintext body
@@ -968,8 +968,8 @@ module.exports = function(passport) {
 		});
 
 		var mailOptions = {
-		    from: 'Contact Us <bryan@wisconsinhavoc.com>', // sender address
-		    to: 'floyd1985@gmail.com', // list of receivers
+		    from: 'Contact Us <bryan.nolasco@wisconsinhavoc.com>', // sender address
+		    to: 'bryan.nolasco@wisconsinhavoc.com', // list of receivers
 		    subject: 'Wisconsin Havoc Contact Us Form', // Subject line
 		    text: text_content, // plaintext body
 		    html: email_content // html body

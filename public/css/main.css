@@ -21,6 +21,15 @@ html {
     clear: both;
 }
 
+@font-face {
+  font-family: 'DejaVuSans';
+  src: url('DejaVuSans-webfont.eot'); /* IE9 Compat Modes */
+  src: url('DejaVuSans-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('DejaVuSans-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+       url('DejaVuSans-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('DejaVuSans-webfont.svg#svgDejaVuSans') format('svg'); /* Legacy iOS */
+}
+
 /*
  * Remove text-shadow in selection highlight:
  * https://twitter.com/miketaylr/status/12228805301
@@ -325,12 +334,27 @@ header {
 }
 
 footer {
-    bottom: 0;
-    width: 100%;
-    height: 26px;
-    position: absolute;
-    background-color: #fcc33b;
-    margin-bottom: 100px;
+    height: 152px;
+}
+
+.footer-content {
+    height: 100px;
+    position: relative;
+}
+
+.footer-content-inner {
+    position: relative;
+    margin: 41px auto;
+    font-family: 'DejaVuSans';
+    color: #fff;
+    text-align: center;
+    line-height: 14px;
+    font-size: 14px;
+}
+
+.mfw_link {
+    display: inline-block;
+    margin-left: 12px;
 }
 
 .footer-full {
@@ -341,11 +365,10 @@ footer {
 }
 
 .footer-full-2 {
-    width: 100%;
+  width: 100%;
   height: 26px;
   position: relative;
   background-color: #5e92cd;
-  margin-bottom: 100px;
 }
 
 #header-logo {
@@ -1039,6 +1062,7 @@ footer {
   margin-top: 8px;
   margin-top: 26px !important;
   z-index: 980;
+  color: #fff;
 }
 
 .flip-card {
@@ -2453,6 +2477,51 @@ input[name="position"] {
     display: none;
 }
 
+/*** Home Page content ***/
+
+.home-page-item {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    padding-top: 12px;
+    margin-top: 14px;
+}
+
+.home-page-item-bkg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    opacity: .1;
+}
+
+.home-page-item-content {
+    padding: 0 0 0 20px;
+}
+
+.home-page-text {
+    color: #fff;
+    width: 84%;
+    font-size: 13px;
+    line-height: 20px;
+    font-weight: normal;
+}
+
+.home-page-tryouts-text {
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.tryout-sub-head {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 4px;
+}
+
 /*** BLOG ***/
 
 .blog-page-content {
@@ -2467,7 +2536,6 @@ input[name="position"] {
     padding-bottom: 20px;
     padding-top: 6px;
     min-height: 121px;
-
 }
 
 .blog-page-item-bkg {

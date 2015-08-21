@@ -1,7 +1,8 @@
 var pausePlayerOnClick = true;
 
 $(document).ready(function() {
-    var player = videojs('vid1', function(){
+    var player = videojs('vid1', { "autoplay": false, "preload": "auto", "poster": "/img/havoc-poster.jpg", 
+        "techOrder": ["youtube"], "src": "https://www.youtube.com/watch?v=kfzk6hFoOMY" }, function() {
 
     });
 
@@ -12,15 +13,15 @@ $(document).ready(function() {
         this.posterImage.hide();
     });
 
-    if ($('.page-main-content').hasClass('index-main')) {
-        $('.video-js').css('display','block');
-        $('.video-toggle').addClass('video-open');
-        $('.video-text').html("Close Video X");
-    } else {
+    //if ($('.page-main-content').hasClass('index-main')) {
+    //    $('.video-js').css('display','block');
+    //    $('.video-toggle').addClass('video-open');
+    //    $('.video-text').html("Close Video X");
+    //} else {
         $('.video-js').css('display','none');
         $('.video-toggle').addClass('video-closed');
         $('.video-text').html('Open Video <i class="fa fa-film"></i>');
-    }
+    //}
 
     $('.video-toggle').click(function(){
         $('.video-js').css('display','block');
