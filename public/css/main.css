@@ -409,6 +409,7 @@ footer {
 #top-menu {
     display: block;
     position: relative;
+    float: left;
     margin-top: -6px;
     list-style-type: none;
     height: 26px;
@@ -447,6 +448,8 @@ footer {
     padding: 0 14px 0 14px;
     line-height: 26px;
     color: #fff;
+    top: -1px;
+    position: relative;
 }
 
 .non-team-menu-item
@@ -476,7 +479,6 @@ footer {
 .non-team-menu-item-sub
 {
     position: relative;
-    left: -4px;
 }
 
 /*#top-menu > li:hover {
@@ -485,6 +487,12 @@ footer {
     cursor: pointer;
     text-decoration: none;
 }*/
+
+.menu-item-2020 {
+    position: absolute !important;
+    right: 0;
+    top: 1px;
+}
 
 #top-menu > li.selected {
     color: #fcc33b !important;
@@ -500,21 +508,21 @@ footer {
 }
 
 #sub-menu {
-    max-width: 420px;
-    width: 420px;
+    max-width: 345px;
+    width: 345px;
     display: none;
     position: absolute;
+    float: left;
     top: 26px;
     left: 0px;
     list-style-type: none;
     height: 26px;
-    background-color: #0f1d3f;
     padding: 0 0 0 0px;
     z-index: 1000;
+    background-color: #0f1d3f;
 }
 
 #sub-menu > li {
-    top: -1px;
     position: relative;
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
@@ -951,6 +959,7 @@ footer {
 .page-main-content {
     position: relative;
     margin-left: 20px;
+    margin-top: 68px !important;
 }
 
 .main-content {
@@ -1060,7 +1069,6 @@ footer {
   min-height: 718px;
   position: relative;
   margin-top: 8px;
-  margin-top: 26px !important;
   z-index: 980;
   color: #fff;
 }
@@ -1103,7 +1111,7 @@ footer {
     -ms-perspective:900px;
     -o-perspective:900px;
     perspective:900px;
-    top: 120px;
+    top: 170px;
     -webkit-transition: all .5s ease-out;
     -moz-transition: all .5s ease-out;
     -ms-transition: all .5s ease-out;
@@ -3303,12 +3311,12 @@ a.tweet-media-link:visited {
 /*** Responsive stuff ***/
 
 @media (max-width: 1115px) {
-    .menu-bkg {
+    /*.menu-bkg {
         display: none;
     }
     .menu-bkg-2 {
         display: none;
-    }
+    }*/
 
 }
 
@@ -3329,6 +3337,12 @@ a.tweet-media-link:visited {
     #sub-menu > li {
         font-size: 12px;
     }
+
+    #sub-menu {
+        width: 308px;
+        max-width: 308px;
+    }
+
     .top-menu-li-spacer {
         display: none;
     }
@@ -3337,7 +3351,23 @@ a.tweet-media-link:visited {
     }
 }
 
+@media (min-width: 917px) {
+    .menu-item-2020 {
+        width: 65px;
+    }
+}
+
 @media (max-width: 865px) {
+    #sub-menu {
+        width: 345px;
+        max-width: 345px;
+
+    }
+
+    .menu-item-2020 {
+        top: 0px;
+    }
+
     .video-toggle {
         right: 0px;
     }
@@ -3370,12 +3400,8 @@ a.tweet-media-link:visited {
 
     #sub-menu > li {
         font-size: 14px;
-    }
-
-    .non-team-menu-item > a {
-    }
-
-    #top-menu > li#teams {
+        height: 25px;
+        top: 1px;
     }
 
     .live-updates-wrapper {
@@ -3608,6 +3634,21 @@ a.tweet-media-link:visited {
 
     #sub-menu > li {
         font-size: 11px;
+        height: 26px;
+        top: 0px;
+    }
+
+    #sub-menu {
+        width: 289px;
+        max-width: 289px;
+    }
+
+    .menu-item-2020 {
+        top: 1px !important;
+    }
+
+    .video-text {
+        font-size: 10px;
     }
 
     /*li#top-menu-li-spacer {
@@ -3676,12 +3717,6 @@ a.tweet-media-link:visited {
 
     #sub-menu > li {
         font-size: 11px;
-    }
-
-    .non-team-menu-item > a {
-    }
-
-    #top-menu > li#teams {
     }
 
     .basketball-card-main-content {
@@ -3802,6 +3837,7 @@ a.tweet-media-link:visited {
     right: 200px;
     z-index: 1;
     -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
     -moz-osx-font-smoothing: grayscale;
 }
 .button:focus {

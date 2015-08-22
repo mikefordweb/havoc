@@ -1,17 +1,17 @@
 var pausePlayerOnClick = true;
 
 $(document).ready(function() {
-    var player = videojs('vid1', { "autoplay": false, "preload": "auto", "poster": "/img/havoc-poster.jpg", 
-        "techOrder": ["youtube"], "src": "https://www.youtube.com/watch?v=kfzk6hFoOMY" }, function() {
+    //var player = videojs('vid1', { "autoplay": false, "preload": "auto", "poster": "/img/havoc-poster.jpg", 
+    //    "techOrder": ["youtube"], "src": "https://www.youtube.com/watch?v=kfzk6hFoOMY" }, function() {
 
-    });
+    //});
 
-    player.on('play', function() {
-        pausePlayerOnClick = true;
-        console.log("player playing");
-        this.bigPlayButton.hide();
-        this.posterImage.hide();
-    });
+    //player.on('play', function() {
+      //  pausePlayerOnClick = true;
+      //  console.log("player playing");
+      //  this.bigPlayButton.hide();
+      //  this.posterImage.hide();
+    //});
 
     //if ($('.page-main-content').hasClass('index-main')) {
     //    $('.video-js').css('display','block');
@@ -1044,13 +1044,13 @@ $(document).ready(function() {
       if (windowWidth < 1101) {
         //console.log("player-list-wrapper width: " + newPlayerListWidth);
         $('.player-list-wrapper').css('width', newPlayerListWidth);
-        $('#sub-menu').css('width', windowWidth);
+        //$('#sub-menu').css('width', windowWidth);
         $('.basketball-card-main-content').css('width',windowWidth-246);
         $('.page-main-content').css('width', windowWidth-286);
       } else if (windowWidth > 1101) {
         //console.log("player-list-wrapper width: " + newPlayerListWidth);
         $('.player-list-wrapper').css('width', '854px');
-        $('#sub-menu').css('width', '841px');
+        //$('#sub-menu').css('width', '841px');
         $('.basketball-card-main-content').css('width','77%');
         $('.page-main-content').css('width', '770px');
       }
@@ -1161,7 +1161,7 @@ $(document).ready(function() {
       } else if (winWidth > 1101) {
         console.log("player-list-wrapper width: " + newPlayerListWidth);
         $('.player-list-wrapper').css('width', '854px');
-        $('#sub-menu').css('width', '841px');
+        //$('#sub-menu').css('width', '841px');
         $('.basketball-card-main-content').css('width','77%');
         $('.page-main-content').css('width', '770px');
       }
@@ -1174,7 +1174,7 @@ $(document).ready(function() {
             var subMenuWidth = 841 - diffWidth;
 
             $('.player-list-wrapper').css('width', newPlayerListWidth);
-            $('#sub-menu').css('width', winWidth);
+            //$('#sub-menu').css('width', winWidth);
             $('.basketball-card-main-content').css('width',winWidth-246);
             console.log("$('.full-photo-item').length: " + $('.full-photo-item').length);
             $('.page-main-content').css('width', winWidth-286);
