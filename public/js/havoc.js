@@ -603,8 +603,8 @@ $(document).ready(function() {
                     //$('#top-menu li#teams > .top-menu-button').removeClass('button--sacnite');
                     console.log("4:setting hoverNonTeamItem = false");
                     hoverNonTeamItem = false;
-                    var froshLeft = (parseInt($('#sub-menu > li:nth-of-type(1)').css('padding-left')) + parseInt($('#sub-menu > li:nth-of-type(1)').css('padding-right')) + parseInt($('#sub-menu > li:nth-of-type(1)').css('width')) - 4);
-                    var seventhLeft = (froshLeft + parseInt($('#sub-menu > li:nth-of-type(2)').css('padding-left')) + parseInt($('#sub-menu > li:nth-of-type(2)').css('padding-right')) + parseInt($('#sub-menu > li:nth-of-type(2)').css('width')));
+                    var froshLeft = (parseInt($('#sub-menu > li:nth-of-type(1)').css('padding-left')) + parseInt($('#sub-menu > li:nth-of-type(1)').css('padding-right')) + parseInt($('#sub-menu > li:nth-of-type(1)').css('width')));
+                    var seventhLeft = (froshLeft + parseInt($('#sub-menu > li:nth-of-type(2)').css('padding-left')) + parseInt($('#sub-menu > li:nth-of-type(2)').css('padding-right')) + parseInt($('#sub-menu > li:nth-of-type(2)').css('width'))-1);
                     console.log("left right hide");
                     if (!$('.player-icon').hasClass('player-icon-selected')) {    
                         $('.player-list-right').css('display','none');
