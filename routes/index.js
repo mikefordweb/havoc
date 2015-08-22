@@ -969,7 +969,7 @@ module.exports = function(passport) {
 
 		var mailOptions = {
 		    from: 'Contact Us <bryan.nolasco@wisconsinhavoc.com>', // sender address
-		    to: 'bryan.nolasco@wisconsinhavoc.com', // list of receivers
+		    to: 'bnolasco@wi.rr.com', // list of receivers
 		    subject: 'Wisconsin Havoc Contact Us Form', // Subject line
 		    text: text_content, // plaintext body
 		    html: email_content // html body
