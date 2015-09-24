@@ -508,8 +508,8 @@ footer {
 }
 
 #sub-menu {
-    max-width: 345px;
-    width: 345px;
+    max-width: 272px;
+    width: 272px;
     display: none;
     position: absolute;
     float: left;
@@ -3359,8 +3359,8 @@ a.tweet-media-link:visited {
 
 @media (max-width: 865px) {
     #sub-menu {
-        width: 345px;
-        max-width: 345px;
+        width: 270px;
+        max-width: 270px;
 
     }
 
@@ -3639,8 +3639,8 @@ a.tweet-media-link:visited {
     }
 
     #sub-menu {
-        width: 289px;
-        max-width: 289px;
+        width: 230px;
+        max-width: 230px;
     }
 
     .menu-item-2020 {
