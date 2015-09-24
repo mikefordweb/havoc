@@ -508,8 +508,8 @@ footer {
 }
 
 #sub-menu {
-    max-width: 272px;
-    width: 272px;
+    max-width: 270px;
+    width: 270px;
     display: none;
     position: absolute;
     float: left;
@@ -3339,8 +3339,8 @@ a.tweet-media-link:visited {
     }
 
     #sub-menu {
-        width: 308px;
-        max-width: 308px;
+        width: 304px;
+        max-width: 304px;
     }
 
     .top-menu-li-spacer {
