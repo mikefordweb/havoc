@@ -16,7 +16,7 @@ connection.connect(function(err) {
     return;
   }
 
-  console.log('connected as id ' + connection.threadId);
+  console.log('init.js: connected as id ' + connection.threadId);
 });
 
 module.exports = function(passport){

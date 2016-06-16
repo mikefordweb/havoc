@@ -3,22 +3,26 @@
 /**
  * Module dependencies.
  */
-
+console.log("1st www");
 var app = require('../app');
 var debug = require('debug')('havoc:server');
 var http = require('http');
-
+console.log("2nd www");
 /**
  * Get port from environment and store in Express.
  */
 
 //var port = normalizePort(process.env.PORT || '80');
-port = normalizePort('80');
+port = normalizePort('3000');
 app.set('port', port);
-
+console.log("creating port 3000");
 /**
  * Create HTTP server.
  */
+
+ /*var server = app.listen(3000, '0.0.0.0', function() {
+  console.log('Listening on port %d', server.address().port);
+});*/
 
 var server = http.createServer(app);
 
@@ -55,6 +59,7 @@ function normalizePort(val) {
  */
 
 function onError(error) {
+  console.log("onError:listen");
   if (error.syscall !== 'listen') {
     throw error;
   }
@@ -87,5 +92,7 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  console.log('Listening on ' + bind);
 }
+
+console.log("3rd www");

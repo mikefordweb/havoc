@@ -1,6 +1,7 @@
+console.log("1st app");
 var express = require('express');
 //var port     = process.env.PORT || 3000;
-var port     = 80;
+var port     = 3000;
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -84,22 +85,13 @@ connection.connect(function(err) {
     return;
   }
 
-  console.log('connected as id ' + connection.threadId);
+  console.log('app:connected as id ' + connection.threadId);
 });
-//connection.query('USE havoc');
 
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
-//app.set('view engine', 'jade');
-//app.engine('handlebars', exphbs({defaultLayout: 'index'}));
-//app.engine('handlebars', hbs.engine);
 app.set('view engine', 'hbs');
 exphbs.registerPartials(__dirname + '/views/partials');
-//app.set('view engine', 'handlebars');
 
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -149,30 +141,6 @@ initPassport(passport);
 var routes = require('./routes/index')(passport);
 app.use('/', routes);
 
-//require('./routes/index.js')(app, passport);
-
-//var request = require('request');
-
-//var getCodeURL = "https://auth.teamsnap.com/oauth/authorize?client_id=fefdcb5c06ae473c1f2ff0cb891ccab1c3afa1938fdbff634d0d2c95244461bb&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F&response_type=code"
-
-//var getTokenURL = "https://auth.teamsnap.com/oauth/token?client_id=fefdcb5c06ae473c1f2ff0cb891ccab1c3afa1938fdbff634d0d2c95244461bb&client_secret=2b481cb1be0400e889bacce690aa95fa5fadf942d58b23d65dece4853522873d&redirect_uri=urn:ietf:wg:oauth:2.0:oob&code=235ab5ec9b20a3f65e942297cb0d733894a13dd76c21cf592907e99b8f966174&grant_type=authorization_code";
-
-//request.get('https://api.teamsnap.com/v3/events/search?team_id=373975', {
-//  'auth': {
-//    'bearer': '6d6ea9ccade7f37b621d647f80f860961adadb45d433c0ba5fca6e91563bd072'
-//  }}, function  (error, response, body) {
-//      var finalData = response.body.replace(/\\/g, "");
-//      console.log("response: " + finalData);
-//  }
-//);
-
-//request.post(getTokenURL, function (error, response, body) {
-//  console.log("response: " + JSON.stringify(response));
-//  if (!error && response.statusCode == 200) {
-//    console.log(body) // Show the HTML for the Google homepage.
-//  }
-//});
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -203,5 +171,7 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+console.log("2nd app");
 
 module.exports = app;

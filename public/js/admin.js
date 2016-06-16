@@ -288,7 +288,7 @@
 
                 $('.box-view').click(function(e){
                     var game_data;
-
+                    e.preventDefault();
                     $.get("/game_data", { game_id: $(this).attr('data-id')}).done(
                         function(data) {
                             console.log("box_score.length: " + data.box_score.length);
@@ -298,6 +298,7 @@
                             
                             console.log("game_data: " + JSON.stringify(game_data));
                             var html1    = template1(game_data);
+                            console.log("html1: " + html1);
                             $('.box-score-wrapper').html("");
                             $('.box-score-wrapper').append(html1);
                         }

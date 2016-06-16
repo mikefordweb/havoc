@@ -741,7 +741,7 @@ module.exports = function(passport) {
 		db.query("INSERT INTO users (username, password, email, first_name, last_name, role, player_id) VALUES ('" + username + "','" + pwd + "', '" + email + "', '" + first_name.toLowerCase() + "', '" + last_name.toLowerCase() + "', 'player', '"+playerID+"')", function(err, result){
 	          // console.log("err: " + err);
 	          // send email with credentials to user
-	          //console.log("NEW PLAYER ACCOUNT: username: " + username + " - password: " + newPassword);
+	          console.log("NEW PLAYER ACCOUNT: username: " + username + " - password: " + newPassword);
 	        var email_content = "<h2>WisconsinHavoc.com Account Login Information</h2>";
 	        email_content += "<h3>Hi " + first_name.capitalize() + ", </h3>";
 			email_content += "<p>An account has been created for you on WisconsinHavoc.com!</p>";
@@ -760,7 +760,7 @@ module.exports = function(passport) {
 			    service: 'Gmail',
 			    auth: {
 			        user: 'wisconsinhavoc@gmail.com',
-			        pass: '#havoc4110'
+			        pass: '#Havoc2016'
 			    }
 			});
 
