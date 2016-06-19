@@ -745,14 +745,14 @@ module.exports = function(passport) {
 	        var email_content = "<h2>WisconsinHavoc.com Account Login Information</h2>";
 	        email_content += "<h3>Hi " + first_name.capitalize() + ", </h3>";
 			email_content += "<p>An account has been created for you on WisconsinHavoc.com!</p>";
-			email_content += "<p>Go here <a href='http://localhost:3000/admin'>http://localhost:3000/admin</a> and log in using the credentials below to start managing your PlayerCard.</p>";
+			email_content += "<p>Go here <a href='http://www.wisconsinhavoc.com/admin'>http://www.wisconsinhavoc.com/admin</a> and log in using the credentials below to start managing your PlayerCard.</p>";
 			email_content += "<p><strong>Username: </strong> " + username + "</p>";
 			email_content += "<p><strong>Password: </strong> " + newPassword + "</p>";
 
 			var text_content = "WisconsinHavoc.com Account Login Information\r\n\r\n";
 			text_content += "Hi " + first_name.capitalize() + "\r\n\r\n";
 			text_content += "An account has been created for you on WisconsinHavoc.com!\r\n\r\n";
-			text_content += "Go here http://104.131.83.40:3000/admin and log in using the credentials below to start managing your PlayerCard.\r\n\r\n";
+			text_content += "Go here http://www.wisconsinhavoc.com/admin and log in using the credentials below to start managing your PlayerCard.\r\n\r\n";
 			text_content += "Username: " + username + "\r\n";
 			text_content += "Password: " + newPassword + "\r\n\r\n";
 
