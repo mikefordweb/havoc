@@ -234,6 +234,7 @@ $(document).ready(function() {
                         var action_on_asset = craftAssetAction(data.live_update_items[i]);
                         //console.log("action_on_asset: " + JSON.stringify(data.live_update_items[i]));
                         var live_update_item = {};
+
                         live_update_item.user = data.live_update_items[i].item_obj.username;
                         live_update_item.first_name = data.live_update_items[i].item_obj.first_name;
                         live_update_item.last_name = data.live_update_items[i].item_obj.last_name;
@@ -242,6 +243,7 @@ $(document).ready(function() {
                         live_update_item.team_asset = data.live_update_items[i].item_obj.table_changed;
                         live_update_item.player_id = data.live_update_items[i].item_obj.player_id;
                         live_update_item.date_time = data.live_update_items[i].date_time;
+                        console.log("live_update_item: " + JSON.stringify(live_update_item));
                         if (data.live_update_items[i].item_obj.table_changed == "game_info") {
                             live_update_item.team_asset = "calendar";
                         } else if (data.live_update_items[i].item_obj.table_changed == "players") {
@@ -256,12 +258,13 @@ $(document).ready(function() {
                         } else {
                             var source1   = $("#live-update-item").html();
                         }
-                        var template1 = Handlebars.compile(source1);
+                        if (live_update_item.action_on_asset !== "added a player to" && live_update_item.action_on_asset !== "removed a player from") {
+                            var template1 = Handlebars.compile(source1);
                         
-                        var html1    = template1(live_update_item);
-                        //console.log("adding a db item");
-                        //$('.live-updates-header').after(html1);
-                        $('#live-updates-content > .viewport > .overview').append(html1);
+                            var html1    = template1(live_update_item);
+
+                            $('#live-updates-content > .viewport > .overview').append(html1);
+                        }
                     } else if (data.live_update_items[i].item_type == "tweet") {
                         var tweet_type_item = {};
                         tweet_type_item.twitter_icon = data.twitter_icon_src;
