@@ -114,6 +114,8 @@ module.exports = function(passport) {
 	          		for (var b = 0; b<results1.length; b++) {
 	          			results1[b].first_name = results1[b].first_name.trim();
 	          			results1[b].last_name = results1[b].last_name.trim();
+	          			results1[b].first_name = results1[b].first_name.replace(/-/g, "");
+	          			results1[b].last_name = results1[b].last_name.replace(/-/g, "");
 	          		}
 	          		res.render('index', {games: games_list, players: results1, media_items: results2});
 	          	});
