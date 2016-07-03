@@ -110,9 +110,11 @@ module.exports = function(passport) {
 	          games_list = results;
 	          db.query("SELECT * FROM players ORDER BY jersey_number ASC", function(err, results1){
 	          	db.query("SELECT * FROM media", function(err2, results2){
-	          		console.log("res render index");
-	          		results1.first_name = results1.first_name.trim();
-	          		results1.last_name = results1.last_name.trim();
+	          		console.log("res render index: " + JSON.stringify(results1));
+	          		for (var b = 0; b<results1.length; b++) {
+	          			results1[b].first_name = results1[b].first_name.trim();
+	          			results1[b].last_name = results1[b].last_name.trim();
+	          		}
 	          		res.render('index', {games: games_list, players: results1, media_items: results2});
 	          	});
 	          });
