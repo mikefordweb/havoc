@@ -79,14 +79,14 @@ var connection = mysql.createConnection({
   port     : '3306'
 });
 
-connection.connect(function(err) {
+/*connection.connect(function(err) {
   if (err) {
     console.error('error connecting: ' + err.stack);
     return;
   }
 
   console.log('app:connected as id ' + connection.threadId);
-});
+});*/
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
