@@ -25,6 +25,7 @@ var isAuthenticated = function (req, res, next) {
 		if (req.xhr) {
 			res.status(401).json({ error: 'Not Authorized' })
 		} else {
+			console.log("1.redirect to login");
 			res.redirect('/login');	
 		}
 	}
@@ -71,6 +72,7 @@ module.exports = function(passport) {
 	router.get('/login', isNotAuthenticated, function(req, res) {
     	// Display the Login page with any flash message, if any
     	//console.log("render /login");
+    	console.log("2.render to login");
 		res.render('login');
 	});
 
@@ -82,6 +84,7 @@ module.exports = function(passport) {
 	/* Handle Logout */
 	router.get('/signout', function(req, res) {
 		req.logout();
+		console.log("3.signout");
 		res.redirect('/login');
 	});
 
@@ -93,7 +96,7 @@ module.exports = function(passport) {
 		var games_list, players_list;
 		console.log("in get /: " + db);
 		db.query("SELECT * FROM game_info", function(err, results){
-                       console.log("1res render index");
+                       console.log("SELECT * FROM game_info: " + results);
                  console.log("game_info:result: " + JSON.stringify(results));
                  for (var j = 0; j < results.length; j++) {
                        var gameDateTime = moment(results[j].date_time);
